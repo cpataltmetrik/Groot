@@ -1,0 +1,28 @@
+{
+  "name": "webdriveriowithtypescript",
+  "version": "1.0.0",
+  "description": "This repository contains webdriverIO configuration with typescript and mocha",
+  "main": "index.js",
+  "devDependencies": {
+    "@wdio/allure-reporter": "^7.19.1",
+    "@wdio/cli": "^7.19.1",
+    "@wdio/local-runner": "^7.19.1",
+    "@wdio/mocha-framework": "^7.19.1",
+    "@wdio/spec-reporter": "^7.19.1", 
+    "chromedriver": "^99.0.0",
+    "wdio-chromedriver-service": "^7.3.2"
+  },
+  "scripts": {
+    "test-local": "npm run allure:history && wdio ./test/config/wdio.local.conf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cpataltmetrik/webdriveriowithtypescript.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cpataltmetrik/webdriveriowithtypescript/issues"
+  },
+  "homepage": "https://github.com/cpataltmetrik/webdriveriowithtypescript#readme"
+}
