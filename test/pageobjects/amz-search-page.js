@@ -1,5 +1,4 @@
 const BasePage = require('./amz-base-page.js');
-let headingProducts = '//div/h2/a/span[contains(text(),"Apple iPhone 12")]';
 
 /**
  * sub page containing specific selectors and methods for a specific page
@@ -17,7 +16,11 @@ class SearchPage extends BasePage {
     }
 
     get searchResults() {
-        return $(headingProducts);
+        return $$('//div/h2/a/span[contains(text(),"Apple iPhone 12")]');
+    }
+
+    get amazonChoiceList(){
+        return $$('//span[text()="Amazon\'s "]/following::span[1][text()="Choice"]');
     }
 
     /**
@@ -30,9 +33,9 @@ class SearchPage extends BasePage {
         await this.btnSearch.click();
     }
 
-    async getListOfResults(){
-         return this.searchResults;
-    }
+    /*async getListOfResults(){
+         await this.searchResults;
+    }8/
 
     /**
      * overwrite specific options to adapt it to page object
