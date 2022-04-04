@@ -1,4 +1,5 @@
 const BasePage = require('./amz-base-page.js');
+const AllureReporter = require('@wdio/allure-reporter').default;
 
 /**
  * sub page containing specific selectors and methods for a specific page
@@ -28,9 +29,11 @@ class SearchPage extends BasePage {
      * e.g. to search a product
      */
     async searchProduct (productToSearch) {
+        AllureReporter.addStep('Searching the producr '+productToSearch);
         await this.searchField.click();
         await this.searchField.setValue(productToSearch);
         await this.btnSearch.click();
+        //AllureReporter.addStep('Click on Button '+this.btnSearch);
     }
 
     /*async getListOfResults(){

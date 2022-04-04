@@ -1,8 +1,11 @@
 const SearchPage = require('../pageobjects/amz-search-page');
+const AllureReporter = require('@wdio/allure-reporter').default;
+const assert = require('chai');
 
 describe('Search a product from Amazon', () => {
     before(() =>{
         SearchPage.open();
+        AllureReporter.addStep('Application is loading');
     })
 
     it('Should search a product and store the value', async () => {
@@ -10,7 +13,7 @@ describe('Search a product from Amazon', () => {
         let getAllIphone = await SearchPage.searchResults;
 
         await getAllIphone.forEach(element =>{
-            //console.log('Apple phone list is '+element.getText());
+            AllureReporter.addStep('Product name is '+element.getText().toString())
         })
 
         expect(await getAllIphone[0].getText()).toHaveValue('Apple');
@@ -24,7 +27,7 @@ describe('Search a product from Amazon', () => {
     });
 
     it('Should be failed to get screenshot', async () => {
-        expect({a: 1}).to.not.have.property('b');
+        assert.expect(2).to.equal(4);
         
     });
 });
