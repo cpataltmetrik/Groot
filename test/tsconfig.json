@@ -6,6 +6,7 @@
             "@wdio/mocha-framework",
             "expect-webdriverio"
         ],
-        "target": "es2019"
+        "target": "es2019",
+        "moduleResolution": "node"
     }
 }

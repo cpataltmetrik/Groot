@@ -226,8 +226,41 @@ export const config: WebdriverIO.Config = {
      * @param {Array.<String>} specs        List of spec file paths that are to be run
      * @param {Object}         browser      instance of created browser/device session
      */
-    // before: function (capabilities, specs) {
-    // },
+     before(capabilities, specs) {
+       // process.env.URL = browser.options.baseUrl
+        browser.addCommand(
+          'clickWhenDisplayed',
+          function (timeout) {
+            // `this` is return value of $(selector)
+            this.waitForDisplayed(timeout || { timeout: 10000 })
+            this.click()
+          },
+          true
+        )
+    
+        browser.addCommand(
+          'clickWhenEnabled',
+          function (timeout) {
+            // `this` is return value of $(selector)
+            this.waitForEnabled(timeout || { timeout: 10000 })
+            this.click()
+          },
+          true
+        )
+    
+        browser.addCommand(
+          'clickWhenReady',
+          function (timeout) {
+            // `this` is return value of $(selector)
+            this.waitForClickable(timeout || { timeout: 10000 })
+            this.click()
+          },
+          true
+        )    
+        browser.setWindowSize(1920, 1080)
+        console.log(`Session Id for session lookup: ${browser.sessionId}`)
+        //console.log(`BASE URL: ${browser.options.baseUrl}`)
+      },
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {String} commandName hook command name

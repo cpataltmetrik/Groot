@@ -31,9 +31,9 @@ class SearchPage extends Page {
      */
 
     public async searchProduct(productToSearch) {
-        await this.searchField.click();
+        await this.searchField.clickWhenDisplayed();
         await this.searchField.setValue(productToSearch);
-        await this.btnSearch.click();
+        await this.btnSearch.clickWhenEnabled();
     }
 
     /**
