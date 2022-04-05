@@ -1,48 +1,49 @@
-const BasePage = require('./amz-base-page.js');
+import { ChainablePromiseElement } from 'webdriverio';
+
+import Page from './page';
 
 /**
  * sub page containing specific selectors and methods for a specific page
  */
-class SearchPage extends BasePage {
+class SearchPage extends Page {
     /**
      * define selectors using getter methods
      */
-    get searchField () {
+    public get searchField() {
         return $('#twotabsearchtextbox');
     }
 
-    get btnSearch () {
+    public get btnSearch() {
         return $('#nav-search-submit-button');
     }
 
-    get searchResults() {
+    public get searchResults() {
         return $$('//div/h2/a/span[contains(text(),"Apple iPhone 12")]');
     }
 
-    get amazonChoiceList(){
+    public get amazonChoiceList() {
         return $$('//span[text()="Amazon\'s "]/following::span[1][text()="Choice"]');
     }
 
     /**
      * a method to encapsule automation code to interact with the page
-     * e.g. to search a product
+     * e.g. to login using username and password
      */
-    async searchProduct (productToSearch) {
+
+    public async searchProduct(productToSearch) {
         await this.searchField.click();
         await this.searchField.setValue(productToSearch);
         await this.btnSearch.click();
     }
 
-    /*async getListOfResults(){
-         await this.searchResults;
-    }8/
-
     /**
      * overwrite specific options to adapt it to page object
      */
-    open () {
-        return super.open();
+
+    public open() {
+        return super.open('');
     }
+
 }
 
-module.exports = new SearchPage();
+export default new SearchPage();

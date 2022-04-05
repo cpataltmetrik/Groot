@@ -3,18 +3,21 @@
   "version": "1.0.0",
   "description": "This repository contains webdriverIO configuration with typescript and mocha",
   "main": "index.js",
+  "type": "commonjs",
   "devDependencies": {
     "@wdio/allure-reporter": "^7.19.1",
     "@wdio/cli": "^7.19.1",
-    "@wdio/local-runner": "^7.19.1",
-    "@wdio/mocha-framework": "^7.19.1",
+    "@wdio/local-runner": "^7.19.3",
+    "@wdio/mocha-framework": "^7.19.3",
     "@wdio/spec-reporter": "^7.19.1",
     "chai": "^4.3.6",
     "chromedriver": "^99.0.0",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3",
     "wdio-chromedriver-service": "^7.3.2"
   },
   "scripts": {
-    "test-local": "wdio ./test/config/wdio.local.conf.js",
+    "test-local": "wdio ./test/config/wdio.local.conf.ts",
     "report": "allure generate allure-results --clean && allure open"
   },
   "repository": {
