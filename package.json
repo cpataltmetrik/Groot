@@ -20,10 +20,10 @@
   },
   "scripts": {
     "test-local": "wdio ./test/wdio.local.conf.ts",
-    "test-dev" : "SET NODE_ENV=dev&&npx wdio ./test/wdio.local.conf.ts",
-    "test-qa" : "SET NODE_ENV=qa&&npx wdio ./test/wdio.local.conf.ts",
-    "test-stage" : "SET NODE_ENV=stage&&npx wdio ./test/wdio.local.conf.ts",
-    "test-prod" : "SET NODE_ENV=prod&&npx wdio ./test/wdio.local.conf.ts",
+    "test-dev" : "SET NODE_ENV=dev&& npx wdio ./test/wdio.local.conf.ts",
+    "test-qa" : "SET NODE_ENV=qa&& npx wdio ./test/wdio.local.conf.ts",
+    "test-stage" : "SET NODE_ENV=stage&& npx wdio ./test/wdio.local.conf.ts",
+    "test-prod" : "SET NODE_ENV=prod&& npx wdio ./test/wdio.local.conf.ts",
     "report": "allure generate allure-results --clean && allure open"
   },
   "repository": {
