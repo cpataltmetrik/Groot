@@ -1,4 +1,4 @@
-const customCommands = require('../test/pageobjects/page-helper.ts')
+const customCommands = require('../src/main/helper/pageHelper.ts')
 export const config: WebdriverIO.Config = {
     //
     // ====================
@@ -24,7 +24,7 @@ export const config: WebdriverIO.Config = {
         // for all available options
         tsNodeOpts: {
             transpileOnly: true,
-            project: 'test/tsconfig.json'
+            project: 'tsconfig.json'
         }
         // tsconfig-paths is only used if "tsConfigPathsOpts" are provided, if you
         // do please make sure "tsconfig-paths" is installed as dependency
@@ -49,7 +49,7 @@ export const config: WebdriverIO.Config = {
     // will be called from there.
     //
     specs: [
-        './test/specs/amz.search.specs.ts'
+        './src/test/specs/amz.search.specs.ts'
     ],
     // Patterns to exclude.
     exclude: [

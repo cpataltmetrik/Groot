@@ -8,5 +8,10 @@
         ],
         "target": "es2019",
         "moduleResolution": "node"
-    }
+    },
+    "include" : [
+        "../**/*.ts",
+        "./src/types/wdio.d.ts",
+    ]
 }
+

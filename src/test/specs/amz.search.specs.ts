@@ -1,5 +1,5 @@
-import SearchPage from '../pageobjects/amz.search.page';
-import  SEARCH_DATA  from '../testdata/searchdata';
+import SearchPage from '../../main/pageobjects/amz.search.page';
+import  SEARCH_DATA  from '../testdata/searchData';
 import * as config from 'config'
 
 //let searchString : string = config.get('TestData1.searchTerm')
