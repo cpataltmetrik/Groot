@@ -1,0 +1,8 @@
+{
+    "Environment": {
+      "baseUrl": "http://www.amazon.co.uk"
+    },
+    "TestData": {
+      "searchTerm": "books"
+    }
+  }
