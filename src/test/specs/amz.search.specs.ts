@@ -12,7 +12,9 @@ describe('Search a product from Amazon', () => {
     it('Should search a product and store the value', async () => {
         await SearchPage.open();
 
-        await SearchPage.searchProduct(searchString);
+        //await SearchPage.searchProduct(searchString);
+        await SearchPage.searchProductTest(searchString);
+
         let getAllIphone = await SearchPage.searchResults;
 
         await getAllIphone.forEach(element => {

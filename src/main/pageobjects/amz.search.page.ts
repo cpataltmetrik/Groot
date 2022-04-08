@@ -1,5 +1,5 @@
 import { ChainablePromiseElement } from 'webdriverio';
-
+import {clickElement, setText}  from '../helper/pageHelper'
 import Page from './page';
 
 /**
@@ -9,7 +9,7 @@ class SearchPage extends Page {
     /**
      * define selectors using getter methods
      */
-    public get searchField() {
+    public get searchField()  {
         return $('#twotabsearchtextbox');
     }
 
@@ -30,12 +30,19 @@ class SearchPage extends Page {
      * e.g. to login using username and password
      */
 
-    public async searchProduct(productToSearch) {
-        await this.searchField.clickWhenDisplayed();
+    /*public async searchProduct(productToSearch) {
+        await this.searchField.clickWhenDisplayed(1000);
         await this.searchField.setValue(productToSearch);
-        await this.btnSearch.clickWhenEnabled();
-    }
+        await this.btnSearch.clickWhenEnabled(1000);
+    }*/
 
+    public async searchProductTest(productToSearch) {
+        await clickElement(await this.searchField);
+        await setText(await this.searchField, productToSearch);
+        await clickElement(await this.btnSearch);
+
+    }
+     
     /**
      * overwrite specific options to adapt it to page object
      */

@@ -1,4 +1,4 @@
-const customCommands = require('../src/main/helper/pageHelper.ts')
+//const customCommands = require('../src/main/helper/pageHelper.ts')
 export const config: WebdriverIO.Config = {
     //
     // ====================
@@ -227,13 +227,13 @@ export const config: WebdriverIO.Config = {
      * @param {Array.<String>} specs        List of spec file paths that are to be run
      * @param {Object}         browser      instance of created browser/device session
      */
-     before(capabilities, specs) {
+     //before(capabilities, specs) {
 
        // Add commands to WebdriverIO
-       Object.keys(customCommands).forEach(key => {
-        browser.addCommand(key, customCommands[key],true);
-      })
-
+       //Object.keys(customCommands).forEach(key => {
+        //browser.addCommand(key, customCommands[key],true);
+      //})
+   // },
        // process.env.URL = browser.options.baseUrl
         /* browser.addCommand(
           'clickWhenDisplayed',
@@ -263,7 +263,7 @@ export const config: WebdriverIO.Config = {
             this.click()
           },
           true
-        )     */
+        )     
         browser.setWindowSize(1920, 1080)
         console.log(`Session Id for session lookup: ${browser.sessionId}`)
         //console.log(`BASE URL: ${browser.options.baseUrl}`)
