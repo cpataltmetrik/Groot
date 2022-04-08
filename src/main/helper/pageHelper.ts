@@ -7,7 +7,7 @@ module.exports = {
          // `this` is return value of $(selector)
          this.waitForDisplayed(timeout || { timeout: 10000 })
          this.click()
-         addLogger(`Clicked on element changed value: ${this.selector.toString()}`)
+         addLogger(`Clicked on element: ${this.selector.toString()}`)
     },
     clickWhenReady: function (timeout) {
         // `this` is return value of $(selector)
@@ -18,11 +18,11 @@ module.exports = {
      // `this` is return value of $(selector)
      this.waitForEnabled(timeout || { timeout: 10000 })
      this.click()
-     addLogger(`Clicked element changed value: ${this.selector.toString()}`)
+     addLogger(`Clicked element: ${this.selector.toString()}`)
      },
    setText : async function (text: string) {
           await this.click();
           await this.setValue(text);
-          addLogger(`Entered value test: ${text} in ${this.selector.toString()}`)
+          addLogger(`Entered value: ${text} in ${this.selector.toString()}`)
      }
 }
