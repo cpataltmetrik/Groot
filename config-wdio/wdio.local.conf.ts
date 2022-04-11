@@ -1,4 +1,8 @@
 const customCommands = require('../src/main/helper/pageHelper.ts')
+import { addLogger } from '../utilities/logger'
+import * as configVal from 'config'
+const baseURL = configVal.get('Environment.baseUrl');
+
 export const config: WebdriverIO.Config = {
     //
     // ====================
@@ -165,7 +169,7 @@ export const config: WebdriverIO.Config = {
         ['allure', {
             outputDir: 'allure-results',
             disableWebdriverStepsReporting: true,
-            disableWebdriverScreenshotsReporting: false,
+            disableWebdriverScreenshotsReporting: true,
         }
         ]],    
         
@@ -228,7 +232,8 @@ export const config: WebdriverIO.Config = {
      * @param {Object}         browser      instance of created browser/device session
      */
      before(capabilities, specs) {
-
+      addLogger(`Env is ${process.env}.toString()`)
+      addLogger(`Test is running in ${baseURL}`)
        // Add commands to WebdriverIO
        Object.keys(customCommands).forEach(key => {
         browser.addCommand(key, customCommands[key],true);
@@ -284,8 +289,10 @@ export const config: WebdriverIO.Config = {
     /**
      * Function to be executed before a test (in Mocha/Jasmine) starts.
      */
-    // beforeTest: function (test, context) {
-    // },
+    beforeTest: function (test, context) {
+      addLogger(`Env is ${process.env}`)
+      addLogger(`Test is running in ${baseURL}`)
+    },
     /**
      * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
      * beforeEach in Mocha)

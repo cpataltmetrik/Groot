@@ -1,18 +1,205 @@
+//import { ChainablePromiseElement } from 'webdriverio';
+//const  addLogger= require('../../../utilities/logger.ts')
+import { addLogger } from '../../../utilities/logger'
+
+
 module.exports = {
-    clickWhenDisplayed: function (timeout):void {
-         // `this` is return value of $(selector)
-         this.waitForDisplayed(timeout || { timeout: 10000 })
-         this.click()
-         console.log('clicked element successfully ======================')
-    },
-    clickWhenReady: function (timeout) {
-        // `this` is return value of $(selector)
-        this.waitForClickable(timeout || { timeout: 10000 })
-        this.click()
-   },
-   clickWhenEnabled: function (timeout) {
-     // `this` is return value of $(selector)
-     this.waitForEnabled(timeout || { timeout: 10000 })
-     this.click()
-},
+     clickWhenDisplayed: function (timeout): void {
+          try {
+               this.waitForDisplayed(timeout || { timeout: 10000 })
+               this.click()
+               addLogger(`STEP: Clicked on element : ${this.selector.toString()}`)
+          }
+          catch (error) {
+               addLogger('ERROR :' + error)
+          }
+     },
+     clickWhenReady: function (timeout) {
+          try {
+               this.waitForClickable(timeout || { timeout: 10000 })
+               this.click()
+               addLogger(`STEP: Clicked element : ${this.selector.toString()}`)
+          }
+          catch (error) {
+               addLogger('ERROR :' + error)
+          }
+     },
+     clickWhenEnabled: async function (timeout) {
+          try {
+               await this.waitForEnabled(timeout || { timeout: 10000 })
+               await this.click()
+               addLogger(`STEP: Clicked element : ${this.selector.toString()}`)
+          }
+          catch (error) {
+               addLogger('ERROR :' + error)
+          }
+     },
+     setText: async function (text: string) {
+          try {
+               this.clear();
+               await this.click();
+               await this.setValue(text);
+               addLogger(`STEP: Entered value : ${text} in ${this.selector.toString()}`)
+          }
+          catch (error) {
+               addLogger('ERROR :' + error)
+          }
+     },
+     // this is similar to clickWhenDisplayed method above, so commenting this out for
+     // waitAndClick: function(timeout) {
+     //     try {
+     //      this.waitForDisplayed(timeout || { timeout: 3000 })
+     //      this.click()
+     //      addLogger(`Clicked element : ${this.selector.toString()}`)
+     //     }
+     //      catch(error) {
+     //           addLogger('ERROR :' +error)
+     //      }
+     // },
+
+     waitAndEnterText: function (timeout, textVal) {
+          try {
+               this.waitForDisplayed(timeout || { timeout: 3000 })
+               this.clear()
+               this.click()
+               this.setValue(textVal)
+               addLogger(`STEP: Entered value : ${textVal} in ${this.selector.toString()}`)
+          }
+          catch (error) {
+               addLogger('ERROR :' + error);
+          }
+     },
+
+     waitTill: async function () {
+          try {
+               if ((await $(this.selector)).waitForEnabled()) {
+                    addLogger(`STEP: Element : ${this.selector.toString()} is enabled`)
+               }
+          } catch (error) {
+               addLogger('ERROR :' + error);
+          }
+     },
+
+     waitTillInterval: async function (timeout) {
+          try {
+               if ((await $(this.selector)).waitForEnabled()) {
+                    addLogger(`STEP: Element : ${this.selector.toString()} is enabled`)
+               }
+               else {
+                    await (await $(this.selector)).waitForDisplayed(timeout)
+                    addLogger(`STEP: Element : ${this.selector.toString()} is enabled after ${timeout}`)
+               }
+          } catch (error) {
+               addLogger('ERROR :' + error);
+           }
+
+       },
+
+       clickAndhighlight : async function(timeout) {
+
+          try {
+               await this.click();
+              // browser.execute('arguments[0].style.backgroundColor = "#FDFF47";', $(this.selector));//provide a yellow background
+               browser.execute('arguments[0].style.outline = "#e94f58";', $(this.selector)); //provide a red outline
+               addLogger(`Highlighted ${this.selector.toString()} in Yellow background and Red outline`)
+           } catch (error) {
+               addLogger('ERROR :' + error);
+           }
+
+       },
+
+       scrolltoView : async function () {
+            try {
+               if((await $(this.selector)).waitForEnabled()) {
+                    (await $(this.selector)).scrollIntoView()
+                    this.waitForDisplayed(3000)
+                    addLogger(`Scrolled to the Element ${this.selector.toString()} view`)
+               }
+            }
+            catch(error) {
+                 addLogger('ERROR :' +error);
+            }
+            
+       },
+
+       selectOption : async function (option) {
+            try {
+                 (await $(this.selector)).click();
+                 (await $(this.selector)).selectByVisibleText(option);
+
+            }catch(error) {
+               addLogger('ERROR :' +error);
+            }
+            
+       },
+
+     waitForPageLoad: async function (timeout) {
+          try {
+               browser.waitUntil(async function () {
+                    const state = browser.execute(function () {
+                         return document.readyState;
+                    });
+                    return await state === 'complete';
+               },
+                    {
+                         timeout: 60000, //60secs
+                         timeoutMsg: 'Oops! Check your internet connection'
+                    });
+               addLogger(`STEP: Page loaded successfully`)
+          } catch (error) {
+               addLogger('ERROR :' + error);
+          }
+     },
+
+     highlightElement: async function (timeout) {
+          try {
+               browser.execute('arguments[0].style.backgroundColor = "#FDFF47";', $(this.selector));//provide a yellow background 
+               browser.execute('arguments[0].style.outline = "#f00 solid 4px";', $(this.selector)); //provide a red outline
+               addLogger(`STEP: Highlighted ${this.selector.toString()} in Yellow background and Red outline`)
+          } catch (error) {
+               addLogger('ERROR :' + error);
+          }
+     },
+
+     getUrl: function (timeout): string {
+          try {
+               return browser.getUrl().toString()
+          } catch (error) {
+               addLogger('ERROR :' + error);
+          }
+     },
+
+     fieldClear: function (timeout) {
+          try {
+               this.waitForDisplayed(timeout || { timeout: 3000 })
+               this.clear()
+               addLogger(`STEP: Cleared the field ${this.selector.toString()}`)
+          }
+          catch (error) {
+               addLogger('ERROR :' + error);
+          }
+     },
+     elementDoubleClick: async function () {
+          try {
+               if (this.waitForDisplayed()) {
+                    this.doubleClick();
+                    addLogger(`STEP: Element dobule clicked successfull :${this.selector.toString()}`);
+               }
+          }
+          catch (error) {
+               addLogger(`ERROR: Element not found to click : ${error}`);
+          }
+
+     },
+     switchToIframe: async function () {
+          try {
+               if (this.waitForExist()) {
+                    this.switchToFrame();
+                    addLogger(`STEP: Moved to frame successfully :${this.selector.toString()}`);
+               }
+          }
+          catch (error) {
+               addLogger(`ERROR: Frame does not exist : ${error}`);
+          }
+     },
 }
