@@ -91,9 +91,47 @@ module.exports = {
                }
           } catch (error) {
                addLogger('ERROR :' + error);
-          }
+           }
 
-     },
+       },
+
+       clickAndhighlight : async function(timeout) {
+
+          try {
+               await this.click();
+              // browser.execute('arguments[0].style.backgroundColor = "#FDFF47";', $(this.selector));//provide a yellow background
+               browser.execute('arguments[0].style.outline = "#e94f58";', $(this.selector)); //provide a red outline
+               addLogger(`Highlighted ${this.selector.toString()} in Yellow background and Red outline`)
+           } catch (error) {
+               addLogger('ERROR :' + error);
+           }
+
+       },
+
+       scrolltoView : async function () {
+            try {
+               if((await $(this.selector)).waitForEnabled()) {
+                    (await $(this.selector)).scrollIntoView()
+                    this.waitForDisplayed(3000)
+                    addLogger(`Scrolled to the Element ${this.selector.toString()} view`)
+               }
+            }
+            catch(error) {
+                 addLogger('ERROR :' +error);
+            }
+            
+       },
+
+       selectOption : async function (option) {
+            try {
+                 (await $(this.selector)).click();
+                 (await $(this.selector)).selectByVisibleText(option);
+
+            }catch(error) {
+               addLogger('ERROR :' +error);
+            }
+            
+       },
 
      waitForPageLoad: async function (timeout) {
           try {
