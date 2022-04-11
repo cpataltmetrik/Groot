@@ -13,7 +13,6 @@ module.exports = {
          catch(error) {
               addLogger('ERROR :' + error)
          }
-         
     },
     clickWhenReady: function (timeout) {
          try {
@@ -34,7 +33,6 @@ module.exports = {
      catch(error) {
           addLogger('ERROR :' + error)
        }
-     
      },
    setText : async function (text: string) {
         try {
@@ -96,6 +94,7 @@ module.exports = {
       
        },
 
+
        highlightElement : async function(timeout) {
 
           try {
@@ -146,6 +145,6 @@ module.exports = {
                addLogger('ERROR :' +error);
             }
             
-       }
+       },
            
 }
