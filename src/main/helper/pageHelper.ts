@@ -8,7 +8,7 @@ module.exports = {
           try {
                this.waitForDisplayed(timeout || { timeout: 10000 })
                this.click()
-               addLogger(`Clicked on element : ${this.selector.toString()}`)
+               addLogger(`STEP: Clicked on element : ${this.selector.toString()}`)
           }
           catch (error) {
                addLogger('ERROR :' + error)
@@ -18,7 +18,7 @@ module.exports = {
           try {
                this.waitForClickable(timeout || { timeout: 10000 })
                this.click()
-               addLogger(`Clicked element : ${this.selector.toString()}`)
+               addLogger(`STEP: Clicked element : ${this.selector.toString()}`)
           }
           catch (error) {
                addLogger('ERROR :' + error)
@@ -28,7 +28,7 @@ module.exports = {
           try {
                await this.waitForEnabled(timeout || { timeout: 10000 })
                await this.click()
-               addLogger(`Clicked element : ${this.selector.toString()}`)
+               addLogger(`STEP: Clicked element : ${this.selector.toString()}`)
           }
           catch (error) {
                addLogger('ERROR :' + error)
@@ -39,7 +39,7 @@ module.exports = {
                this.clear();
                await this.click();
                await this.setValue(text);
-               addLogger(`Entered value : ${text} in ${this.selector.toString()}`)
+               addLogger(`STEP: Entered value : ${text} in ${this.selector.toString()}`)
           }
           catch (error) {
                addLogger('ERROR :' + error)
@@ -63,7 +63,7 @@ module.exports = {
                this.clear()
                this.click()
                this.setValue(textVal)
-               addLogger(`Entered value : ${textVal} in ${this.selector.toString()}`)
+               addLogger(`STEP: Entered value : ${textVal} in ${this.selector.toString()}`)
           }
           catch (error) {
                addLogger('ERROR :' + error);
@@ -73,7 +73,7 @@ module.exports = {
      waitTill: async function () {
           try {
                if ((await $(this.selector)).waitForEnabled()) {
-                    addLogger(`Element : ${this.selector.toString()} is enabled`)
+                    addLogger(`STEP: Element : ${this.selector.toString()} is enabled`)
                }
           } catch (error) {
                addLogger('ERROR :' + error);
@@ -83,11 +83,11 @@ module.exports = {
      waitTillInterval: async function (timeout) {
           try {
                if ((await $(this.selector)).waitForEnabled()) {
-                    addLogger(`Element : ${this.selector.toString()} is enabled`)
+                    addLogger(`STEP: Element : ${this.selector.toString()} is enabled`)
                }
                else {
                     await (await $(this.selector)).waitForDisplayed(timeout)
-                    addLogger(`Element : ${this.selector.toString()} is enabled after ${timeout}`)
+                    addLogger(`STEP: Element : ${this.selector.toString()} is enabled after ${timeout}`)
                }
           } catch (error) {
                addLogger('ERROR :' + error);
@@ -107,7 +107,7 @@ module.exports = {
                          timeout: 60000, //60secs
                          timeoutMsg: 'Oops! Check your internet connection'
                     });
-               addLogger(`Page loaded successfully`)
+               addLogger(`STEP: Page loaded successfully`)
           } catch (error) {
                addLogger('ERROR :' + error);
           }
@@ -117,7 +117,7 @@ module.exports = {
           try {
                browser.execute('arguments[0].style.backgroundColor = "#FDFF47";', $(this.selector));//provide a yellow background 
                browser.execute('arguments[0].style.outline = "#f00 solid 4px";', $(this.selector)); //provide a red outline
-               addLogger(`Highlighted ${this.selector.toString()} in Yellow background and Red outline`)
+               addLogger(`STEP: Highlighted ${this.selector.toString()} in Yellow background and Red outline`)
           } catch (error) {
                addLogger('ERROR :' + error);
           }
@@ -135,10 +135,33 @@ module.exports = {
           try {
                this.waitForDisplayed(timeout || { timeout: 3000 })
                this.clear()
-               addLogger(`Cleared the field ${this.selector.toString()}`)
+               addLogger(`STEP: Cleared the field ${this.selector.toString()}`)
           }
           catch (error) {
                addLogger('ERROR :' + error);
+          }
+     },
+     elementDoubleClick: async function () {
+          try {
+               if (this.waitForDisplayed()) {
+                    this.doubleClick();
+                    addLogger(`STEP: Element dobule clicked successfull :${this.selector.toString()}`);
+               }
+          }
+          catch (error) {
+               addLogger(`ERROR: Element not found to click : ${error}`);
+          }
+
+     },
+     switchToIframe: async function () {
+          try {
+               if (this.waitForExist()) {
+                    this.switchToFrame();
+                    addLogger(`STEP: Moved to frame successfully :${this.selector.toString()}`);
+               }
+          }
+          catch (error) {
+               addLogger(`ERROR: Frame does not exist : ${error}`);
           }
      },
 }
