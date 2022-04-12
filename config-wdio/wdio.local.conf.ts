@@ -290,8 +290,7 @@ export const config: WebdriverIO.Config = {
      * Function to be executed before a test (in Mocha/Jasmine) starts.
      */
     beforeTest: function (test, context) {
-      addLogger(`Env is ${process.env}`)
-      addLogger(`Test is running in ${baseURL}`)
+      addLogger(`Test is running in Env : ${process.env.NODE_ENV} & URL : ${baseURL}` )
     },
     /**
      * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
