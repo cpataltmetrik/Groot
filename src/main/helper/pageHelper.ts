@@ -238,6 +238,8 @@ module.exports = {
                console.log(yLocation);
 
                browser.moveToElement('$(this.selector)', xLocation, yLocation)
+          } catch (error) {
+               addLogger(`ERROR : ${error}`)
           }
-     }
+     },
 }
