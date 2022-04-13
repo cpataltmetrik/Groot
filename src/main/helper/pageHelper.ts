@@ -242,4 +242,28 @@ module.exports = {
                addLogger(`ERROR : ${error}`)
           }
      },
+
+     switchToWindow : async function name() {
+          try{
+
+                    // get the current or parent window name 
+                     let parentWindow = await browser.getWindowHandle();
+
+                    // get the all child windows name  
+                     let childWindows = await browser.getWindowHandles();
+                     await childWindows.forEach(window => {
+                          if(window !== parentWindow){
+                                browser.newWindow(window)
+                          }
+
+                          else {
+                              addLogger('ERROR : There is no new window opened')
+                          }
+                     });
+          }
+          catch (error){
+               addLogger(`ERROR : ${error}`)
+          }
+          
+     }
 }
