@@ -293,11 +293,11 @@ export const config: WebdriverIO.Config = {
      */
   afterTest: function (test, context, { error, result, duration, passed, retries }) {
     if (error) {
-      browser.saveScreenshot('./screenshot/' + commonUtils.generateFileNameWithTimeStamp());
+      browser.saveScreenshot('./screenshot/'+ test.title +'_'+commonUtils.generateFileNameWithTimeStamp());
 
     }
     if (result==='skip') {
-      browser.saveScreenshot('./screenshot/' + commonUtils.generateFileNameWithTimeStamp());
+      browser.saveScreenshot('./screenshot/' +test.title+'_'+ commonUtils.generateFileNameWithTimeStamp());
 
     }
   },
