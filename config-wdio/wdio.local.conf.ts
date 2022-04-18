@@ -53,7 +53,8 @@ export const config: WebdriverIO.Config = {
     // will be called from there.
     //
     specs: [
-        './src/test/specs/amz.search.specs.ts'
+       // './src/test/specs/amz.search.specs.ts',
+       './src/test/specs/amz.productDetails.specs.ts'
     ],
     // Patterns to exclude.
     exclude: [

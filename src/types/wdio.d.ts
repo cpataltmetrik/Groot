@@ -18,3 +18,9 @@ declare global {
 
 declare const browser: WebdriverIO.Browser
 declare const driver: WebdriverIO.Browser
+
+// declare type ChainablePrototype = {
+//     [K in Elements]: (...args: Parameters<$ElementCommands[K]>) => ChainablePromiseElement<ReturnType<$ElementCommands[K]>>;
+// } & {
+//     [K in ElementsQueryCommands]: (...args: Parameters<$ElementCommands[K]>) => ChainablePromiseArray<ThenArg<ReturnType<$ElementCommands[K]>>>;
+// };

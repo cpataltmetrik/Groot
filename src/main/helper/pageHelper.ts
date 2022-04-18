@@ -4,11 +4,14 @@ import { addLogger } from '../../../utilities/logger'
 
 
 module.exports = {
-     clickWhenDisplayed: function (timeout): void {
+     clickWhenDisplayed: function (timeout) {
           try {
                this.waitForDisplayed(timeout || { timeout: 10000 })
                this.click()
                addLogger(`STEP: Clicked on element : ${this.selector.toString()}`)
+               // return new Promise((resolve,reject) => {
+               //      resolve('successful');
+               //         });
           }
           catch (error) {
                addLogger('ERROR :' + error)
@@ -173,7 +176,7 @@ module.exports = {
           }
      },
 
-     highlightElement: async function (timeout) {
+     highlightElement: async function () {
           try {
                browser.execute('arguments[0].style.backgroundColor = "#FDFF47";', $(this.selector));//provide a yellow background 
                browser.execute('arguments[0].style.outline = "#f00 solid 4px";', $(this.selector)); //provide a red outline
@@ -227,19 +230,48 @@ module.exports = {
      },
 
      mouseHover : async function () {
+
           try {
+
                const location = (await $(this.selector)).getLocation();
-               console.log(location); 
+
+               console.log(location);
+
+
 
                const xLocation = await (await $(this.selector)).getLocation('x')
-               console.log(xLocation); 
+
+               console.log('xlocation********** :', xLocation);
+
+
 
                const yLocation = await (await $(this.selector)).getLocation('y')
-               console.log(yLocation);
 
-               browser.moveToElement('$(this.selector)', xLocation, yLocation)
+               console.log('ylocation********** :',yLocation);
+
+               
+
+               this.moveTo(xLocation, yLocation)
+
           } catch (error) {
+
                addLogger(`ERROR : ${error}`)
+
           }
+
      },
+
+     switchToWindow : async function () {
+          try {
+               // await this.getAllWindowHandles().then(function(handles){
+               // this.switchTo().window(handles[1]);
+               // }  
+               await browser.newWindow('https://www.amazon.in/')  
+          } 
+          catch (error) {
+               addLogger(`ERROR: New Window does not exist : ${error}`);
+          }
+             
+     },
+     
 }
