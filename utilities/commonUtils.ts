@@ -10,8 +10,12 @@ module.exports = {
         }
         emailStr = emailStr + '@wdio.com';
         return emailStr;
+    },
+
+    generateFileNameWithTimeStamp: function () {
+        const currentTimeInSeconds = Math.floor(Date.now() / 1000)
+        let fileName: String
+        fileName = 'screenshot_' + currentTimeInSeconds + '.png';
+        return fileName;
     }
-
-
-    // Generate randon Numbers
 }
