@@ -54,7 +54,11 @@ export const config: WebdriverIO.Config = {
   // will be called from there.
   //
   specs: [
-    './src/test/specs/amz.search.specs.ts'
+    [
+      "./src/test/specs/loadPage.ts",
+      "./src/test/specs/selectCategory.ts",
+      "./src/test/specs/watchCategory.ts"
+    ]
   ],
   // Patterns to exclude.
   exclude: [
@@ -103,7 +107,7 @@ export const config: WebdriverIO.Config = {
   // Define all options that are relevant for the WebdriverIO instance here
   //
   // Level of logging verbosity: trace | debug | info | warn | error | silent
-  logLevel: 'info',
+  logLevel: 'silent',
   //
   // Set specific log levels per logger
   // loggers:
