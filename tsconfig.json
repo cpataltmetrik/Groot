@@ -12,6 +12,5 @@
     },
     "include" : [
         "../**/*.ts",
-        "./src/types/wdio.d.ts",
     ]
 }

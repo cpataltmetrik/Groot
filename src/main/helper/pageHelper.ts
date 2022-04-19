@@ -1,6 +1,6 @@
 //import { ChainablePromiseElement } from 'webdriverio';
 //const  addLogger= require('../../../utilities/logger.ts')
-import { addLogger } from '../../../utilities/logger'
+import { addLogger } from '../utilities/logger'
 
 
 module.exports = {
