@@ -13,15 +13,15 @@ class SearchPage extends Page {
     }
 
     public get btnSearch() {
-        return $('#nav-search-submit-button');
+        return <any>$('#nav-search-submit-button');
     }
 
     public get searchResults() {
-        return $$('//div/h2/a/span[contains(text(),"Apple iPhone 12")]');
+        return <any>$$('//div/h2/a/span[contains(text(),"Apple iPhone 12")]');
     }
 
     public get amazonChoiceList() {
-        return $$('//span[text()="Amazon\'s "]/following::span[1][text()="Choice"]');
+        return <any>$$('//span[text()="Amazon\'s "]/following::span[1][text()="Choice"]');
     }
 
     /**
