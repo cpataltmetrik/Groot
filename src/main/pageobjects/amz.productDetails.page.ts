@@ -9,7 +9,7 @@ class ProductDetailsPage extends Page {
 
     
     public get pdtToSearch() {
-        return <any>$('(//*[contains(text(),"Smart LED")])//parent::a/..');
+        return <any>$('(//*[contains(text(), "'+pdtexpectedString+'")])//parent::a/..');
     }
 
     public get searchField() {
@@ -20,7 +20,7 @@ class ProductDetailsPage extends Page {
     }
 
     public get searchResults() {
-        return <any>$$('//div/h2/a/span[contains(text(),"Smart LED")]');
+        return <any>$$('//div/h2/a/span[contains(text(),"'+pdtexpectedString+'")]');
     }
 
     public get emiOptions(){
@@ -29,7 +29,7 @@ class ProductDetailsPage extends Page {
 
 
     public get pdtImage() {
-        return <any>$('//img[contains(@alt,"Smart LED") and contains(@onload,"markFeatureRenderForImageBlock()")]');
+        return <any>$('//img[contains(@alt,"'+pdtexpectedString+'") and contains(@onload,"markFeatureRenderForImageBlock()")]');
     }
 
     public get fullScreenIMG() {
