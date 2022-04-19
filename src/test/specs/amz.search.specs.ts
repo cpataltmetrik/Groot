@@ -11,7 +11,7 @@ let searchString : string = SEARCH_DATA.dataset1.searchString
 let expectedString : string = SEARCH_DATA.dataset1.expectedString
 describe('Search a product from Amazon', () => {
     
-    it('Should search a product and store the value', async () => {
+    it.skip('Should search a product and store the value', async () => {
        
         await SearchPage.open();
 
@@ -23,5 +23,16 @@ describe('Search a product from Amazon', () => {
         })
 
         expect(await getAllIphone[0].getText()).toHaveValue(expectedString);
+    });
+
+    it(' Validate Help and Setting section', async() => {
+       await SearchPage.open();
+       await SearchPage.clickAllButton();
+       await SearchPage.scrollToHelpAndSettingsSection();
+       await SearchPage.scrollTOSignInButton();
+       browser.pause(3000);
+       let allHeadings = (await browser.$$('//ul[@data-menu-id="1"]//li[@class="hmenu-separator"][4]/following-sibling::li/a'));
+       console.log('length is  '+allHeadings.length);
+        
     });
 });

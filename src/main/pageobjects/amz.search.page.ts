@@ -24,6 +24,24 @@ class SearchPage extends Page {
         return $$('//span[text()="Amazon\'s "]/following::span[1][text()="Choice"]');
     }
 
+    public get allButtonSearch() {
+        return $('//a[@id="nav-hamburger-menu"]//span[text()="All"]');
+    }
+
+    public get helpAndSettingSection() {
+        return $('//div[contains(text(),"help")]');
+    }
+
+    public get getAllHeadingsFromhelpAndSettingSection() {
+        return $$('//ul[@data-menu-id="1"]//li[@class="hmenu-separator"][4]/following-sibling::li/a');
+    }
+
+    public get signIn_Btn() {
+        return $('//li/a[text()="Sign In"]');
+    }
+
+    
+
     /**
      * a method to encapsule automation code to interact with the page
      * e.g. to login using username and password
@@ -36,14 +54,30 @@ class SearchPage extends Page {
         await this.btnSearch.clickWhenEnabled();
     }
 
+    public async clickAllButton() {
+        await this.allButtonSearch.clickWhenDisplayed();
+    }
+
+    public async scrollToHelpAndSettingsSection() {
+        await this.helpAndSettingSection.scrolltoView();
+    }
+
+    public async scrollTOSignInButton() {
+        await this.signIn_Btn.scrolltoView();
+    }
+
+    public async getHeadings() {
+        await this.getAllHeadingsFromhelpAndSettingSection;
+    }
+
     /**
      * overwrite specific options to adapt it to page object
      */
 
     public open() {
         return super.open('');
-    }  
-    
+    }
+
 }
 
 export default new SearchPage();
