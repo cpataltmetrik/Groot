@@ -9,35 +9,35 @@ class ProductDetailsPage extends Page {
 
     
     public get pdtToSearch() {
-        return $('(//*[contains(text(),"Smart LED")])//parent::a/..');
+        return <any>$('(//*[contains(text(),"Smart LED")])//parent::a/..');
     }
 
     public get searchField() {
-        return $('#twotabsearchtextbox');
+        return <any>$('#twotabsearchtextbox');
     }
     public get btnSearch() {
-        return $('#nav-search-submit-button');
+        return <any>$('#nav-search-submit-button');
     }
 
     public get searchResults() {
-        return $$('//div/h2/a/span[contains(text(),"Smart LED")]');
+        return <any>$$('//div/h2/a/span[contains(text(),"Smart LED")]');
     }
 
-    public get emiOptions() {
-        return $('//*[contains(text(),"EMI options")]');
+    public get emiOptions(){
+        return <any>$('//*[contains(text(),"EMI options")]');
     }
 
 
     public get pdtImage() {
-        return $('//img[contains(@alt,"Smart LED") and contains(@onload,"markFeatureRenderForImageBlock()")]');
+        return <any>$('//img[contains(@alt,"Smart LED") and contains(@onload,"markFeatureRenderForImageBlock()")]');
     }
 
     public get fullScreenIMG() {
-        return $('//img[@class="fullscreen"]');
+        return <any>$('//img[@class="fullscreen"]');
     }
 
     public get ZoomIMGTitle() {
-        return $('//div[@id="ivTitle"]');
+        return <any>$('//div[@id="ivTitle"]');
     }
 
     public async productView(searchProduct) {

@@ -9,7 +9,7 @@ class SearchPage extends Page {
      * define selectors using getter methods
      */
     public get searchField() {
-        return $('#twotabsearchtextbox');
+        return <any>$('#twotabsearchtextbox');
     }
 
     public get btnSearch() {

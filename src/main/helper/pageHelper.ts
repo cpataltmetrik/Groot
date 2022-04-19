@@ -147,7 +147,7 @@ module.exports = {
           
      },
 
-     selectOption : async function (index) {
+     selectOptionByIndex : async function (index) {
           try {
                (await $(this.selector)) .click();
                (await $(this.selector)).selectByIndex(index)
