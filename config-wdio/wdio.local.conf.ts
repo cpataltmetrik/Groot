@@ -1,8 +1,8 @@
 const customCommands = require('../src/main/helper/pageHelper.ts')
-import { addLogger } from '../utilities/logger'
+import { addLogger } from '../src/main/utilities/logger'
 import * as configVal from 'config'
 const baseURL = configVal.get('Environment.baseUrl');
-const commonUtils = require('../utilities/commonUtils');
+const commonUtils = require('../src/main/utilities/commonUtils');
 
 export const config: WebdriverIO.Config = {
   //
@@ -55,6 +55,7 @@ export const config: WebdriverIO.Config = {
   //
   specs: [
     './src/test/specs/amz.productDetails.specs.ts'
+    './test/specs/amz.search.specs.ts'
   ],
   // Patterns to exclude.
   exclude: [

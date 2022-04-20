@@ -2,6 +2,10 @@ import SearchPage from '../../main/pageobjects/amz.search.page';
 import  SEARCH_DATA  from '../testData/searchData';
 import * as config from 'config'
 import { addLogger } from '../../../utilities/logger'
+import SearchPage from '../../src/main/pageobjects/amz.search.page';
+import  SEARCH_DATA  from '../testData/searchData';
+import * as config from 'config'
+import { addLogger } from '../../src/main/utilities/logger'
 const baseURL = config.get('Environment.baseUrl');
 
 //let searchString : string = config.get('TestData1.searchTerm')
@@ -23,5 +27,6 @@ describe('Search a product from Amazon', () => {
         })
 
       //  expect(await getAllIphone[0].getText()).toHaveValue(expectedString);
+     
     });
 });
