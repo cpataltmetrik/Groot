@@ -2,6 +2,7 @@ import Page from "./page";
 import * as config from 'config'
 const baseURL = config.get('Environment.baseUrl');
 import loginData from "../../test/testData/loginData";
+import { addLogger } from "../../../utilities/logger";
 const input1: string=loginData.userPassSet.input1
 const input2: string=loginData.userPassSet.input2
 export default class Login extends Page{
@@ -40,17 +41,17 @@ export default class Login extends Page{
         await this.Path(baseURL)
         await this.maxWin
         await this.signIn.clickWhenDisplayed()      //sign-in button
-        await this.eMail.setValue(eMail)            //email textarea
+        await this.eMail.setText(eMail)            //email textarea
         await this.contBtn.clickWhenReady()       //continue button
-        await this.passWord.setValue(passWord)      //password textarea
+        await this.passWord.setText(passWord)      //password textarea
         await this.lastBtn.clickWhenEnabled()       //finalizing sign-in button
     }
     public async loginSucces(){
-        if(await this.successLog == "Hello, Sign in"){
+        if(await this.successLog != "Hello, Sign in"){
             await this.successLog.highlightElement()
             console.log(await"==login was successful==")
         }else{
-            console.log(await"==login was successful==")
+            console.log(await"==login was not successful==")
         }
     }
 }

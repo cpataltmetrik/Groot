@@ -14,7 +14,7 @@ describe("login amazon account",()=>
         await login.loginProcess(input1,input2);
     })
 
-    it("login is success or not",async ()=>
+    it("login is successful or not",async ()=>
     {
         await login.loginSucces()
     })

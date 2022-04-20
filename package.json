@@ -6,11 +6,12 @@
   "type": "commonjs",
   "devDependencies": {
     "@types/config": "^0.0.41",
-    "@wdio/allure-reporter": "^7.19.1",
+    "@wdio/allure-reporter": "^7.19.5",
     "@wdio/cli": "^7.19.1",
     "@wdio/local-runner": "^7.19.3",
     "@wdio/mocha-framework": "^7.19.3",
     "@wdio/spec-reporter": "^7.19.1",
+    "allure-commandline": "^2.17.2",
     "chai": "^4.3.6",
     "chromedriver": "^99.0.0",
     "config": "^3.3.7",
@@ -20,10 +21,10 @@
   },
   "scripts": {
     "test-local": "wdio ./config-wdio/wdio.local.conf.ts",
-    "test-dev" : "SET NODE_ENV=dev&& npx wdio ./config-wdio/wdio.local.conf.ts",
-    "test-qa" : "SET NODE_ENV=qa&& npx wdio ./config-wdio/wdio.local.conf.ts",
-    "test-stage" : "SET NODE_ENV=stage&& npx wdio ./config-wdio/wdio.local.conf.ts",
-    "test-prod" : "SET NODE_ENV=prod&& npx wdio ./config-wdio/wdio.local.conf.ts",
+    "test-dev": "SET NODE_ENV=dev&& npx wdio ./config-wdio/wdio.local.conf.ts",
+    "test-qa": "SET NODE_ENV=qa&& npx wdio ./config-wdio/wdio.local.conf.ts",
+    "test-stage": "SET NODE_ENV=stage&& npx wdio ./config-wdio/wdio.local.conf.ts",
+    "test-prod": "SET NODE_ENV=prod&& npx wdio ./config-wdio/wdio.local.conf.ts",
     "report": "allure generate allure-results --clean && allure open"
   },
   "repository": {
@@ -35,8 +36,5 @@
   "bugs": {
     "url": "https://github.com/cpataltmetrik/webdriveriowithtypescript/issues"
   },
-  "homepage": "https://github.com/cpataltmetrik/webdriveriowithtypescript#readme",
-  "dependencies": {
-    "allure-commandline": "^2.17.2"
-  }
+  "homepage": "https://github.com/cpataltmetrik/webdriveriowithtypescript#readme"
 }

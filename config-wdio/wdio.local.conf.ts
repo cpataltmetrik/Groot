@@ -53,7 +53,7 @@ export const config: WebdriverIO.Config = {
     // will be called from there.
     //
     specs: [
-        './src/test/specs/amz.search.specs.ts'
+        './src/test/specs/amz.login.specs.ts'
     ],
     // Patterns to exclude.
     exclude: [
@@ -102,7 +102,7 @@ export const config: WebdriverIO.Config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'info',
+    logLevel: 'silent',
     //
     // Set specific log levels per logger
     // loggers:
@@ -164,12 +164,12 @@ export const config: WebdriverIO.Config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec',
+    reporters: [
 
         ['allure', {
             outputDir: 'allure-results',
             disableWebdriverStepsReporting: true,
-            disableWebdriverScreenshotsReporting: true,
+            disableWebdriverScreenshotsReporting: false,
         }
         ]],    
         
@@ -305,6 +305,13 @@ export const config: WebdriverIO.Config = {
      */
     // afterHook: function (test, context, { error, result, duration, passed, retries }) {
     // },
+    afterTest: async(
+      test, context, { 
+        error, duration, passed }) =>{
+      if (error) {
+        await browser.takeScreenshot();
+      }
+    }
     /**
      * Function to be executed after a test (in Mocha/Jasmine only)
      * @param {Object}  test             test object

@@ -36,7 +36,7 @@ module.exports = {
      },
      setText: async function (text: string) {
           try {
-               this.clear();
+               this.clearValue();
                await this.click();
                await this.setValue(text);
                addLogger(`STEP: Entered value : ${text} in ${this.selector.toString()}`)
