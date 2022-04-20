@@ -25,7 +25,8 @@
     "test-qa": "SET NODE_ENV=qa&& npx wdio ./config-wdio/wdio.local.conf.ts",
     "test-stage": "SET NODE_ENV=stage&& npx wdio ./config-wdio/wdio.local.conf.ts",
     "test-prod": "SET NODE_ENV=prod&& npx wdio ./config-wdio/wdio.local.conf.ts",
-    "report": "allure generate allure-results --clean && allure open"
+    "report": "allure generate allure-results --clean && allure open",
+    
   },
   "repository": {
     "type": "git",

@@ -4,9 +4,7 @@ const assertchai = require("chai").assert;
 const baseURL = config.get("Environment.baseUrl");
 
 export default class shopByCategory extends Page {
-  path(link: any) {
-    return browser.url(link);
-  }
+  
   public get shopby() {
     return <any>$("//h2[text()='Shop by Category']");
   }

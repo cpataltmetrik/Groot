@@ -5,7 +5,7 @@ const baseURL = config.get("Environment.baseUrl");
 const footer: any = new Footer();
 
 describe("Navigate to Footer Section", async () => {
-  it("navigating to footer and click on Help", async () => {
+  it("Navigating to footer and click on Help", async () => {
     await footer.open();
     await footer.NavigateToFooter();
   });
