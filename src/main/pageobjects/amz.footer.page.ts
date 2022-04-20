@@ -1,13 +1,11 @@
 import Page from "./page";
-
+const assertchai=require('chai').assert;
 import * as config from "config"
+import { isAssertClause, OperationCanceledException } from "typescript";
 const baseURL = config.get('Environment.baseUrl');
 
 export default class Footer extends Page{
-   public async path(link:any)
-    {
-        return browser.url(link)
-    }
+   
 
     public get helpbtn()
     {
@@ -25,24 +23,25 @@ export default class Footer extends Page{
     {
         return <any>$("(//a[@class='a-link-normal'])[1]");
     }
-     public async navigate_footer()
+     public async NavigateToFooter()
      {
         
-        await this.path(baseURL)
+        //await config.get('Environment.baseUrl');
+       
         await this.helpbtn.scrolltoView()
         await this.helpbtn.clickWhenDisplayed()
         
         
      }
-     public async amazonpay_validation(text)
+     public async AmazonpayLinks_validation(text:any)
      {
         await await this.searchtxt.setValue(text)
         await this.searchtxt.keys('Enter')
-        let KYC=await this.kyc.isDisplayed();
-        console.log(KYC);
+        assertchai.exists(await this.kyc);
         
         
-    
-        
-     }
+        }
+        public open() {
+            return super.open('');
+        }  
     }
