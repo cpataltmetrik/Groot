@@ -45,12 +45,11 @@ class ProductDetailsPage extends Page {
         await this.btnSearch.clickWhenDisplayed();
         await this.pdtToSearch.waitTillInterval(3000);
         await (await this.pdtToSearch).click()
-        // ----- switch to window
         await browser.getWindowHandles().then(function(handles) {
             var newTabHandle = handles[1];
             browser.switchToWindow(newTabHandle);
-            console.log("Switched to New Window");
-        });
+            console.log("Switched to New Window");           
+             });
         await this.pdtToSearch.waitTill()
         if((await this.pdtToSearch).isDisplayed())     {
             await this.pdtToSearch.highlightElement()

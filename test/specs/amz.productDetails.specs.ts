@@ -1,8 +1,8 @@
-import ProductDetailsPage from '../../main/pageobjects/amz.productDetails.page';
-import SearchPage from '../../main/pageobjects/amz.search.page';
+import ProductDetailsPage from '../../src/main/pageobjects/amz.productDetails.page';
+import SearchPage from '../../src/main/pageobjects/amz.search.page';
 import  SEARCH_DATA  from '../testData/searchData';
 import * as config from 'config'
-import { addLogger } from '../../../utilities/logger'
+import { addLogger } from '../../src/main/utilities/logger'
 const baseURL = config.get('Environment.baseUrl');
 
 let pdtsearchString : string = config.get('ProductData.searchProduct')
@@ -43,7 +43,6 @@ describe('Search a product from Amazon', () => {
         await ProductDetailsPage.viewEMIOptions();
 
     });
-
 
     it('Product zoom', async () => {
 

@@ -1,6 +1,6 @@
 //import { ChainablePromiseElement } from 'webdriverio';
 //const  addLogger= require('../../../utilities/logger.ts')
-import { addLogger } from '../../../utilities/logger'
+import { addLogger } from '../utilities/logger'
 
 
 module.exports = {
@@ -261,21 +261,7 @@ module.exports = {
 
      },
 
-     switchToWindow : async function () {
-          try {
-               // await this.getAllWindowHandles().then(function(handles){
-               // this.switchTo().window(handles[1]);
-               // }  
-               await browser.newWindow('https://www.amazon.in/')  
-          } 
-          catch (error) {
-               addLogger(`ERROR: New Window does not exist : ${error}`);
-          }
-             
-     },
-
-
-     switchToWindow : async function name() {
+     switchToWindow : async function(name) {
           try{
 
                     // get the current or parent window name 
