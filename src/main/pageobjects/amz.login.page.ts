@@ -12,9 +12,6 @@ export default class Login extends Page{
     Path(link: any){
         return browser.url(link)
     }
-    public get maxWin(){
-        return browser.maximizeWindow()
-    }
     public get signIn(){
         return <any>$("//a[@id='nav-link-accountList']"); 
     }
@@ -37,13 +34,20 @@ export default class Login extends Page{
         return <any>$("span#nav-link-accountList-nav-line-1");
     }
 
-    public async loginProcess(eMail,passWord){
+    public async loginProcess(){
         await this.Path(baseURL)
-        await this.maxWin
         await this.signIn.clickWhenDisplayed()      //sign-in button
+    }
+    public async enterEmailId(eMail){
         await this.eMail.setText(eMail)            //email textarea
+    }
+    public async clickContinue(){
         await this.contBtn.clickWhenReady()       //continue button
+    }
+    public async enterPassword(passWord){
         await this.passWord.setText(passWord)      //password textarea
+    }
+    public async finishSignIn(){
         await this.lastBtn.clickWhenEnabled()       //finalizing sign-in button
     }
     public async loginSucces(){

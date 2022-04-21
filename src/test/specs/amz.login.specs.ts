@@ -11,7 +11,11 @@ describe("login amazon account",()=>
 {
     it("should login with given credentials",async ()=>
     {
-        await login.loginProcess(input1,input2);
+        await login.loginProcess();
+        await login.enterEmailId(input1);
+        await login.clickContinue();
+        await login.enterPassword(input2);
+        await login.finishSignIn();
     })
 
     it("login is successful or not",async ()=>
