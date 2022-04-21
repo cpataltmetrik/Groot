@@ -1,4 +1,4 @@
-import Login from "../../main/pageobjects/amz.login.page"
+import Login from "../../src/main/pageobjects/login.page"
 import * as config from 'config'
 import loginData from "../testData/loginData"
 

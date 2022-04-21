@@ -1,7 +1,7 @@
 import Page from "./page";
 import * as config from 'config'
 const baseURL = config.get('Environment.baseUrl');
-import loginData from "../../test/testData/loginData";
+import loginData from "../../../test/testData/loginData";
 import { addLogger } from "../../../utilities/logger";
 const input1: string=loginData.userPassSet.input1
 const input2: string=loginData.userPassSet.input2
