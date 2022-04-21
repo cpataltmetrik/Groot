@@ -9,8 +9,8 @@ export default class Login extends Page{
 
     //navigting to enter amazon account credentials
 
-    Path(link: any){
-        return browser.url(link)
+    public open(path: string): Promise<string> {
+        return super.open(path) 
     }
     public get signIn(){
         return <any>$("//a[@id='nav-link-accountList']"); 
@@ -35,7 +35,7 @@ export default class Login extends Page{
     }
 
     public async loginProcess(){
-        await this.Path(baseURL)
+        await this.open("")
         await this.signIn.clickWhenDisplayed()      //sign-in button
     }
     public async enterEmailId(eMail){
