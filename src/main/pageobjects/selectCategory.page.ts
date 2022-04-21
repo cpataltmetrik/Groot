@@ -1,11 +1,12 @@
 const chaiExpect: any = require("chai").expect
+import Page from "./page"
 
-export default class SelectCategory
+export default class SelectCategory extends Page
 {
     //Load Page
     public async open(path: string): Promise<any>
     {
-        await browser.url(path)
+        await super.open(path)
     }
 
     //Maximize Window
@@ -86,14 +87,14 @@ export default class SelectCategory
 
     //Load Page And Perform Basic Assertions
     public async loadPage(
-        path: string,
         input1: string,
         input2: string,
+        path: string,
         inputType: string,
         input3: string
     ): Promise<any>
     {
-        await this.open(path)
+        await this.open("")
         await this.maxWin
         await this.getUrlAndTitle()
         await this.wdioAssertions(input1, input2)

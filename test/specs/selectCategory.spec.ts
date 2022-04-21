@@ -1,6 +1,6 @@
-import Category from "../../main/pageobjects/selectCategory.page"
+import Category from "../../src/main/pageobjects/selectCategory.page"
 const category: any = new Category()
-import categoryData from "../testData/categoryData"
+import categoryData from "../testData/category.data"
 
 /* Data */
 const input4: string = categoryData.categoryDataSet.input4

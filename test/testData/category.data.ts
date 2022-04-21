@@ -1,8 +1,8 @@
 const CategoryData = {
     loadPageDataSet: {
-        link: "https://www.amazon.in/",
         input1: "amazon",
         input2: "Shopping",
+        path: "https://www.amazon.in/",
         inputType: "string",
         input3: "Online Shopping site in India: Shop Online for Mobiles, Books, Watches, Shoes and More - Amazon.in"
     },
