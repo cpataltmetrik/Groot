@@ -36,7 +36,7 @@ module.exports = {
      },
      setText: async function (text: string) {
           try {
-               this.clear();
+               this.clearValue();
                await this.click();
                await this.setValue(text);
                addLogger(`STEP: Entered value : ${text} in ${this.selector.toString()}`)
@@ -60,7 +60,7 @@ module.exports = {
      waitAndEnterText: function (timeout, textVal) {
           try {
                this.waitForDisplayed(timeout || { timeout: 3000 })
-               this.clear()
+               this.clearValue()
                this.click()
                this.setValue(textVal)
                addLogger(`STEP: Entered value : ${textVal} in ${this.selector.toString()}`)
@@ -183,19 +183,10 @@ module.exports = {
           }
      },
 
-     getUrlAndTitle: function (timeout): string {
-          try {
-               return browser.getUrl().toString()
-               return browser.getTitle.toString()
-          } catch (error) {
-               addLogger('ERROR :' + error);
-          }
-     },
-
      fieldClear: function (timeout) {
           try {
                this.waitForDisplayed(timeout || { timeout: 3000 })
-               this.clear()
+               this.clearValue()
                addLogger(`STEP: Cleared the field ${this.selector.toString()}`)
           }
           catch (error) {
