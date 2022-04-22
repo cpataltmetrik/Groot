@@ -1,24 +1,21 @@
 export default class Apple {
-  //Load Page
   public async open(path: string): Promise<any> {
     await browser.url(path);
   }
 
-  //Maximize Window
   public get maxWin() {
     return browser.maximizeWindow();
   }
-//Navigation to Mobile Page
-  public get NavigateToMobilePage() {
+
+  public get navigateToMobilePage() {
     return $("//a[contains(text(),'Mobiles')]");
   }
- 
+
   public async fieldClick(input: any): Promise<any> {
     await input.click();
   }
- 
-  //To select iphone on mobile page
-  public get SelectIphone() {
+
+  public get selectIphone() {
     return $("//span[text()='Apple']");
   }
 
@@ -26,29 +23,28 @@ export default class Apple {
     await input.scrollIntoView();
   }
 
-  public get Dropdown() {
+  public get dropDown() {
     return $(".a-dropdown-prompt");
   }
- // To sort price from low to High 
+  // To sort price from low to High
   public get sortOrder() {
     return $("//a[text()='Price: Low to High'][1]");
   }
 
-  // To get cost of all products
-  public get CostOfProducts() {
+  public get costOfProducts() {
     return $$("//span[@class='a-price-whole']");
   }
 
   public async minvalue(): Promise<any> {
     let price: number[] = new Array();
     let val: any;
-    for (let i: number = 0; i < (await this.CostOfProducts.length); i++) {
-      val = await this.CostOfProducts[i].getText();
+    for (let i: number = 0; i < (await this.costOfProducts.length); i++) {
+      val = await this.costOfProducts[i].getText();
+      console.log(await val);
       val = val.replace(",", "");
       price.push(val);
-      console.log(await val);
     }
-    console.log(await price.length);
+    //console.log(await price.length);
     console.log("Product with lowest price is :- ");
     console.log(Math.min(...price));
   }
