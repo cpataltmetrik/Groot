@@ -54,7 +54,7 @@ export const config: WebdriverIO.Config = {
   // will be called from there.
   //
   specs: [
-    './test/specs/amz.search.specs.ts'
+   './test/specs/**.*.ts',
   ],
   // Patterns to exclude.
   exclude: [
@@ -179,7 +179,8 @@ export const config: WebdriverIO.Config = {
   // See the full list at http://mochajs.org/
   mochaOpts: {
     ui: 'bdd',
-    timeout: 60000
+    //grep: process.env.npm_config_grep,
+    timeout: 60000,
   },
   //
   // =====
