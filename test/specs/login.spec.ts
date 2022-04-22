@@ -1,6 +1,6 @@
 import Login from "../../src/main/pageobjects/login.page"
-import * as config from 'config'
 import loginData from "../testData/loginData"
+import { addLogger } from "../../src/main/utilities/logger";
 
 /*data from login data*/
 const input1: string=loginData.userPassSet.input1
@@ -11,16 +11,22 @@ describe("login amazon account",()=>
 {
     it("should login with given credentials",async ()=>
     {
-        await login.loginProcess();
-        await login.enterEmailId(input1);
-        await login.clickContinue();
-        await login.enterPassword(input2);
-        await login.finishSignIn();
+        await login.open("")
+        await login.signIn.clickWhenDisplayed()      //sign-in button
+        await login.eMail.setText(input1)            //email textarea
+        await login.contBtn.clickWhenReady()       //continue button
+        await login.passWord.setText(input2)      //password textarea
+        await login.lastBtn.clickWhenEnabled()       //finalizing sign-in button
     })
 
-    it("login is successful or not",async ()=>
+    it("should verify login is successful or not",async ()=>
     {
-        await login.loginSucces()
+        if(await login.successLog != "Hello, Sign in"){
+            await login.successLog.highlightElement()
+            addLogger(`==login was successful==`)
+        }else{
+            addLogger(`==login was not successful==`)
+        }
     })
 
 })
