@@ -1,47 +1,44 @@
 import Page from "./page";
 import * as config from "config";
 const assertchai = require("chai").assert;
-const baseURL = config.get("Environment.baseUrl");
+//const baseURL = config.get("Environment.baseUrl");
 
 export default class shopByCategory extends Page {
-  
-  public get shopby() {
+  public get shopBy() {
     return <any>$("//h2[text()='Shop by Category']");
   }
-  public get mobiles() {
+  public get mobilesImage() {
     return <any>$("//img[@alt='Mobiles']");
   }
-  public get brand() {
+  public get brandText() {
     return <any>$("//span[.='Brands']");
   }
-  public get boat_brand() {
+  public get boatBrand() {
     return <any>$("//span[.='boAt']");
   }
-  public get oneplus_brand() {
+  public get oneplusBrand() {
     return <any>$("//span[.='OnePlus']");
   }
-  public get boat_Product1() {
+  public get boatProduct1() {
     return <any>$("(//span[contains(.,'boAt Bassheads')])[2]");
   }
-  public get oneplus_product1() {
+  public get oneplusProduct1() {
     return <any>$("(//span[contains(.,'OnePlus Nord CE ')])[1]");
   }
-  public get brands_list() {
-    return <any>(
-      $$(
-        "//ul[@class='a-unordered-list a-nostyle a-vertical a-spacing-medium']"
-      )
+  public get brandsList() {
+    return $$(
+      "//span[text()='Brands']//parent::div/../ul/li//span[@dir='auto']"
     );
   }
 
-  public async ClickOnMobiles_UnderShopByCategory() {
-    await this.mobiles.clickWhenDisplayed();
+  public async selectMobilesUnderShopByCategory() {
+    await this.mobilesImage.clickWhenDisplayed();
   }
-
-  public async selectBrand(brandsName, productName) {
+  public async selectBrandName(brandsName, productName) {
     await brandsName.clickWhenDisplayed();
     assertchai.exists(await productName);
   }
+
   public open() {
     return super.open("");
   }

@@ -4,26 +4,26 @@ import * as config from "config";
 import { isAssertClause, OperationCanceledException } from "typescript";
 
 export default class Footer extends Page {
-  public get helpbtn() {
+  public get helpButton() {
     return <any>$("//a[.='Amazon Assistant Download']/following::a[.='Help']");
   }
-  public get searchtxt() {
+  public get searchText() {
     return <any>$("//input[@type='search']");
   }
-  public get searchbtn() {
+  public get searchButton() {
     return <any>$("//i[@class='a-icon a-icon-search']");
   }
-  public get kyc() {
+  public get amazonPayKYC() {
     return <any>$("(//a[@class='a-link-normal'])[1]");
   }
-  public async NavigateToFooter() {
-    await this.helpbtn.scrolltoView();
-    await this.helpbtn.clickWhenDisplayed();
+  public async navigateToFooter() {
+    await this.helpButton.scrolltoView();
+    await this.helpButton.clickWhenDisplayed();
   }
-  public async AmazonpayLinks_validation(text: any) {
-    await await this.searchtxt.setValue(text);
-    await this.searchtxt.keys("Enter");
-    assertchai.exists(await this.kyc);
+  public async amazonPayLinksValidation(text: any) {
+    await await this.searchText.setValue(text);
+    await this.searchText.keys("Enter");
+    assertchai.exists(await this.amazonPayKYC);
   }
   public open() {
     return super.open("");
