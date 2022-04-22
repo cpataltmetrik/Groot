@@ -13,10 +13,10 @@ const CategoryData = {
         input7: "Shoes"
     },
     watchCategoryDataSet: {
-        input4: "Watches",
-        input5: "value",
-        input6: "search-alias=watches",
-        input7: "Sonata Watch"
+        input8: "Watches",
+        input9: "value",
+        input10: "search-alias=watches",
+        input11: "Sonata Watch"
     }
 }
  

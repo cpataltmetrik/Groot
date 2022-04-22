@@ -256,20 +256,5 @@ module.exports = {
                addLogger(`ERROR : ${error}`)
           }
           
-     },
-
-     printUrlAndTitle: async (): Promise<any> => 
-     {
-          try 
-          {
-               return {
-                    url: await (await browser.getUrl()).toString(),
-                    title: await (await browser.getTitle()).toString()
-               }
-          }
-          catch(error)
-          {
-               addLogger(`Error is :- ${error}`)
-          }
      }
 }

@@ -1,6 +1,6 @@
 {
   "Environment": {
-    "baseUrl": "https://www.amazon.in/"
+    "baseUrl": "https://www.amazon.in"
   },
   "TestData1": {
       "searchTerm": "iPhone 12",
