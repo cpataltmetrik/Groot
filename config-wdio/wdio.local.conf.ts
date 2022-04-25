@@ -53,7 +53,7 @@ export const config: WebdriverIO.Config = {
   // then the current working directory is where your `package.json` resides, so `wdio`
   // will be called from there.
   //
-  specs: ["./test/specs/login.spec.ts"],
+  specs: [],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -86,7 +86,6 @@ export const config: WebdriverIO.Config = {
       // grid with only 5 firefox instances available you can make sure that not more than
       // 5 instances get started at a time.
       maxInstances: 5,
-
       //
       browserName: "chrome",
       acceptInsecureCerts: true,
@@ -286,7 +285,6 @@ export const config: WebdriverIO.Config = {
    */
   // afterHook: function (test, context, { error, result, duration, passed, retries }) {
   // },
-
   /**
    * Function to be executed after a test (in Mocha/Jasmine only)
    * @param {Object}  test             test object
