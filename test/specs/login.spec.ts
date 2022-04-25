@@ -1,32 +1,25 @@
-import Login from "../../src/main/pageobjects/login.page"
-import loginData from "../testData/loginData"
+import Login from "../../src/main/pageobjects/login.page";
 import { addLogger } from "../../src/main/utilities/logger";
+import loginData from "../testData/loginData";
+const chaiExpect: any = require("chai").expect;
+const login: any = new Login();
 
 /*data from login data*/
-const input1: string=loginData.userPassSet.input1
-const input2: string=loginData.userPassSet.input2
+const input1: string = loginData.userPassSet.input1;
+const input2: string = loginData.userPassSet.input2;
 
-const login: any = new Login()
-describe("login amazon account",()=>
-{
-    it("should login with given credentials",async ()=>
-    {
-        await login.open("")
-        await login.signIn.clickWhenDisplayed()      //sign-in button
-        await login.eMail.setText(input1)            //email textarea
-        await login.contBtn.clickWhenReady()       //continue button
-        await login.passWord.setText(input2)      //password textarea
-        await login.lastBtn.clickWhenEnabled()       //finalizing sign-in button
-    })
+describe("Login Page", async () => {
+  it("Should login to amazon page", async () => {
+    await login.open("");
+    await login.successLog.clickWhenReady();
+    await login.emailField.setText(input1);
+    await login.continueButton.clickWhenEnabled();
+    await login.passWord.setText(input2);
+    await login.lastBtn.clickWhenEnabled();
+  });
 
-    it("should verify login is successful or not",async ()=>
-    {
-        if(await login.successLog != "Hello, Sign in"){
-            await login.successLog.highlightElement()
-            addLogger(`==login was successful==`)
-        }else{
-            addLogger(`==login was not successful==`)
-        }
-    })
-
-})
+  it("Should check login has been done successful or not", async () => {
+    let txt: string = await login.successLog.getText();
+    chaiExpect(txt).to.equal("Hello,");
+  });
+});

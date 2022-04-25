@@ -1,8 +1,8 @@
-const customCommands = require('../src/main/helper/pageHelper.ts')
-import { addLogger } from '../src/main/utilities/logger'
-import * as configVal from 'config'
-const baseURL = configVal.get('Environment.baseUrl');
-const commonUtils = require('../src/main/utilities/commonUtils');
+const customCommands = require("../src/main/helper/pageHelper.ts");
+import { addLogger } from "../src/main/utilities/logger";
+import * as configVal from "config";
+const baseURL = configVal.get("Environment.baseUrl");
+const commonUtils = require("../src/main/utilities/commonUtils");
 
 export const config: WebdriverIO.Config = {
   //
@@ -23,15 +23,14 @@ export const config: WebdriverIO.Config = {
   // environment variables for ts-node or use wdio config's autoCompileOpts section.
   //
 
-
   autoCompileOpts: {
     autoCompile: true,
     // see https://github.com/TypeStrong/ts-node#cli-and-programmatic-options
     // for all available options
     tsNodeOpts: {
       transpileOnly: true,
-      project: 'tsconfig.json'
-    }
+      project: "tsconfig.json",
+    },
     // tsconfig-paths is only used if "tsConfigPathsOpts" are provided, if you
     // do please make sure "tsconfig-paths" is installed as dependency
     // tsConfigPathsOpts: {
@@ -54,9 +53,7 @@ export const config: WebdriverIO.Config = {
   // then the current working directory is where your `package.json` resides, so `wdio`
   // will be called from there.
   //
-  specs: [
-    './test/specs/amz.search.specs.ts'
-  ],
+  specs: ["./test/specs/login.spec.ts"],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -83,21 +80,22 @@ export const config: WebdriverIO.Config = {
   // Sauce Labs platform configurator - a great tool to configure your capabilities:
   // https://saucelabs.com/platform/platform-configurator
   //
-  capabilities: [{
+  capabilities: [
+    {
+      // maxInstances can get overwritten per capability. So if you have an in-house Selenium
+      // grid with only 5 firefox instances available you can make sure that not more than
+      // 5 instances get started at a time.
+      maxInstances: 5,
 
-    // maxInstances can get overwritten per capability. So if you have an in-house Selenium
-    // grid with only 5 firefox instances available you can make sure that not more than
-    // 5 instances get started at a time.
-    maxInstances: 5,
-
-    //
-    browserName: 'chrome',
-    acceptInsecureCerts: true
-    // If outputDir is provided WebdriverIO can capture driver session logs
-    // it is possible to configure which logTypes to include/exclude.
-    // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
-    // excludeDriverLogs: ['bugreport', 'server'],
-  }],
+      //
+      browserName: "chrome",
+      acceptInsecureCerts: true,
+      // If outputDir is provided WebdriverIO can capture driver session logs
+      // it is possible to configure which logTypes to include/exclude.
+      // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
+      // excludeDriverLogs: ['bugreport', 'server'],
+    },
+  ],
   //
   // ===================
   // Test Configurations
@@ -105,7 +103,7 @@ export const config: WebdriverIO.Config = {
   // Define all options that are relevant for the WebdriverIO instance here
   //
   // Level of logging verbosity: trace | debug | info | warn | error | silent
-  logLevel: 'info',
+  logLevel: "info",
   //
   // Set specific log levels per logger
   // loggers:
@@ -129,7 +127,7 @@ export const config: WebdriverIO.Config = {
   // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
   // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
   // gets prepended directly.
-  baseUrl: 'http://localhost',
+  baseUrl: "http://localhost",
   //
   // Default timeout for all waitFor* commands.
   waitforTimeout: 10000,
@@ -145,8 +143,7 @@ export const config: WebdriverIO.Config = {
   // Services take over a specific job you don't want to take care of. They enhance
   // your test setup with almost no effort. Unlike plugins, they don't add new
   // commands. Instead, they hook themselves up into the test process.
-  services: ['chromedriver', 'screenshots-cleanup'],
-
+  services: ["chromedriver", "screenshots-cleanup"],
 
   // Framework you want to run your specs with.
   // The following are supported: Mocha, Jasmine, and Cucumber
@@ -154,7 +151,7 @@ export const config: WebdriverIO.Config = {
   //
   // Make sure you have the wdio adapter package for the specific framework installed
   // before running any tests.
-  framework: 'mocha',
+  framework: "mocha",
   //
   // The number of times to retry the entire specfile when it fails as a whole
   // specFileRetries: 1,
@@ -168,20 +165,24 @@ export const config: WebdriverIO.Config = {
   // Test reporter for stdout.
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
-  reporters: ['spec',
+  reporters: [
+    "spec",
 
-    ['allure', {
-      outputDir: 'allure-results',
-      disableWebdriverStepsReporting: true,
-      disableWebdriverScreenshotsReporting: true,
-    }
-    ]],
+    [
+      "allure",
+      {
+        outputDir: "allure-results",
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: true,
+      },
+    ],
+  ],
 
   // Options to be passed to Mocha.
   // See the full list at http://mochajs.org/
   mochaOpts: {
-    ui: 'bdd',
-    timeout: 60000
+    ui: "bdd",
+    timeout: 60000,
   },
   //
   // =====
@@ -236,81 +237,88 @@ export const config: WebdriverIO.Config = {
    * @param {Object}         browser      instance of created browser/device session
    */
   before(capabilities, specs) {
-    addLogger(`Env is ${process.env}.toString()`)
+    addLogger(`Env is ${process.env}.toString()`);
     addLogger(`Test is running in ${baseURL}`);
 
     // Add commands to WebdriverIO
-    Object.keys(customCommands).forEach(key => {
+    Object.keys(customCommands).forEach((key) => {
       browser.addCommand(key, customCommands[key], true);
-    })
+    });
 
     // Add commands to WebdriverIO
-    Object.keys(commonUtils).forEach(key => {
+    Object.keys(commonUtils).forEach((key) => {
       browser.addCommand(key, commonUtils[key], true);
-    })
-    browser.setWindowSize(1920, 1080)
-    console.log(`Session Id for session lookup: ${browser.sessionId}`)
+    });
+    browser.setWindowSize(1920, 1080);
+    console.log(`Session Id for session lookup: ${browser.sessionId}`);
     //console.log(`BASE URL: ${browser.options.baseUrl}`)
   },
-    /**
-     * Runs before a WebdriverIO command gets executed.
-     * @param {String} commandName hook command name
-     * @param {Array} args arguments that command would receive
-     */
-    // beforeCommand: function (commandName, args) {
-    // },
-    /**
-     * Hook that gets executed before the suite starts
-     * @param {Object} suite suite details
-     */
-    // beforeSuite: function (suite) {
-    // },
-    /**
-     * Function to be executed before a test (in Mocha/Jasmine) starts.
-     */
-    beforeTest: function (test, context) {
-      addLogger(`Test is running in Env : ${process.env.NODE_ENV} & URL : ${baseURL}` )
-    },
-    /**
-     * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
-     * beforeEach in Mocha)
-     */
-    // beforeHook: function (test, context) {
-    // },
-    /**
-     * Hook that gets executed _after_ a hook within the suite starts (e.g. runs after calling
-     * afterEach in Mocha)
-     */
-    // afterHook: function (test, context, { error, result, duration, passed, retries }) {
-    // },
-    afterTest: async(
-      test, context, { 
-        error, duration, passed }) =>{
-      if (error) {
-        await browser.takeScreenshot();
-      }
-    }
-    /**
-     * Function to be executed after a test (in Mocha/Jasmine only)
-     * @param {Object}  test             test object
-     * @param {Object}  context          scope object the test was executed with
-     * @param {Error}   result.error     error object in case the test fails, otherwise `undefined`
-     * @param {Any}     result.result    return object of test function
-     * @param {Number}  result.duration  duration of test
-     * @param {Boolean} result.passed    true if test has passed, otherwise false
-     * @param {Object}  result.retries   informations to spec related retries, e.g. `{ attempts: 0, limit: 0 }`
-     */
-  afterTest: function (test, context, { error, result, duration, passed, retries }) {
+  /**
+   * Runs before a WebdriverIO command gets executed.
+   * @param {String} commandName hook command name
+   * @param {Array} args arguments that command would receive
+   */
+  // beforeCommand: function (commandName, args) {
+  // },
+  /**
+   * Hook that gets executed before the suite starts
+   * @param {Object} suite suite details
+   */
+  // beforeSuite: function (suite) {
+  // },
+  /**
+   * Function to be executed before a test (in Mocha/Jasmine) starts.
+   */
+  beforeTest: function (test, context) {
+    addLogger(
+      `Test is running in Env : ${process.env.NODE_ENV} & URL : ${baseURL}`
+    );
+  },
+  /**
+   * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
+   * beforeEach in Mocha)
+   */
+  // beforeHook: function (test, context) {
+  // },
+  /**
+   * Hook that gets executed _after_ a hook within the suite starts (e.g. runs after calling
+   * afterEach in Mocha)
+   */
+  // afterHook: function (test, context, { error, result, duration, passed, retries }) {
+  // },
+
+  /**
+   * Function to be executed after a test (in Mocha/Jasmine only)
+   * @param {Object}  test             test object
+   * @param {Object}  context          scope object the test was executed with
+   * @param {Error}   result.error     error object in case the test fails, otherwise `undefined`
+   * @param {Any}     result.result    return object of test function
+   * @param {Number}  result.duration  duration of test
+   * @param {Boolean} result.passed    true if test has passed, otherwise false
+   * @param {Object}  result.retries   informations to spec related retries, e.g. `{ attempts: 0, limit: 0 }`
+   */
+  afterTest: function (
+    test,
+    context,
+    { error, result, duration, passed, retries }
+  ) {
     if (error) {
-      browser.saveScreenshot('./screenshot/'+ test.title +'_'+commonUtils.generateFileNameWithTimeStamp());
-
+      browser.saveScreenshot(
+        "./screenshot/" +
+          test.title +
+          "_" +
+          commonUtils.generateFileNameWithTimeStamp()
+      );
     }
-    if (result==='skip') {
-      browser.saveScreenshot('./screenshot/' +test.title+'_'+ commonUtils.generateFileNameWithTimeStamp());
-
+    if (result === "skip") {
+      browser.saveScreenshot(
+        "./screenshot/" +
+          test.title +
+          "_" +
+          commonUtils.generateFileNameWithTimeStamp()
+      );
     }
   },
-
 
   /**
    * Hook that gets executed after the suite has ended
@@ -355,10 +363,10 @@ export const config: WebdriverIO.Config = {
   // onComplete: function(exitCode, config, capabilities, results) {
   // },
   /**
-  * Gets executed when a refresh happens.
-  * @param {String} oldSessionId session ID of the old session
-  * @param {String} newSessionId session ID of the new session
-  */
+   * Gets executed when a refresh happens.
+   * @param {String} oldSessionId session ID of the old session
+   * @param {String} newSessionId session ID of the new session
+   */
   // onReload: function(oldSessionId, newSessionId) {
   // }
-}
+};

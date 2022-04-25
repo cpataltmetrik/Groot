@@ -15,4 +15,3 @@ const LOGIN_DATA = {
 }
 
 export default LOGIN_DATA
-
