@@ -40,6 +40,11 @@ class ProductDetailsPage extends Page {
         return <any>$('//div[@id="ivTitle"]');
     }
 
+    public async searchAProduct(searchProduct) {
+        await(this.searchField).setValue(searchProduct);
+        await this.btnSearch.clickWhenDisplayed();
+    }
+
     public async productView(searchProduct) {
         await (await this.searchField).setValue(searchProduct);
         await this.btnSearch.clickWhenDisplayed();

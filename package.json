@@ -25,7 +25,9 @@
     "test-qa": "SET NODE_ENV=qa&& npx wdio ./config-wdio/wdio.local.conf.ts",
     "test-stage": "SET NODE_ENV=stage&& npx wdio ./config-wdio/wdio.local.conf.ts",
     "test-prod": "SET NODE_ENV=prod&& npx wdio ./config-wdio/wdio.local.conf.ts",
-    "report": "allure generate allure-results --clean && allure open"
+    "report": "allure generate allure-results --clean && allure open",
+    "regression": "SET NODE_ENV=dev&& npx wdio ./config-wdio/wdio.local.conf.ts --mochaOpts.grep=@Regression",
+    "sanity": "SET NODE_ENV=dev&& npx wdio ./config-wdio/wdio.local.conf.ts --mochaOpts.grep=@Sanity"
   },
   "repository": {
     "type": "git",
@@ -38,6 +40,7 @@
   },
   "homepage": "https://github.com/cpataltmetrik/webdriveriowithtypescript#readme",
   "dependencies": {
-    "allure-commandline": "^2.17.2"
+    "allure-commandline": "^2.17.2",
+    "mocha-tags": "^1.0.1"
   }
 }
