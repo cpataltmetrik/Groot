@@ -29,6 +29,16 @@
 - [ ] Do the new cases pass locally?
 - [ ] Do all the other cases ran fine locally?
 
+## Architecture
+- [ ] Are resuable functions, classes insted of writting code again? 
+- [ ] Do you have framework to maintain everything in place?
+- [ ] Relevant Parameters are configurable?
+
+## Performance
+- [ ] Is the code performance acceptable?
+- [ ] Is automation code reducing the manual test case execution time?
+
+
 1. For more information in detail on the checklist, go through this document - https://o365altimetrik-my.sharepoint.com/:w:/r/personal/cparihar_altimetrik_com/Documents/Code%20Review%20Checklist.docx?d=wb7d05100abc045dfa1af61e558ce71e2&csf=1&web=1
 
 2. For better naming conventions, please go through the read me document.
