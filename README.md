@@ -1,4 +1,4 @@
-# webdriveriowithtypescript
+# Groot - I am Groot
 This repository contains webdriverIO configuration with typescript and mocha
 
 ## Getting Started
@@ -8,8 +8,8 @@ This repository contains webdriverIO configuration with typescript and mocha
 2. Clone this repo locally and install the dependencies
 
 ```
-    $ git clone https://github.com/cpataltmetrik/webdriveriowithtypescript.git
-    $ cd webdriveriowithtypescript
+    $ git clone https://github.com/cpataltmetrik/groot.git
+    $ cd groot
     $ npm install
 ```
 ## Running Tests
