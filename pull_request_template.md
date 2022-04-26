@@ -30,8 +30,8 @@
 - [ ] Do all the other cases ran fine locally?
 
 ## Architecture
-- [ ] Are you using a design pattern in your coding style? 
-- [ ] Are files and packages maintain proper naming conventions? 
+- [ ] Are resuable functions, classes insted of writting code again? 
+- [ ] Do you have framework to maintain everything in place?
 - [ ] Relevant Parameters are configurable?
 
 ## Performance
