@@ -9,7 +9,7 @@ let secondZip ='500072'
 
 describe('update your address', () => {
     
-    it('Should enter a Zip and update it successfully', async () => {
+    it('Should enter a Zip and update it successfully -> @Sanity', async () => {
        
         await SearchPage.open();
         await amazonHomePage.clickSelectAddress();

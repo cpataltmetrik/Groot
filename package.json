@@ -22,10 +22,13 @@
   "scripts": {
     "test-local": "wdio ./config-wdio/wdio.local.conf.ts",
     "test-dev": "SET NODE_ENV=dev&& npx wdio ./config-wdio/wdio.local.conf.ts",
+    "test-dev-smoke": "SET NODE_ENV=dev&& npx wdio ./config-wdio/wdio.local.conf.ts --mochaOpts.grep=@Smoke",
+    "test-dev-sanity": "SET NODE_ENV=dev&& npx wdio ./config-wdio/wdio.local.conf.ts --mochaOpts.grep=@Sanity",
     "test-qa": "SET NODE_ENV=qa&& npx wdio ./config-wdio/wdio.local.conf.ts",
     "test-stage": "SET NODE_ENV=stage&& npx wdio ./config-wdio/wdio.local.conf.ts",
     "test-prod": "SET NODE_ENV=prod&& npx wdio ./config-wdio/wdio.local.conf.ts",
-    "report": "allure generate allure-results --clean && allure open"
+    "report": "allure generate allure-results --clean && allure open",
+    "test": "npx wdio run ./config-wdio/wdio.local.conf.ts"
   },
   "repository": {
     "type": "git",
