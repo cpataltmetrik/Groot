@@ -1,6 +1,6 @@
 import Page from "./page";
 import * as config from "config";
-const assertchai = require("chai").assert;
+
 //const baseURL = config.get("Environment.baseUrl");
 
 export default class ShopByCategory extends Page {
@@ -26,8 +26,7 @@ export default class ShopByCategory extends Page {
     return <any>$("(//span[contains(.,'OnePlus Nord CE ')])[1]");
   }
   public get brandsList() {
-    return $$(
-      "//span[text()='Brands']//parent::div/../ul/li//span[@dir='auto']"
+    return $$("//span[text()='Brands']//parent::div/../ul/li//span[@dir='auto']"
     );
   }
 
@@ -36,7 +35,7 @@ export default class ShopByCategory extends Page {
   }
   public async selectBrandName(brandsName, productName) {
     await brandsName.clickWhenDisplayed();
-    assertchai.exists(await productName);
+    
   }
 
   public open() {

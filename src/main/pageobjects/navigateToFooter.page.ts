@@ -1,5 +1,5 @@
 import Page from "./page";
-const assertchai = require("chai").assert;
+
 import * as config from "config";
 import { isAssertClause, OperationCanceledException } from "typescript";
 
@@ -23,7 +23,7 @@ export default class Footer extends Page {
   public async amazonPayLinksValidation(text: any) {
     await await this.searchText.setValue(text);
     await this.searchText.keys("Enter");
-    assertchai.exists(await this.amazonPayKYC);
+    
   }
   public open() {
     return super.open("");
