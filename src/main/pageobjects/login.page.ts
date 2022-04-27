@@ -4,7 +4,7 @@ import Page from "./page";
 /**
  * sub page containing specific selectors and methods for a specific page
  */
-export default class LoginPage extends Page {
+class LoginPage extends Page {
   public async open(path: string): Promise<string> {
     return super.open(path);
   }
@@ -59,3 +59,4 @@ export default class LoginPage extends Page {
     await this.emailField.waitForPageLoad();
   }
 }
+export default new LoginPage();
