@@ -36,7 +36,7 @@ module.exports = {
      },
      setText: async function (text: string) {
           try {
-               this.clear();
+               this.clearValue();
                await this.click();
                await this.setValue(text);
                addLogger(`STEP: Entered value : ${text} in ${this.selector.toString()}`)
@@ -60,7 +60,7 @@ module.exports = {
      waitAndEnterText: function (timeout, textVal) {
           try {
                this.waitForDisplayed(timeout || { timeout: 3000 })
-               this.clear()
+               this.clearValue()
                this.click()
                this.setValue(textVal)
                addLogger(`STEP: Entered value : ${textVal} in ${this.selector.toString()}`)
@@ -99,7 +99,7 @@ module.exports = {
 
           try {
                await this.click();
-              // browser.execute('arguments[0].style.backgroundColor = "#FDFF47";', $(this.selector));//provide a yellow background
+              browser.execute('arguments[0].style.backgroundColor = "#FDFF47";', $(this.selector));//provide a yellow background
                browser.execute('arguments[0].style.outline = "#e94f58";', $(this.selector)); //provide a red outline
                addLogger(`Highlighted ${this.selector.toString()} in Yellow background and Red outline`)
            } catch (error) {
@@ -122,7 +122,7 @@ module.exports = {
             
        },
 
-       selectOption : async function (option) {
+       selectByText : async function (option) {
             try {
                  (await $(this.selector)).click();
                  (await $(this.selector)).selectByVisibleText(option);
@@ -132,6 +132,28 @@ module.exports = {
             }
             
        },
+
+       selectOption : async function (option, value) {
+          try {
+               (await $(this.selector)) .click();
+               (await $(this.selector)).selectByAttribute(option, value)
+
+          }catch(error) {
+             addLogger('ERROR :' +error);
+          }
+          
+     },
+
+     selectOption : async function (index) {
+          try {
+               (await $(this.selector)) .click();
+               (await $(this.selector)).selectByIndex(index)
+
+          }catch(error) {
+             addLogger('ERROR :' +error);
+          }
+          
+     },
 
      waitForPageLoad: async function (timeout) {
           try {
@@ -161,18 +183,10 @@ module.exports = {
           }
      },
 
-     getUrl: function (timeout): string {
-          try {
-               return browser.getUrl().toString()
-          } catch (error) {
-               addLogger('ERROR :' + error);
-          }
-     },
-
      fieldClear: function (timeout) {
           try {
                this.waitForDisplayed(timeout || { timeout: 3000 })
-               this.clear()
+               this.clearValue()
                addLogger(`STEP: Cleared the field ${this.selector.toString()}`)
           }
           catch (error) {
@@ -202,4 +216,45 @@ module.exports = {
                addLogger(`ERROR: Frame does not exist : ${error}`);
           }
      },
+
+     mouseHover : async function () {
+          try {
+               const location = (await $(this.selector)).getLocation();
+               console.log(location); 
+
+               const xLocation = await (await $(this.selector)).getLocation('x')
+               console.log(xLocation); 
+
+               const yLocation = await (await $(this.selector)).getLocation('y')
+               console.log(yLocation);
+
+               browser.moveToElement('$(this.selector)', xLocation, yLocation)
+          } catch (error) {
+               addLogger(`ERROR : ${error}`)
+          }
+     },
+
+     switchToWindow : async function name() {
+          try{
+
+                    // get the current or parent window name 
+                     let parentWindow = await browser.getWindowHandle();
+
+                    // get the all child windows name  
+                     let childWindows = await browser.getWindowHandles();
+                     await childWindows.forEach(window => {
+                          if(window !== parentWindow){
+                                browser.newWindow(window)
+                          }
+
+                          else {
+                              addLogger('ERROR : There is no new window opened')
+                          }
+                     });
+          }
+          catch (error){
+               addLogger(`ERROR : ${error}`)
+          }
+          
+     }
 }

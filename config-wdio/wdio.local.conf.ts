@@ -1,8 +1,8 @@
 const customCommands = require('../src/main/helper/pageHelper.ts')
-import { addLogger } from '../utilities/logger'
+import { addLogger } from '../src/main/utilities/logger'
 import * as configVal from 'config'
 const baseURL = configVal.get('Environment.baseUrl');
-const commonUtils = require('../utilities/commonUtils');
+const commonUtils = require('../src/main/utilities/commonUtils');
 
 export const config: WebdriverIO.Config = {
   //
@@ -54,7 +54,7 @@ export const config: WebdriverIO.Config = {
   // will be called from there.
   //
   specs: [
-    './src/test/specs/SpecificPhonePage.ts'
+    "./test/specs/finalPrice.spec.ts"
   ],
   // Patterns to exclude.
   exclude: [
@@ -246,90 +246,58 @@ export const config: WebdriverIO.Config = {
     Object.keys(commonUtils).forEach(key => {
       browser.addCommand(key, commonUtils[key], true);
     })
-
-    // process.env.URL = browser.options.baseUrl
-    /* browser.addCommand(
-      'clickWhenDisplayed',
-      function (timeout) {
-        // `this` is return value of $(selector)
-        this.waitForDisplayed(timeout || { timeout: 10000 })
-        this.click()
-      },
-      true
-    )
- 
-    browser.addCommand(
-      'clickWhenEnabled',
-      function (timeout) {
-        // `this` is return value of $(selector)
-        this.waitForEnabled(timeout || { timeout: 10000 })
-        this.click()
-      },
-      true
-    )
- 
-    browser.addCommand(
-      'clickWhenReady',
-      function (timeout) {
-        // `this` is return value of $(selector)
-        this.waitForClickable(timeout || { timeout: 10000 })
-        this.click()
-      },
-      true
-    )     */
     browser.setWindowSize(1920, 1080)
     console.log(`Session Id for session lookup: ${browser.sessionId}`)
     //console.log(`BASE URL: ${browser.options.baseUrl}`)
   },
-  /**
-   * Runs before a WebdriverIO command gets executed.
-   * @param {String} commandName hook command name
-   * @param {Array} args arguments that command would receive
-   */
-  // beforeCommand: function (commandName, args) {
-  // },
-  /**
-   * Hook that gets executed before the suite starts
-   * @param {Object} suite suite details
-   */
-  // beforeSuite: function (suite) {
-  // },
-  /**
-   * Function to be executed before a test (in Mocha/Jasmine) starts.
-   */
-  beforeTest: function (test, context) {
-    addLogger(`Env is ${process.env}`)
-    addLogger(`Test is running in ${baseURL}`)
-  },
-  /**
-   * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
-   * beforeEach in Mocha)
-   */
-  // beforeHook: function (test, context) {
-  // },
-  /**
-   * Hook that gets executed _after_ a hook within the suite starts (e.g. runs after calling
-   * afterEach in Mocha)
-   */
-  // afterHook: function (test, context, { error, result, duration, passed, retries }) {
-  // },
-  /**
-   * Function to be executed after a test (in Mocha/Jasmine only)
-   * @param {Object}  test             test object
-   * @param {Object}  context          scope object the test was executed with
-   * @param {Error}   result.error     error object in case the test fails, otherwise `undefined`
-   * @param {Any}     result.result    return object of test function
-   * @param {Number}  result.duration  duration of test
-   * @param {Boolean} result.passed    true if test has passed, otherwise false
-   * @param {Object}  result.retries   informations to spec related retries, e.g. `{ attempts: 0, limit: 0 }`
-   */
+    /**
+     * Runs before a WebdriverIO command gets executed.
+     * @param {String} commandName hook command name
+     * @param {Array} args arguments that command would receive
+     */
+    // beforeCommand: function (commandName, args) {
+    // },
+    /**
+     * Hook that gets executed before the suite starts
+     * @param {Object} suite suite details
+     */
+    // beforeSuite: function (suite) {
+    // },
+    /**
+     * Function to be executed before a test (in Mocha/Jasmine) starts.
+     */
+    beforeTest: function (test, context) {
+      addLogger(`Test is running in Env : ${process.env.NODE_ENV} & URL : ${baseURL}` )
+    },
+    /**
+     * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
+     * beforeEach in Mocha)
+     */
+    // beforeHook: function (test, context) {
+    // },
+    /**
+     * Hook that gets executed _after_ a hook within the suite starts (e.g. runs after calling
+     * afterEach in Mocha)
+     */
+    // afterHook: function (test, context, { error, result, duration, passed, retries }) {
+    // },
+    /**
+     * Function to be executed after a test (in Mocha/Jasmine only)
+     * @param {Object}  test             test object
+     * @param {Object}  context          scope object the test was executed with
+     * @param {Error}   result.error     error object in case the test fails, otherwise `undefined`
+     * @param {Any}     result.result    return object of test function
+     * @param {Number}  result.duration  duration of test
+     * @param {Boolean} result.passed    true if test has passed, otherwise false
+     * @param {Object}  result.retries   informations to spec related retries, e.g. `{ attempts: 0, limit: 0 }`
+     */
   afterTest: function (test, context, { error, result, duration, passed, retries }) {
     if (error) {
-      browser.saveScreenshot('./screenshot/' + commonUtils.generateFileNameWithTimeStamp());
+      browser.saveScreenshot('./screenshot/'+ test.title +'_'+commonUtils.generateFileNameWithTimeStamp());
 
     }
     if (result==='skip') {
-      browser.saveScreenshot('./screenshot/' + commonUtils.generateFileNameWithTimeStamp());
+      browser.saveScreenshot('./screenshot/' +test.title+'_'+ commonUtils.generateFileNameWithTimeStamp());
 
     }
   },
