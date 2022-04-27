@@ -5,7 +5,7 @@ import LOGINDATA from '../testData/loginData';
 import * as config from 'config'
 import { addLogger } from '../../src/main/utilities/logger'
 
-let email: string = LOGINDATA.account1.email
+let email: string = LOGINDATA.userPassSet.input1
 describe('Click on forgot password link -> @Smoke', () => {
     it('Should return a Verification page for OTP', async () => {
 

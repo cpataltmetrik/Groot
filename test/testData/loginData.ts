@@ -1,7 +1,9 @@
-const LOGIN_DATA = {
-    account1: {
-      email: 'opportun.team09@gmail.com'
+
+const loginData = {
+    userPassSet:{
+        input1:'opportun.team09@gmail.com',
+        input2:'Opportun123'
     }
 }
 
-export default LOGIN_DATA
+export default loginData
