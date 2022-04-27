@@ -1,6 +1,6 @@
-import Login from "../../src/main/pageobjects/login.page";
-import { addLogger } from "../../src/main/utilities/logger";
-import loginData from "../testData/loginData";
+import Login from '../../src/main/pageobjects/login.page';
+import { addLogger } from '../../src/main/utilities/logger';
+import loginData from '../testData/loginData';
 import loginPage from '../../src/main/pageobjects/login.page';
 const chaiExpect: any = require("chai").expect;
 
