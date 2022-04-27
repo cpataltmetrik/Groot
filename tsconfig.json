@@ -7,7 +7,8 @@
             "expect-webdriverio"
         ],
         "target": "es2019",
-        "moduleResolution": "node"
+        "moduleResolution": "node",
+        "allowJs": true,
     },
     "include" : [
         "../**/*.ts",
