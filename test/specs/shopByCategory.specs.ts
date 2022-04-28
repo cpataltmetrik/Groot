@@ -2,8 +2,8 @@ import ShopByCategory from "../../src/main/pageobjects/shopByCategory.page";
 import * as config from "config";
 import { addLogger } from "../../src/main/utilities/logger";
 const ASSERT_CHAI = require("chai").assert;
-
 const shopBy: any = new ShopByCategory();
+
 describe("Select mobiles under ShopBy category", async () => {
   it("select mobiles in shopBy category ", async () => {
     await shopBy.open();

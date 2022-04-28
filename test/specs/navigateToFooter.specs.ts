@@ -13,6 +13,6 @@ describe("Navigate to Footer Section", async () => {
 
   it("Search for Amazon pay and validate the links present below", async () => {
     await footer.amazonPayLinksValidation("Amazon Pay")
-    ASSERT_CHAI.exists(await this.amazonPayKYC);
+    ASSERT_CHAI.exists(await footer.amazonPayKYC);
   });
 });

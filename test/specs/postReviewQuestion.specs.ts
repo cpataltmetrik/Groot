@@ -1,6 +1,6 @@
-import * as config from "config";
-import { addLogger } from "../../src/main/utilities/logger";
-import postReviewQuestion from "../../src/main/pageobjects/postReviewQuestion.page";
+import * as config from 'config';
+import { addLogger } from '../../src/main/utilities/logger';
+import postReviewQuestion from '../../src/main/pageobjects/postReviewQuestion.page';
 const postReviewQuestions = new postReviewQuestion();
 const ASSERT_CHAI = require("chai").assert;
 
@@ -19,6 +19,5 @@ describe("Post a Review Question on Amazon Product and validate the Same ", asyn
     await postReviewQuestions.emailField.waitForDisplayed();
     await postReviewQuestions.LoginFunctionality("opportun.team09@gmail.com","Opportun123");
     ASSERT_CHAI.exists(await postReviewQuestions.validateQuestionReceived);
-    console.log(await postReviewQuestions.validateQuestionReceived.getText());
-  });
+});
 });
