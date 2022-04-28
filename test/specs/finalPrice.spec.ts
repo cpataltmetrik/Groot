@@ -1,5 +1,6 @@
 
 import Cart from "../../src/main/pageobjects/Cart.page";
+import { addLogger } from "../../src/main/utilities/logger";
 const cart: any = new Cart();
 describe("It should Select products and add to cart ", async () => {
   it("should print total price with number of items in cart", async () => {
@@ -10,11 +11,15 @@ describe("It should Select products and add to cart ", async () => {
     await cart.clickOnOptions(await cart.selectProductType);
     await cart.clickOnOptions(await cart.selectProductBrand);
     await cart.clickOnOptions(await cart.selectFirstProduct);
-    await cart.waitForPageLoad;
     await cart.handleWindow();
     await cart.clickOnOptions(await cart.dropDownToMoreNumber);
     await cart.selectValuefromDropdown(await cart.dropDownToMoreNumber, 2);
     await cart.clickOnOptions(await cart.addItemsToCart);
-    await cart.totalPrice();
-  });
-});
+    let rate: any;
+      rate = cart.totalPriceOfProductsInCart.getText();
+      addLogger("Total Price is:-")
+      rate=rate.replace(",","")
+      addLogger(rate)
+    }
+  )
+})
