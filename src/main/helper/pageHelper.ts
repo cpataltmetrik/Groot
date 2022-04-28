@@ -1,3 +1,4 @@
+import clearValue from "webdriverio/build/commands/element/clearValue";
 import { addLogger } from "../utilities/logger";
 
 module.exports = {
@@ -62,7 +63,7 @@ module.exports = {
    */
   setText: async function (text) {
     try {
-      this.clear();
+      this.clearValue();
       await this.click();
       await this.setValue(text);
       addLogger(`STEP: Entered value : ${text} in ${this.selector.toString()}`);
@@ -92,7 +93,7 @@ module.exports = {
   waitAndEnterText: function (timeout, textVal) {
     try {
       this.waitForDisplayed(timeout || { timeout: 3000 });
-      this.clear();
+      this.clearValue();
       this.click();
       this.setValue(textVal);
       addLogger(
@@ -306,7 +307,7 @@ module.exports = {
   fieldClear: function (timeout) {
     try {
       this.waitForDisplayed(timeout || { timeout: 3000 });
-      this.clear();
+      this.clearValue();
       addLogger(`STEP: Cleared the field ${this.selector.toString()}`);
     } catch (error) {
       addLogger("ERROR :" + error);
