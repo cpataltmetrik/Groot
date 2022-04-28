@@ -6,13 +6,11 @@
             "@wdio/mocha-framework",
             "expect-webdriverio"
         ],
-        "target": "es2019",
         "moduleResolution": "node",
-        "allowJs": true,
+        "target": "ES2022",
+        "module": "CommonJS"
     },
     "include" : [
         "../**/*.ts",
-       // "./src/types/wdio.d.ts",
     ]
 }
-

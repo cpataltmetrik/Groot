@@ -1,8 +1,8 @@
 {
-    "Environment": {
-      "baseUrl": "https://www.amazon.in"
-    },
-    "TestData1": {
+  "Environment": {
+    "baseUrl": "https://www.amazon.in"
+  },
+  "TestData1": {
       "searchTerm": "iPhone 12",
       "expectedString": "Apple"
     },
