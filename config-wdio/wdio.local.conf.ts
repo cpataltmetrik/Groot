@@ -54,7 +54,8 @@ export const config: WebdriverIO.Config = {
   // will be called from there.
   //
   specs: [
- ],
+   './test/specs/**.*.ts',
+  ],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -73,7 +74,7 @@ export const config: WebdriverIO.Config = {
   // set maxInstances to 1; wdio will spawn 3 processes. Therefore, if you have 10 spec
   // files and you set maxInstances to 10, all spec files will get tested at the same time
   // and 30 processes will get spawned. The property handles how many capabilities
-  // from the same test should run tests.
+  // from the same test should run tests.441
   //
   maxInstances: 10,
   //
