@@ -1,8 +1,16 @@
+<<<<<<< HEAD:src/test/specs/amz.search.specs.ts
 import SearchPage from "../../main/pageobjects/amz.search.page";
 import SEARCH_DATA from "../testData/searchData";
 import * as config from "config";
 import { addLogger } from "../../../utilities/logger";
 const baseURL = config.get("Environment.baseUrl");
+=======
+import SearchPage from '../../src/main/pageobjects/amz.search.page';
+import  SEARCH_DATA  from '../testData/searchData';
+import * as config from 'config'
+import { addLogger } from '../../src/main/utilities/logger'
+const baseURL = config.get('Environment.baseUrl');
+>>>>>>> develop:test/specs/amz.search.specs.ts
 
 //let searchString : string = config.get('TestData1.searchTerm')
 //let expectedString : string = config.get('TestData1.expectedString')

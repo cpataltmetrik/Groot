@@ -1,8 +1,8 @@
 const customCommands = require('../src/main/helper/pageHelper.ts')
-import { addLogger } from '../utilities/logger'
+import { addLogger } from '../src/main/utilities/logger'
 import * as configVal from 'config'
 const baseURL = configVal.get('Environment.baseUrl');
-const commonUtils = require('../utilities/commonUtils');
+const commonUtils = require('../src/main/utilities/commonUtils');
 
 export const config: WebdriverIO.Config = {
   //
@@ -54,7 +54,7 @@ export const config: WebdriverIO.Config = {
   // will be called from there.
   //
   specs: [
-    './src/test/specs/amz.search.specs.ts'
+   './test/specs/**.*.ts',
   ],
   // Patterns to exclude.
   exclude: [
@@ -74,7 +74,7 @@ export const config: WebdriverIO.Config = {
   // set maxInstances to 1; wdio will spawn 3 processes. Therefore, if you have 10 spec
   // files and you set maxInstances to 10, all spec files will get tested at the same time
   // and 30 processes will get spawned. The property handles how many capabilities
-  // from the same test should run tests.
+  // from the same test should run tests.441
   //
   maxInstances: 10,
   //
@@ -179,7 +179,7 @@ export const config: WebdriverIO.Config = {
   // See the full list at http://mochajs.org/
   mochaOpts: {
     ui: 'bdd',
-    timeout: 60000
+    timeout: 60000,
   },
   //
   // =====
