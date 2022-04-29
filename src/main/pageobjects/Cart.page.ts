@@ -24,21 +24,15 @@ export default class Cart extends Page {
     return <any> $("img[alt='LG 80 cm (32 inches) HD Ready Smart LED TV 32LM563BPTC (Dark Iron Gray) (2020 Model)']")
   }
   public get dropDownToMoreNumber() {
-    return <any> $("#quantity");
+    return <any> $("//select[@id='quantity']");
   }
   public async clickOnOptions(input: any): Promise<any> {
     await input.clickWhenDisplayed();
   }
-  public async waitForPage(
-    input: any,
-    digit: number
-  ): Promise<any>{
+  public async waitForPage( input: any): Promise<any>{
     await input.waitForPageLoad();
   }
-  public async selectValuefromDropdown(
-    input: any,
-    digit: number
-  ): Promise<any> {
+  public async selectValuefromDropdown(input: any,digit: number): Promise<any> {
     await input.selectByVisibleText(digit);
   }
   public get numberOfProductsOnCart() {
@@ -48,20 +42,14 @@ export default class Cart extends Page {
     await input.scrolltoView();
   }
   public get totalPriceOfProductsInCart() {
-    return <any> $("#sw-subtotal");
+    return <any> $("//div[@id='sw-subtotal']");
   }
-   public async handleWindow() {
-    let handles: any = await browser.getWindowHandles();
+   public async handleWindow(input: any) {
+    let handles: any = await browser.getWindowHandles()
     await browser.switchToWindow(handles[1]);
   }
   public get addItemsToCart() {
     return <any> $("#add-to-cart-button");
   }
-  public async totalPrice(): Promise<any> {
-    let rate: any;
-    rate = await (await this.totalPriceOfProductsInCart).getText();
-    addLogger("Total Price is:-");
-    rate = rate.replace(",", "");
-    addLogger(rate);
   }
-}
+

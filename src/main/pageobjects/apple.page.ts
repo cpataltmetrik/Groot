@@ -25,16 +25,4 @@ export default class Apple extends Page {
   public get costOfProducts() {
     return <any> $$("//span[@class='a-price-whole']");
   }
-  public async minvalue(): Promise<any> {
-    let price: number[] = new Array();
-    let val: any;
-    for (let i: number = 0; i < (await this.costOfProducts.length); i++) {
-      val = await this.costOfProducts[i].getText();
-      addLogger(await val);
-      val = val.replace(",", "");
-      price.push(val);
-    }
-    addLogger("Product with lowest price is :- ");
-    addLogger(`${Math.min(...price)}`)
   }
-}
