@@ -38,6 +38,20 @@ class SearchPage extends Page {
     return $$("//div[.='help & settings']/../following-sibling::li/a");
   }
 
+  public get newReleaseLink() {
+    return <any>(
+      $('//li/div[text()="trending"]/following::li[2]/a[text()="New Releases"]')
+    );
+  }
+
+  public get hotReleaseHeading() {
+    return <any>$('//div/span[text()="Amazon Hot New Releases"]');
+  }
+
+  public get getHotReleaseGroupList() {
+    return $$('//div[@data-csa-c-slot-id="tree-nav-2"]//div//div[2]//div');
+  }
+
   /**
    * a method to encapsule automation code to interact with the page
    * e.g. to login using username and password
@@ -61,6 +75,15 @@ class SearchPage extends Page {
 
   public async getHelpAndSettingAllHeadings() {
     await this.helpAndSettingSection.waitForDisplayed();
+  }
+
+  public async clickNewReleaseLink() {
+    await this.newReleaseLink.waitForDisplayed();
+    await this.newReleaseLink.clickWhenDisplayed();
+  }
+
+  public async getHotReleaseHeadingText() {
+    return await this.hotReleaseHeading.getText();
   }
 
   /**
