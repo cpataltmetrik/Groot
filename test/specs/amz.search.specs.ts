@@ -1,27 +1,43 @@
-import SearchPage from '../../src/main/pageobjects/amz.search.page';
-import  SEARCH_DATA  from '../testData/searchData';
-import * as config from 'config'
-import { addLogger } from '../../src/main/utilities/logger'
-const baseURL = config.get('Environment.baseUrl');
+import SearchPage from "../../src/main/pageobjects/amz.search.page";
+import SEARCH_DATA from "../testData/searchData";
+const expect = require("chai").expect;
 
-//let searchString : string = config.get('TestData1.searchTerm')
-//let expectedString : string = config.get('TestData1.expectedString')
+let searchString: string = SEARCH_DATA.dataset1.searchString;
+let expectedString: string = SEARCH_DATA.dataset1.expectedString;
 
-let searchString : string = SEARCH_DATA.dataset1.searchString
-let expectedString : string = SEARCH_DATA.dataset1.expectedString
-describe('Search a product from Amazon', () => {
-    
-    it('Should search a product and store the value', async () => {
-       
-        await SearchPage.open();
+describe("Search a product from Amazon", () => {
+  it("Should search a product and store the value", async () => {
+    await SearchPage.open();
 
-        await SearchPage.searchProduct(searchString);
-        let getAllIphone = await SearchPage.searchResults;
+    await SearchPage.searchProduct(searchString);
+    let getAllIphone = await SearchPage.searchResults;
 
-        await getAllIphone.forEach(element => {
-           console.log(element.getText());
-        })
-
-        expect(await getAllIphone[0].getText()).toHaveValue(expectedString);
+    await getAllIphone.forEach((element) => {
+      console.log(element.getText());
     });
+
+    expect(await getAllIphone[0].getText()).toHaveValue(expectedString);
+  });
+
+  it.only("Validate Help and Setting section", async () => {
+    let expectedHeadings: string[] = [];
+    let actualHeadings: string[] = [
+      "Your Account",
+      "Customer Service",
+      "Sign In",
+    ];
+
+    await SearchPage.open();
+
+    await SearchPage.clickOnSearchAllButton();
+    await SearchPage.scrollToHelpAndSettingsSection();
+    let allHeadings = await SearchPage.helpAndSettingAllHeadings;
+
+    for (let i = 0; i < (await allHeadings.length); i++) {
+      expectedHeadings.push(await allHeadings[i].getText());
+    }
+
+    let isTrue = expectedHeadings.some((item) => actualHeadings.includes(item));
+    expect(isTrue).to.be.true;
+  });
 });
