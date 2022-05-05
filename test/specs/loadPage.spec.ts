@@ -11,26 +11,23 @@ const inputType: string = categoryData.loadPageDataSet.inputType
 const input3: string = categoryData.loadPageDataSet.input3
 /* Data */
 
-describe("Loading Page", async () => 
-{
-    it("Should load page and perform assertions", async () => 
-    {
+describe("Loading Page", async () => {
+    it("Should load page and perform assertions", async () => {
         //Load Page And Perform Basic Assertions
         await category.open("")
-        await category.maxWin
+        await category.screenMaximize
         await category.getUrlAndTitle()
 
         //WebDriverIO Assertions
         await expect(browser).toHaveUrlContaining(input1)
         expect(await browser).toHaveTitleContaining(input2)
-    
+
         //Chai Assertions
         const chaiAssertions: any = async (
             inputSelector: any,
-            input: string, 
+            input: string,
             inputType: string
-        ): Promise<any> => 
-        {
+        ): Promise<any> => {
             chaiExpect(await inputSelector).to.equal(input)
             chaiExpect(await inputSelector).to.be.a(inputType)
             chaiExpect(await inputSelector).to.have.lengthOf(input.length)
