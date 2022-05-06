@@ -206,7 +206,7 @@ export const config: WebdriverIO.Config = {
    * @param  {[type]} specs    specs to be run in the worker process
    * @param  {[type]} args     object that will be merged with the main configuration once worker is initialized
    * @param  {[type]} execArgv list of string arguments passed to the worker process
-  */
+   */
   // onWorkerStart: function (cid, caps, specs, args, execArgv) {
   // },
   /**
@@ -293,7 +293,7 @@ export const config: WebdriverIO.Config = {
      * @param {Boolean} result.passed    true if test has passed, otherwise false
      * @param {Object}  result.retries   informations to spec related retries, e.g. `{ attempts: 0, limit: 0 }`
      */
-  afterTest: function (test, context, { error, result, duration, passed, retries }) { 
+  afterTest: function (test, context, { error, result, duration, passed, retries }) {
     if (error) {
       browser.saveScreenshot('./screenshot/'+ test.title +'_'+commonUtils.generateFileNameWithTimeStamp());
 
