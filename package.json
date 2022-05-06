@@ -13,6 +13,7 @@
     "@wdio/spec-reporter": "^7.19.1",
     "better-docs": "^2.7.2",
     "chai": "^4.3.6",
+    "chalk": "^4.1.2",
     "chromedriver": "^99.0.0",
     "config": "^3.3.7",
     "jsdoc": "^3.6.10",
