@@ -1,5 +1,57 @@
-# Groot - I am Groot
-This repository contains webdriverIO configuration with typescript and mocha
+# Groot - 👋 I am Groot
+
+My repository contains webdriverIO configuration with Typescript and Mocha
+
+### Languages and Framework
+
+<p align="left">
+<a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/typescript-colored.svg" width="36" height="36" alt="Typescript" /></a>
+<a href="https://webdriver.io/" target="_blank" rel="noreferrer"><img src="![image](https://user-images.githubusercontent.com/51842349/167116198-3b47dc3a-bce6-4513-89f9-5abd8efbce43.png)" width="36" height="36" alt="Webdriverio" /></a>
+</p>
+
+## Table of Contents
+1. [Why Typescript?](#Why-Typescript?)
+
+2. [Why should I use WDIO over Selenium?](#Why-should-I-use-Wdio-instead-of-Selenium?)
+
+3. [Why Groot? Why not use WDIO Directly?](#Why-Groot?-Why-not-use-WDIO-Directly?)
+
+4. [How does Groot Strengthen WDIO?](#How-does-Groot-Strengthen-WDIO?)
+
+5. [Getting Started](#Getting-Started)
+
+6. [Running Tests](#Running-Tests)
+
+7. [Understanding the Folder structure](#Understanding-the-Folder-structure)
+
+8. [Understand custom config for groot](#Understand-custom-config-for-Groot)
+
+9. [Mocha Integration](#Mocha-Integration)
+
+10. [Test Reports](#Test-Reports)
+
+11. [Naming conventions](#Naming-conventions)
+
+12. [Features](#Features)
+    
+* [Bail out](#Bail-out)
+* [Retries and re-run](#Retry-and-re-run)
+
+13. [code Examples](#code-Examples)
+
+14. [mocha official webite](#mocha-official-website)
+
+15. [wdio official website](#wdio-official-website)
+
+16. [Documentation](#Documentation)
+
+## Why Typescript?
+
+## Why should I use WDIO over Selenium?
+
+## Why Groot? Why not use WDIO Directly?
+
+## How does Groot Strengthen WDIO?
 
 ## Getting Started
 1. Ensure that Node.js 10+ is installed
@@ -41,6 +93,12 @@ This repository contains webdriverIO configuration with typescript and mocha
  6. test\specs --> all the test cases files are saved here
  7. test\testData --> contains all the test data ts files
 ```
+
+ ## Understand custom config for groot
+
+ ## Mocha Integration
+ We are using mocha framework. mocha is a power pull 
+
  ## Test Reports
 We are using Allure reports in this project,Allure is a flexible lightweight multi-language test report tool that not only shows a very concise representation of what have been tested in a neat web report form, but allows everyone participating in the development process to extract maximum of useful information from everyday execution of tests.
 > how to run a report
@@ -115,3 +173,20 @@ constants :
 	constants will be written in capital letters (UPPERCASE)
 	if constants have words more than one, then separate words by underscore (_)
 	>> example:- const DAYS_UNTIL_TOMORROW = 1;
+
+## Features
+#### Bail out
+Bail event help to stop the execution when the specified bail count equals to test failure count.
+
+Condition we need to know
+
+* Maximum Instance <= Total failure count
+
+
+## code Examples
+## Mocha official website
+https://mochajs.org/
+## Wdio official website
+https://webdriver.io/
+
+
