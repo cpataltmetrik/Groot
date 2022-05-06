@@ -8,7 +8,9 @@ const RerunService = require("wdio-rerun-service");
 const fs = require("fs");
 const path = require("path");
 const { v5: uuidv5 } = require("uuid");
-
+const RpService = require("wdio-reportportal-service");
+const reportportal = require("wdio-reportportal-reporter");
+const repoConf = require("../config-wdio/wdio-reporter.conf");
 const argv = require("minimist")(process.argv.slice(2));
 
 const rerun_utilities = {
@@ -173,6 +175,7 @@ export const config: WebdriverIO.Config = {
         commandPrefix: "VARIABLE=true", //Prefix which will be added to the re-run command that is generated.
       },
     ],
+    [RpService, {}],
   ],
 
   // Framework you want to run your specs with.
@@ -205,6 +208,7 @@ export const config: WebdriverIO.Config = {
         disableWebdriverScreenshotsReporting: true,
       },
     ],
+    [reportportal, repoConf],
   ],
 
   // Options to be passed to Mocha.
@@ -432,7 +436,7 @@ export const config: WebdriverIO.Config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  onComplete: function (exitCode, config, capabilities, results) {
+  onComplete: async function (exitCode, config, capabilities, results) {
     const directoryPath = path.join(`${rerun_utilities.rerunDataDir}`);
     if (fs.existsSync(directoryPath)) {
       const rerunFiles = fs.readdirSync(directoryPath);
@@ -475,6 +479,14 @@ export const config: WebdriverIO.Config = {
         "failed cases": results.failed,
       });
     }
+
+    //const protocol = 'http:';
+    //const hostname = 'example.com';
+    //const port = ':8080'; // or empty string for default 80/443 ports
+    // const link =  RpService.getLaunchUrlByParams(protocol, hostname, port, config);
+    //console.log(`Report portal link ${link}`)
+    const link = await RpService.getLaunchUrl(repoConf);
+    console.log(`Report portal link ${link}`);
   },
   /**
    * Gets executed when a refresh happens.
