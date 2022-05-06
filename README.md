@@ -6,7 +6,7 @@ My repository contains webdriverIO configuration with Typescript and Mocha
 
 <p align="left">
 <a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/typescript-colored.svg" width="36" height="36" alt="Typescript" /></a>
-<a href="https://webdriver.io/" target="_blank" rel="noreferrer"><img src="![image](https://user-images.githubusercontent.com/51842349/167116198-3b47dc3a-bce6-4513-89f9-5abd8efbce43.png)" width="36" height="36" alt="Webdriverio" /></a>
+<a href="https://webdriver.io/" target="_blank" rel="noreferrer"><img src="https://user-images.githubusercontent.com/51842349/167116198-3b47dc3a-bce6-4513-89f9-5abd8efbce43.png" width="36" height="36" alt="Webdriverio" /></a>
 </p>
 
 ## Table of Contents
