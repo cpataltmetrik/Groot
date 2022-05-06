@@ -6,7 +6,7 @@ My repository contains webdriverIO configuration with Typescript and Mocha
 
 <p align="left">
 <a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/typescript-colored.svg" width="36" height="36" alt="Typescript" /></a>
-<a href="https://webdriver.io/" target="_blank" rel="noreferrer"><img src="https://webdriver.io/img/webdriverio.png" width="36" height="36" alt="Webdriverio" /></a>
+<a href="https://webdriver.io/" target="_blank" rel="noreferrer"><img src="![image](https://user-images.githubusercontent.com/51842349/167116198-3b47dc3a-bce6-4513-89f9-5abd8efbce43.png)" width="36" height="36" alt="Webdriverio" /></a>
 </p>
 
 ## Table of Contents
@@ -161,7 +161,7 @@ Add below suffixes to the files respectively :
 
 
 
-Branch name conventions= :
+Branch name conventions :
 
 	feature/test_scenario_name
 	all words of 'test_scenario_name' will be in lowercase, separated by underscore (_)
@@ -175,15 +175,57 @@ constants :
 	>> example:- const DAYS_UNTIL_TOMORROW = 1;
 
 ## Features
-#### Bail out
+### Bail out :
 Bail event help to stop the execution when the specified bail count equals to test failure count.
 
-Condition we need to know
+Condition we need to know : 
 
 * Maximum Instance <= Total failure count
+ > Add the maximum instances in wdio config file.
 
+```
+capabilities: [{
+    maxInstances: 1
+  }]
+```
+Configure Mocha bailout options in wdio config file.
 
+Bail object must be boolean.
+
+```
+  mochaOpts: {
+    bail: true
+  }
+```
+Configure specific bail count to stop the execution after that much number of failure.
+```
+bail: 2  //execution will stop after 2 failures
+```
+#### Bail report :
+
+once the execution is stopping because of bail we need to generate our own report.
+
+For creating our own report formate we need to add the following code in wdio-config!
+```
+onComplete: function(exitCode, config, capabilities, results) {
+    if(results.failed == this.bail){
+      console.log(chalk.red.underline.bold("******* BAILING OUT *******"))
+      console.table({
+        "Total Executed cases" : results.finished,
+        "passed cases": results.passed,
+        "failed cases": results.failed 
+      })      
+    }
+  }
+```
 ## code Examples
+1. WDIO test folder and specs - groot\test\specs
+
+```
+login.spec.ts
+productCategory.spec.ts
+pinCodeChange.spec.ts
+```
 ## Mocha official website
 https://mochajs.org/
 ## Wdio official website
