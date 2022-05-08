@@ -1,42 +1,43 @@
-import { ChainablePromiseElement } from "webdriverio";
 import Page from "./page";
 
 /**
  * sub page containing specific selectors and methods for a specific page
  */
 class SearchPage extends Page {
-  /**
-   * define selectors using getter methods
-   */
-  public get searchField() {
-    return <any>$("#twotabsearchtextbox");
-  }
+    /**
+     * define selectors using getter methods
+     */
+    public get searchField() {
+        return <any>$("#twotabsearchtextbox");
+    }
 
-  public get btnSearch() {
-    return <any>$("#nav-search-submit-button");
-  }
+    public get btnSearch() {
+        return <any>$("#nav-search-submit-button");
+    }
 
-  public get searchResults() {
-    return <any>$$('//div/h2/a/span[contains(text(),"Apple iPhone 12")]');
-  }
+    public get searchResults() {
+        return <any>$$('//div/h2/a/span[contains(text(),"Apple iPhone 12")]');
+    }
 
-  public get amazonChoiceList() {
-    return <any>(
-      $$('//span[text()="Amazon\'s "]/following::span[1][text()="Choice"]')
-    );
-  }
+    public get amazonChoiceList() {
+        return <any>(
+            $$(
+                '//span[text()="Amazon\'s "]/following::span[1][text()="Choice"]',
+            )
+        );
+    }
 
-  public get allButtonSearch() {
-    return <any>$('//a[@id="nav-hamburger-menu"]//span[text()="All"]');
-  }
+    public get allButtonSearch() {
+        return <any>$('//a[@id="nav-hamburger-menu"]//span[text()="All"]');
+    }
 
-  public get helpAndSettingSection() {
-    return <any>$('//li/div[contains(text(),"help")]');
-  }
+    public get helpAndSettingSection() {
+        return <any>$('//li/div[contains(text(),"help")]');
+    }
 
-  public get helpAndSettingAllHeadings() {
-    return $$("//div[.='help & settings']/../following-sibling::li/a");
-  }
+    public get helpAndSettingAllHeadings() {
+        return $$("//div[.='help & settings']/../following-sibling::li/a");
+    }
 
   public get newReleaseLink() {
     return <any>(
@@ -56,26 +57,30 @@ class SearchPage extends Page {
    * a method to encapsule automation code to interact with the page
    * e.g. to login using username and password
    */
+    /**
+     * a method to encapsule automation code to interact with the page
+     * e.g. to login using username and password
+     */
 
-  public async searchProduct(productToSearch) {
-    await this.searchField.clickWhenDisplayed();
-    await this.searchField.clickAndhighlight();
-    await this.searchField.setText(productToSearch);
-    await this.btnSearch.clickWhenEnabled();
-  }
+    public async searchProduct(productToSearch) {
+        await this.searchField.clickWhenDisplayed();
+        await this.searchField.clickAndhighlight();
+        await this.searchField.setText(productToSearch);
+        await this.btnSearch.clickWhenEnabled();
+    }
 
-  public async clickOnSearchAllButton() {
-    await this.allButtonSearch.waitForDisplayed();
-    await this.allButtonSearch.clickWhenDisplayed();
-  }
+    public async clickOnSearchAllButton() {
+        await this.allButtonSearch.waitForDisplayed();
+        await this.allButtonSearch.clickWhenDisplayed();
+    }
 
-  public async scrollToHelpAndSettingsSection() {
-    await this.helpAndSettingSection.scrolltoView();
-  }
+    public async scrollToHelpAndSettingsSection() {
+        await this.helpAndSettingSection.scrolltoView();
+    }
 
-  public async getHelpAndSettingAllHeadings() {
-    await this.helpAndSettingSection.waitForDisplayed();
-  }
+    public async getHelpAndSettingAllHeadings() {
+        await this.helpAndSettingSection.waitForDisplayed();
+    }
 
   public async clickNewReleaseLink() {
     await this.newReleaseLink.waitForDisplayed();
@@ -89,10 +94,13 @@ class SearchPage extends Page {
   /**
    * overwrite specific options to adapt it to page object
    */
+    /**
+     * overwrite specific options to adapt it to page object
+     */
 
-  public open() {
-    return super.open("");
-  }
+    public open() {
+        return super.open("");
+    }
 }
 
 export default new SearchPage();

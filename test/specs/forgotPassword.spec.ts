@@ -1,14 +1,12 @@
-import SearchPage from '../../src/main/pageobjects/amz.search.page';
-import amazonHomePage from '../../src/main/pageobjects/home.page';
-import amazonLoginPage from '../../src/main/pageobjects/login.page';
-import LOGINDATA from '../testData/loginData';
-import * as config from 'config'
-import { addLogger } from '../../src/main/utilities/logger'
+import SearchPage from "../../src/main/pageobjects/amz.search.page";
+import amazonHomePage from "../../src/main/pageobjects/home.page";
+import amazonLoginPage from "../../src/main/pageobjects/login.page";
+import LOGINDATA from "../testData/loginData";
+import { addLogger } from "../../src/main/utilities/logger";
 
-let email: string = LOGINDATA.userPassSet.input1
-describe('Click on forgot password link -> @Smoke', () => {
-    it('Should return a Verification page for OTP', async () => {
-
+const email: string = LOGINDATA.userPassSet.input1;
+describe("Click on forgot password link -> @Smoke", () => {
+    it("Should return a Verification page for OTP", async () => {
         await SearchPage.open();
         await amazonHomePage.clickLoginButton();
         await amazonLoginPage.enterEmailAddress(email);
@@ -18,7 +16,12 @@ describe('Click on forgot password link -> @Smoke', () => {
         await amazonLoginPage.enterEmailAddress(email);
         await amazonLoginPage.clickContinueButton();
 
-        expect(amazonLoginPage.getVerificationRequiredText()).toHaveValue("Verification required");
-        addLogger(amazonLoginPage.getVerificationRequiredText() + " text validated Successfully");
+        expect(amazonLoginPage.getVerificationRequiredText()).toHaveValue(
+            "Verification required",
+        );
+        addLogger(
+            amazonLoginPage.getVerificationRequiredText() +
+                " text validated Successfully",
+        );
     });
 });

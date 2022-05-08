@@ -1,7 +1,7 @@
 const SEARCH_DATA = {
     dataset1: {
-      searchString: 'iPhone 12',
-      expectedString: 'Apple'
+        searchString: 'iPhone 12',
+        expectedString: 'Apple'
     }
 }
 

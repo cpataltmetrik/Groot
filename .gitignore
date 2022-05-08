@@ -2,3 +2,10 @@ node_modules
 .vscode
 allure-report
 allure-results
+.DS_Store
+npm-debug.log
+package-lock.json
+logs/
+.git
+.eslintcache
+# Once the screenshot folder is availale add in this file

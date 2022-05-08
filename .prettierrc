@@ -1,0 +1,16 @@
+{
+    "trailingComma": "all",
+    "tabWidth": 4,
+    "semi": true,
+    "printWidth": 80,
+    "useTabs": false,
+    "arrowParens": "always",
+    "overrides": [
+        {
+            "files": ["*.json", ".*.json"],
+            "options": {
+                "tabWidth": 2
+            }
+        }
+    ]
+}
