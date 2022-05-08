@@ -1,9 +1,24 @@
-const customCommands = require('../src/main/helper/pageHelper.ts')
-import { addLogger } from '../src/main/utilities/logger'
-import * as configVal from 'config'
-const baseURL = configVal.get('Environment.baseUrl');
-const commonUtils = require('../src/main/utilities/commonUtils');
-const  chalk = require('chalk');
+const customCommands = require("../src/main/helper/pageHelper.ts");
+import { addLogger } from "../src/main/utilities/logger";
+import * as configVal from "config";
+const baseURL = configVal.get("Environment.baseUrl");
+const commonUtils = require("../src/main/utilities/commonUtils");
+const chalk = require("chalk");
+const RerunService = require("wdio-rerun-service");
+import fs = require("fs");
+import path = require("path");
+const { v5: uuidv5 } = require("uuid");
+
+const argv = require("minimist")(process.argv.slice(2));
+
+const rerun_utilities = {
+  nonPassingItems: [],
+  serviceWorkerId: "",
+  rerunDataDir: "./results/rerun",
+  rerunScriptPath: "./rerun.sh",
+  commandPrefix: "",
+  specFile: "",
+};
 
 export const config: WebdriverIO.Config = {
   //
@@ -30,8 +45,8 @@ export const config: WebdriverIO.Config = {
     // for all available options
     tsNodeOpts: {
       transpileOnly: true,
-      project: 'tsconfig.json'
-    }
+      project: "tsconfig.json",
+    },
     // tsconfig-paths is only used if "tsConfigPathsOpts" are provided, if you
     // do please make sure "tsconfig-paths" is installed as dependency
     // tsConfigPathsOpts: {
@@ -54,9 +69,7 @@ export const config: WebdriverIO.Config = {
   // then the current working directory is where your `package.json` resides, so `wdio`
   // will be called from there.
   //
-  specs: [
-   './test/specs/**.*.ts',
-  ],
+  specs: ["./test/specs/**.*.ts"],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -83,20 +96,21 @@ export const config: WebdriverIO.Config = {
   // Sauce Labs platform configurator - a great tool to configure your capabilities:
   // https://saucelabs.com/platform/platform-configurator
   //
-  capabilities: [{
-
-    // maxInstances can get overwritten per capability. So if you have an in-house Selenium
-    // grid with only 5 firefox instances available you can make sure that not more than
-    // 5 instances get started at a time.
-    maxInstances: 1,
-    //
-    browserName: 'chrome',
-    acceptInsecureCerts: true
-    // If outputDir is provided WebdriverIO can capture driver session logs
-    // it is possible to configure which logTypes to include/exclude.
-    // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
-    // excludeDriverLogs: ['bugreport', 'server'],
-  }],
+  capabilities: [
+    {
+      // maxInstances can get overwritten per capability. So if you have an in-house Selenium
+      // grid with only 5 firefox instances available you can make sure that not more than
+      // 5 instances get started at a time.
+      maxInstances: 1,
+      //
+      browserName: "chrome",
+      acceptInsecureCerts: true,
+      // If outputDir is provided WebdriverIO can capture driver session logs
+      // it is possible to configure which logTypes to include/exclude.
+      // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
+      // excludeDriverLogs: ['bugreport', 'server'],
+    },
+  ],
   //
   // ===================
   // Test Configurations
@@ -104,7 +118,7 @@ export const config: WebdriverIO.Config = {
   // Define all options that are relevant for the WebdriverIO instance here
   //
   // Level of logging verbosity: trace | debug | info | warn | error | silent
-  logLevel: 'info',
+  logLevel: "silent",
   //
   // Set specific log levels per logger
   // loggers:
@@ -128,7 +142,7 @@ export const config: WebdriverIO.Config = {
   // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
   // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
   // gets prepended directly.
-  baseUrl: 'http://localhost',
+  baseUrl: "http://localhost",
   //
   // Default timeout for all waitFor* commands.
   waitforTimeout: 10000,
@@ -145,9 +159,21 @@ export const config: WebdriverIO.Config = {
   // your test setup with almost no effort. Unlike plugins, they don't add new
   // commands. Instead, they hook themselves up into the test process.
   services: [
-    ['selenium-standalone', { drivers: { chrome: true, chromiumedge: 'latest' } }]
+    [
+      "selenium-standalone",
+      { drivers: { chrome: true, chromiumedge: "latest" } },
+    ],
+    "screenshots-cleanup",
+    [
+      RerunService,
+      {
+        rerunDataDir: rerun_utilities.rerunDataDir,
+        rerunScriptPath: rerun_utilities.rerunScriptPath,
+        // ignoredTags: ['@known_bug']
+        commandPrefix: "VARIABLE=true", //Prefix which will be added to the re-run command that is generated.
+      },
+    ],
   ],
-
 
   // Framework you want to run your specs with.
   // The following are supported: Mocha, Jasmine, and Cucumber
@@ -155,10 +181,10 @@ export const config: WebdriverIO.Config = {
   //
   // Make sure you have the wdio adapter package for the specific framework installed
   // before running any tests.
-  framework: 'mocha',
+  framework: "mocha",
   //
   // The number of times to retry the entire specfile when it fails as a whole
-  // specFileRetries: 1,
+  // specFileRetries: 2,
   //
   // Delay in seconds between the spec file retry attempts
   // specFileRetriesDelay: 0,
@@ -169,21 +195,26 @@ export const config: WebdriverIO.Config = {
   // Test reporter for stdout.
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
-  reporters: ['spec',
+  reporters: [
+    "spec",
 
-    ['allure', {
-      outputDir: 'allure-results',
-      disableWebdriverStepsReporting: true,
-      disableWebdriverScreenshotsReporting: true,
-    }
-    ]],
+    [
+      "allure",
+      {
+        outputDir: "allure-results",
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: true,
+      },
+    ],
+  ],
 
   // Options to be passed to Mocha.
   // See the full list at http://mochajs.org/
   mochaOpts: {
-    ui: 'bdd',
+    ui: "bdd",
     timeout: 60000,
-    bail: true
+    bail: true,
+    // retries: 3,
   },
   //
   // =====
@@ -238,74 +269,114 @@ export const config: WebdriverIO.Config = {
    * @param {Object}         browser      instance of created browser/device session
    */
   before(capabilities, specs) {
-    addLogger(`Env is ${process.env}.toString()`)
+    addLogger(`Env is ${process.env}.toString()`);
     addLogger(`Test is running in ${baseURL}`);
 
     // Add commands to WebdriverIO
-    Object.keys(customCommands).forEach(key => {
+    Object.keys(customCommands).forEach((key) => {
       browser.addCommand(key, customCommands[key], true);
-    })
+    });
 
     // Add commands to WebdriverIO
-    Object.keys(commonUtils).forEach(key => {
+    Object.keys(commonUtils).forEach((key) => {
       browser.addCommand(key, commonUtils[key], true);
-    })
-    browser.setWindowSize(1920, 1080)
-    console.log(`Session Id for session lookup: ${browser.sessionId}`)
+    });
+    browser.setWindowSize(1920, 1080);
+    console.log(`Session Id for session lookup: ${browser.sessionId}`);
     //console.log(`BASE URL: ${browser.options.baseUrl}`)
+
+    rerun_utilities.specFile = specs[0];
+    console.log(
+      `Re-run service is activated. Data directory: ${rerun_utilities.rerunDataDir}`
+    );
+    fs.mkdirSync(rerun_utilities.rerunDataDir, { recursive: true });
+    // INFO: `namespace` below copied from: https://github.com/kelektiv/node-uuid/blob/master//lib/v35.js#L54:16
+    rerun_utilities.serviceWorkerId = uuidv5(
+      `${Date.now()}`,
+      "6ba7b810-9dad-11d1-80b4-00c04fd430c8"
+    );
   },
-    /**
-     * Runs before a WebdriverIO command gets executed.
-     * @param {String} commandName hook command name
-     * @param {Array} args arguments that command would receive
-     */
-    // beforeCommand: function (commandName, args) {
-    // },
-    /**
-     * Hook that gets executed before the suite starts
-     * @param {Object} suite suite details
-     */
-    // beforeSuite: function (suite) {
-    // },
-    /**
-     * Function to be executed before a test (in Mocha/Jasmine) starts.
-     */
-    beforeTest: function (test, context) {
-      addLogger(`Test is running in Env : ${process.env.NODE_ENV} & URL : ${baseURL}` )
-    },
-    /**
-     * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
-     * beforeEach in Mocha)
-     */
-    // beforeHook: function (test, context) {
-    // },
-    /**
-     * Hook that gets executed _after_ a hook within the suite starts (e.g. runs after calling
-     * afterEach in Mocha)
-     */
-    // afterHook: function (test, context, { error, result, duration, passed, retries }) {
-    // },
-    /**
-     * Function to be executed after a test (in Mocha/Jasmine only)
-     * @param {Object}  test             test object
-     * @param {Object}  context          scope object the test was executed with
-     * @param {Error}   result.error     error object in case the test fails, otherwise `undefined`
-     * @param {Any}     result.result    return object of test function
-     * @param {Number}  result.duration  duration of test
-     * @param {Boolean} result.passed    true if test has passed, otherwise false
-     * @param {Object}  result.retries   informations to spec related retries, e.g. `{ attempts: 0, limit: 0 }`
-     */
-  afterTest: function (test, context, { error, result, duration, passed, retries }) {
+  /**
+   * Runs before a WebdriverIO command gets executed.
+   * @param {String} commandName hook command name
+   * @param {Array} args arguments that command would receive
+   */
+  // beforeCommand: function (commandName, args) {
+  // },
+  /**
+   * Hook that gets executed before the suite starts
+   * @param {Object} suite suite details
+   */
+  // beforeSuite: function (suite) {
+  // },
+  /**
+   * Function to be executed before a test (in Mocha/Jasmine) starts.
+   */
+  beforeTest: function (test, context) {
+    addLogger(
+      `Test is running in Env : ${process.env.NODE_ENV} & URL : ${baseURL}`
+    );
+  },
+  /**
+   * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
+   * beforeEach in Mocha)
+   */
+  // beforeHook: function (test, context) {
+  // },
+  /**
+   * Hook that gets executed _after_ a hook within the suite starts (e.g. runs after calling
+   * afterEach in Mocha)
+   */
+  // afterHook: function (test, context, { error, result, duration, passed, retries }) {
+  // },
+  /**
+   * Function to be executed after a test (in Mocha/Jasmine only)
+   * @param {Object}  test             test object
+   * @param {Object}  context          scope object the test was executed with
+   * @param {Error}   result.error     error object in case the test fails, otherwise `undefined`
+   * @param {Any}     result.result    return object of test function
+   * @param {Number}  result.duration  duration of test
+   * @param {Boolean} result.passed    true if test has passed, otherwise false
+   * @param {Object}  result.retries   informations to spec related retries, e.g. `{ attempts: 0, limit: 0 }`
+   */
+  afterTest: function (
+    test,
+    context,
+    { error, result, duration, passed, retries }
+  ) {
     if (error) {
-      browser.saveScreenshot('./screenshot/'+ test.title +'_'+commonUtils.generateFileNameWithTimeStamp());
-
+      browser.saveScreenshot(
+        "./screenshot/" +
+          test.title +
+          "_" +
+          commonUtils.generateFileNameWithTimeStamp()
+      );
     }
-    if (result==='skip') {
-      browser.saveScreenshot('./screenshot/' +test.title+'_'+ commonUtils.generateFileNameWithTimeStamp());
+    if (result === "skip") {
+      browser.saveScreenshot(
+        "./screenshot/" +
+          test.title +
+          "_" +
+          commonUtils.generateFileNameWithTimeStamp()
+      );
+    }
 
+    if (config.framework !== "cucumber" && !passed) {
+      console.log(`Re-run service is inspecting non-passing test.`);
+      console.log(`Test location: ${rerun_utilities.specFile}`);
+      if (error && error.message) {
+        rerun_utilities.nonPassingItems.push({
+          location: rerun_utilities.specFile.replaceAll("\\", "/"),
+          failure: error.message,
+          ErrorStack: error.stack.replaceAll("\\", "/"),
+        });
+      } else {
+        console.log(
+          "The non-passing test did not contain any error message, it could not be added for re-run."
+        );
+      }
     }
   },
-
 
   /**
    * Hook that gets executed after the suite has ended
@@ -329,8 +400,24 @@ export const config: WebdriverIO.Config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that ran
    */
-  // after: function (result, capabilities, specs) {
-  // },
+  after: function (result, capabilities, specs) {
+    if (rerun_utilities.nonPassingItems.length > 0) {
+      fs.writeFileSync(
+        `${
+          rerun_utilities.rerunDataDir
+        }/rerun-${commonUtils.generateFileNameWithTimeStamp()}.json`,
+        JSON.stringify(rerun_utilities.nonPassingItems)
+      );
+      console.log(
+        "ServiceWorkId: ",
+        JSON.stringify(rerun_utilities.serviceWorkerId)
+      );
+    } else {
+      console.log(
+        "Re-run service did not detect any non-passing scenarios or tests."
+      );
+    }
+  },
   /**
    * Gets executed right after terminating the webdriver session.
    * @param {Object} config wdio configuration object
@@ -347,21 +434,55 @@ export const config: WebdriverIO.Config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  onComplete: function(exitCode, config, capabilities, results) {
-    if(results.failed == this.bail){
-      console.log(chalk.red.underline.bold("******* BAILING OUT *******"))
+  onComplete: function (exitCode, config, capabilities, results) {
+    const directoryPath = path.join(`${rerun_utilities.rerunDataDir}`);
+    if (fs.existsSync(directoryPath)) {
+      const rerunFiles = fs.readdirSync(directoryPath);
+      console.log("In On complete hook");
+      console.log("length: ", rerunFiles.length);
+      if (rerunFiles.length > 0) {
+        let rerunCommand = `DISABLE_RERUN=true node_modules/.bin/wdio ${argv._[0]} `;
+        if (rerun_utilities.commandPrefix) {
+          rerunCommand = `${rerun_utilities.commandPrefix} ${rerunCommand}`;
+          console.log("Rerun Command: ", rerunCommand);
+        }
+        let failureLocations = [];
+        rerunFiles.forEach((file) => {
+          const json = JSON.parse(
+            fs
+              .readFileSync(`${rerun_utilities.rerunDataDir}/${file}`)
+              .toString()
+          );
+          json.forEach((failure) => {
+            failureLocations.push(failure.location.replace(/\\/g, "/"));
+          });
+        });
+        const failureLocationsUnique = [...new Set(failureLocations)];
+        failureLocationsUnique.forEach((failureLocation) => {
+          rerunCommand += ` --spec=${failureLocation}`;
+        });
+        console.log("RerunCommand: ", rerunCommand);
+        fs.writeFileSync(rerun_utilities.rerunScriptPath, rerunCommand);
+        console.log(
+          `Re-run script has been generated @ ${rerun_utilities.rerunScriptPath}`
+        );
+      }
+    }
+
+    if (results.failed == this.bail) {
+      console.log(chalk.red.underline.bold("******* BAILING OUT *******"));
       console.table({
-        "Total Executed cases" : results.finished,
+        "Total Executed cases": results.finished,
         "passed cases": results.passed,
-        "failed cases": results.failed 
-      })      
+        "failed cases": results.failed,
+      });
     }
   },
   /**
-  * Gets executed when a refresh happens.
-  * @param {String} oldSessionId session ID of the old session
-  * @param {String} newSessionId session ID of the new session
-  */
+   * Gets executed when a refresh happens.
+   * @param {String} oldSessionId session ID of the old session
+   * @param {String} newSessionId session ID of the new session
+   */
   // onReload: function(oldSessionId, newSessionId) {
   // }
-}
+};
