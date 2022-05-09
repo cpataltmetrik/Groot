@@ -173,6 +173,10 @@ export const config: WebdriverIO.Config = {
         commandPrefix: "VARIABLE=true", //Prefix which will be added to the re-run command that is generated.
       },
     ],
+    [
+      "selenium-standalone",
+      { drivers: { chrome: true, chromiumedge: "latest" } },
+    ],
   ],
 
   // Framework you want to run your specs with.
