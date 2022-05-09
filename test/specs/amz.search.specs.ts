@@ -6,6 +6,7 @@ let searchString: string = SEARCH_DATA.dataset1.searchString;
 let expectedString: string = SEARCH_DATA.dataset1.expectedString;
 
 describe("Search a product from Amazon", () => {
+  
   it("Should search a product and store the value", async () => {
     await SearchPage.open();
 
@@ -19,7 +20,7 @@ describe("Search a product from Amazon", () => {
     expect(await getAllIphone[0].getText()).toHaveValue(expectedString);
   });
 
-  it.only("Validate Help and Setting section", async () => {
+  it("Validate Help and Setting section", async () => {
     let expectedHeadings: string[] = [];
     let actualHeadings: string[] = [
       "Your Account",
@@ -39,5 +40,29 @@ describe("Search a product from Amazon", () => {
 
     let isTrue = expectedHeadings.some((item) => actualHeadings.includes(item));
     expect(isTrue).to.be.true;
+  });
+
+  it("Validate categories having new releases", async () => {
+    let hotReleaseHeadingText: string;
+    let listOfHotReleaseItems: any[];
+    await SearchPage.open();
+
+    let browserUrl = await browser.getUrl();
+    if (browserUrl.includes(".in")) {
+      await SearchPage.clickOnSearchAllButton();
+      await SearchPage.clickNewReleaseLink();
+
+      hotReleaseHeadingText = await SearchPage.getHotReleaseHeadingText();
+
+      expect(hotReleaseHeadingText).to.be.a("string").that.contains("Releases");
+
+      listOfHotReleaseItems = await SearchPage.getHotReleaseGroupList;
+
+      await listOfHotReleaseItems.forEach((groupName) => {
+        console.log(groupName.getText());
+      });
+    } else {
+      console.log("Hot release feature is only available for DEV Environment");
+    }
   });
 });
