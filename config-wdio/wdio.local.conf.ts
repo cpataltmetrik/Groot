@@ -405,7 +405,7 @@ export const config: WebdriverIO.Config = {
       fs.writeFileSync(
         `${
           rerun_utilities.rerunDataDir
-        }/rerun-${commonUtils.generateFileNameWithTimeStamp()}.json`,
+        }/rerun-${commonUtils.generateRerunFileNameWithTimeStamp()}.json`,
         JSON.stringify(rerun_utilities.nonPassingItems)
       );
       console.log(
