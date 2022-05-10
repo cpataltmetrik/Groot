@@ -6,11 +6,8 @@ const baseURL = configVal.get('Environment.baseUrl');
 var overrides = {
 
     baseUrl: baseURL,
-
     services: ['devtools'],
-
     runner: 'local',
-
     logLevel: 'info',
 
     capabilities: [{
@@ -23,6 +20,6 @@ var overrides = {
 
 exports.config = _.defaultsDeep(overrides, defaults);
 
-  exports.config.capabilities.forEach(function(caps){
+exports.config.capabilities.forEach(function(caps){
   for(var i in exports.config.commonCapabilities) caps[i] = caps[i] || exports.config.commonCapabilities[i];
 });
