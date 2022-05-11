@@ -8,6 +8,7 @@
     "@types/config": "^0.0.41",
     "@wdio/allure-reporter": "^7.19.1",
     "@wdio/cli": "^7.19.1",
+    "@wdio/devtools-service": "^7.19.6",
     "@wdio/local-runner": "^7.19.3",
     "@wdio/mocha-framework": "^7.19.3",
     "@wdio/spec-reporter": "^7.19.1",
