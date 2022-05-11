@@ -2,21 +2,20 @@ import Category from "../../src/main/pageobjects/productCategory.page"
 const category: any = new Category()
 import categoryData from "../testData/category.data"
 const chaiExpect: any = require("chai").expect
+import { addLogger } from "../../src/main/utilities/logger"
 
-/* Data */
 const urlText: string = categoryData.loadPageDataSet.urlText
 const titleText: string = categoryData.loadPageDataSet.titleText
 const path: string = categoryData.loadPageDataSet.path
 const inputType: string = categoryData.loadPageDataSet.inputType
 const pageTitle: string = categoryData.loadPageDataSet.pageTitle
-/* Data */
 
 describe("Loading Page", async () => {
     it("Should load page and perform assertions", async () => {
-        //Load Page And Perform Basic Assertions
         await category.open("")
-        await category.screenMaximize
-        await category.getUrlAndTitle()
+        let printUrlAndTitle: any = await category.getUrlAndTitle()
+        addLogger(`${await printUrlAndTitle.webPageUrl}`)
+        addLogger(`${await printUrlAndTitle.webPageTitle}`)
 
         //WebDriverIO Assertions
         await expect(browser).toHaveUrlContaining(urlText)

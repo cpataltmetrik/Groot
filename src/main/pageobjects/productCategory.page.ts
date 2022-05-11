@@ -1,24 +1,18 @@
-import { addLogger } from "../utilities/logger"
 import Page from "./page"
 
 export default class SelectCategory extends Page {
-    //Load Page
-    public async open(path: string): Promise<any> {
-        await super.open(path)
+
+    public async open(path: string): Promise<string> {
+        return await super.open(path)
     }
 
-    //Maximize Window
-    public get screenMaximize() {
-        return browser.maximizeWindow()
+    public async getUrlAndTitle(): Promise<object> {
+        return {
+            webPageUrl: await browser.getUrl(),
+            webPageTitle: await browser.getTitle()
+        }
     }
 
-    //Get Page Url Address And Title
-    public async getUrlAndTitle(): Promise<any> {
-        addLogger(await browser.getUrl())
-        addLogger(await browser.getTitle())
-    }
-
-    //Select Category
     public get dropdown() {
         return <any>$("#searchDropdownBox")
     }
@@ -27,7 +21,6 @@ export default class SelectCategory extends Page {
         return <any>$$("//select[@id='searchDropdownBox']/option")
     }
 
-    //Search Box
     public get searchBox() {
         return <any>$("#twotabsearchtextbox")
     }
@@ -36,8 +29,3 @@ export default class SelectCategory extends Page {
         return <any>$("//*[@type='submit']")
     }
 }
-
-/*
-module.exports = new SelectCategory()
-export default new SelectCategory()
-*/
