@@ -4,11 +4,11 @@ import categoryData from "../testData/category.data"
 const chaiExpect: any = require("chai").expect
 
 /* Data */
-const input1: string = categoryData.loadPageDataSet.input1
-const input2: string = categoryData.loadPageDataSet.input2
+const urlText: string = categoryData.loadPageDataSet.urlText
+const titleText: string = categoryData.loadPageDataSet.titleText
 const path: string = categoryData.loadPageDataSet.path
 const inputType: string = categoryData.loadPageDataSet.inputType
-const input3: string = categoryData.loadPageDataSet.input3
+const pageTitle: string = categoryData.loadPageDataSet.pageTitle
 /* Data */
 
 describe("Loading Page", async () => {
@@ -19,8 +19,8 @@ describe("Loading Page", async () => {
         await category.getUrlAndTitle()
 
         //WebDriverIO Assertions
-        await expect(browser).toHaveUrlContaining(input1)
-        expect(await browser).toHaveTitleContaining(input2)
+        await expect(browser).toHaveUrlContaining(urlText)
+        expect(await browser).toHaveTitleContaining(titleText)
 
         //Chai Assertions
         const chaiAssertions: any = async (
@@ -34,6 +34,6 @@ describe("Loading Page", async () => {
         }
 
         await chaiAssertions(browser.getUrl(), path, inputType)
-        await chaiAssertions(browser.getTitle(), input3, inputType)
+        await chaiAssertions(browser.getTitle(), pageTitle, inputType)
     })
 })
