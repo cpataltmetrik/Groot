@@ -9,29 +9,29 @@ describe("amazon customer service page", async () => {
     await service.scrollToHelp();
   });
   it("should hover on all titles", async () => {
-    let hoverAll: any, getTitles: any, disableHtml: string, removeTags: string;
+    let hoverAll: string, getTitles: any, fetchContent: string, optimizeContent: string;
     let sortedTitles = new Array();
-    let replaceNull: string;
+    let updatedText: string;
 
     let getTopics = await service.categoryContainer;
 
     for (let i = 0; i < getTopics.length; i++) {
       hoverAll = await (await getTopics[i].$("a")).click();
       getTitles = await service.titleContainer;
-      disableHtml = await getTitles[i].getHTML(false);
-      removeTags = await disableHtml.trim();
-      sortedTitles.push(removeTags);
+      fetchContent = await getTitles[i].getHTML(false);
+      optimizeContent = await fetchContent.trim();
+      sortedTitles.push(optimizeContent);
     }
 
     for (let j = 0; j < sortedTitles.length; j++) {
       if (sortedTitles[j].includes("&amp; ")) {
-        replaceNull = sortedTitles[j].replace("&amp; ", "");
-        sortedTitles[j] = replaceNull;   
+        updatedText = sortedTitles[j].replace("&amp; ", "");
+        sortedTitles[j] = updatedText;   
       }
 
       if (sortedTitles[j].includes("\n", "")) {
-        replaceNull = sortedTitles[j].replace("\n", "");
-        sortedTitles[j] = replaceNull;
+        updatedText = sortedTitles[j].replace("\n", "");
+        sortedTitles[j] = updatedText;
       }
       addLogger(await `${sortedTitles[j]}`);
     }
