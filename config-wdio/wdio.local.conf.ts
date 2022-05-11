@@ -70,7 +70,10 @@ export const config: WebdriverIO.Config = {
   // will be called from there.
   //
   specs: [
-    './test/specs/**.*.ts',
+    [
+      './test/specs/loadPage.spec.ts',
+      './test/specs/productCategory.spec.ts'
+    ]
   ],
   // Patterns to exclude.
   exclude: [
@@ -281,7 +284,7 @@ export const config: WebdriverIO.Config = {
     // Add commands to WebdriverIO
     Object.keys(commonUtils).forEach((key) => {
       browser.addCommand(key, commonUtils[key], true);
-    });
+    })
     browser.maximizeWindow()
     console.log(`Session Id for session lookup: ${browser.sessionId}`)
     //console.log(`BASE URL: ${browser.options.baseUrl}`)
