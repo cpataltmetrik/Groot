@@ -3,6 +3,7 @@ import { addLogger } from '../src/main/utilities/logger'
 import * as configVal from 'config'
 const baseURL = configVal.get('Environment.baseUrl');
 const commonUtils = require('../src/main/utilities/commonUtils');
+const  chalk = require('chalk');
 
 export const config: WebdriverIO.Config = {
   //
@@ -87,7 +88,7 @@ export const config: WebdriverIO.Config = {
     // maxInstances can get overwritten per capability. So if you have an in-house Selenium
     // grid with only 5 firefox instances available you can make sure that not more than
     // 5 instances get started at a time.
-    maxInstances: 5,
+    maxInstances: 1,
     //
     browserName: 'chrome',
     acceptInsecureCerts: true
@@ -121,7 +122,7 @@ export const config: WebdriverIO.Config = {
   //
   // If you only want to run your tests until a specific amount of tests have failed use
   // bail (default is 0 - don't bail, run all tests).
-  bail: 0,
+  bail: 2,
   //
   // Set a base URL in order to shorten url command calls. If your `url` parameter starts
   // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
@@ -143,7 +144,9 @@ export const config: WebdriverIO.Config = {
   // Services take over a specific job you don't want to take care of. They enhance
   // your test setup with almost no effort. Unlike plugins, they don't add new
   // commands. Instead, they hook themselves up into the test process.
-  services: ['chromedriver', 'screenshots-cleanup'],
+  services: [
+    ['selenium-standalone', { drivers: { chrome: true, chromiumedge: 'latest' } }]
+  ],
 
 
   // Framework you want to run your specs with.
@@ -180,6 +183,7 @@ export const config: WebdriverIO.Config = {
   mochaOpts: {
     ui: 'bdd',
     timeout: 60000,
+    bail: true
   },
   //
   // =====
@@ -343,8 +347,16 @@ export const config: WebdriverIO.Config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  // onComplete: function(exitCode, config, capabilities, results) {
-  // },
+  onComplete: function(exitCode, config, capabilities, results) {
+    if(results.failed == this.bail){
+      console.log(chalk.red.underline.bold("******* BAILING OUT *******"))
+      console.table({
+        "Total Executed cases" : results.finished,
+        "passed cases": results.passed,
+        "failed cases": results.failed 
+      })      
+    }
+  },
   /**
   * Gets executed when a refresh happens.
   * @param {String} oldSessionId session ID of the old session
