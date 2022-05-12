@@ -87,7 +87,7 @@ Also supports Interfaces, sub-interfaces, classes and sub-classes. Has additiona
 ## **Why should I use WDIO over Selenium?**
 
 * WDIO in-built timeout configuration removes the Explicit timeout and Implicit timeout.
-* Supported for multiple platform and multiple browser execution.
+* Supported for multiple platforms and multiple browser execution.
 * You choose how to interact with browser - using webdriver or DevTools protocol.
 * Easy project setup.
 * Flexible configuration.
@@ -98,10 +98,10 @@ Also supports Interfaces, sub-interfaces, classes and sub-classes. Has additiona
 WebdriverIO has huge in-built functionalities, but depends on business requirement and we come up with idea of Groot Testing framework. It is integration of Multiple features, libraries and functionalities 
 
 Feature like Docker, ESlint, Parallel executions, Mocha libraries and
-bail-out that strengthen Groot framework helps   to reduce in code repeatability and increase in productivity.
+bail-out that strengthens Groot framework helps   to reduce in code repeatability and increase in productivity.
 
 ## **How does Groot Strengthen WDIO?**
-Groot comes with multiple features like Spec report for reporting test files. Also, Integreated configuration file with Bail out logic that enhances groot to
+Groot comes with multiple features like Spec report for reporting test files. Also, Integrated configuration file with Bail out logic that enhances groot to
 
 WebdriverIO framework. Here is the link for more details [here](#features)
 
@@ -267,7 +267,7 @@ bail: 2  //execution will stop after 2 failures
 
 Once the execution is stopping because of bail we need to generate our own report.
 
-For creating our own report formate we need to add the following code in wdio-config!
+For creating our own report format we need to add the following code in wdio-config!
 ```
 onComplete: function(exitCode, config, capabilities, results) {
     if(results.failed == this.bail){
@@ -286,7 +286,7 @@ onComplete: function(exitCode, config, capabilities, results) {
 <summary> Retries and re run</summary>
 
 ### *Retries :*
-Retry is an mechanism available in Mocha to re-execute the falky test cases when it fails.  
+Retry is   mechanism available in Mocha to re-execute the flaky test cases when it fails.  
 
 This can be achieved in different levels in mocha as below: 
 #### *Suite/Test Level :*
@@ -300,7 +300,7 @@ describe('retries', function () {
   }) 
 ```
 #### *Framework Level:*
-By configuring the below properties in WDIO config file can control the retry logice in framework levels:
+By configuring the below properties in WDIO config file can control the retry logic in framework levels:
 
 **specFileRetries :** n - Retries on this level mean that the whole setup process will simply be repeated, just as if it were for a new spec file.  
 
@@ -395,7 +395,7 @@ To fix the lint errors use the following command,
 
 <details>
 <summary> DevTool Integration for LightHouse </summary>
-The following WDIO service help us to automate chrome beyond the webDriver protocol.
+The following WDIO service helps us to automate chrome beyond the webDriver protocol.
 ```
 npm install @wdio/devtools-service --save-dev
 ```
@@ -415,9 +415,9 @@ services: ['devtools']
 
 <details>
 <summary>WDIO Logger Utility </summary>
-Groot has its own logger functionality that help us to print the data in console and also add the info in allure reporter.
+Groot has its own logger functionality that helps us to print the data in console and also add the info in allure reporter.
 
-This command help us to perform logger function
+This command helps us to perform logger function
 ```
 export const addLogger = (log: string) => {
 allureReporter.addStep(`STEP: ${log}`)
@@ -428,7 +428,7 @@ console.log(`STEP: ${log}`)
 
 <details>
 <summary> Allure Report </summary>
-Allure reporter help us to create a report with formatted information and interactive UI.
+Allure reporter helps us to create a report with formatted information and interactive UI.
 
 Installation of allure report with WDIO
 ```
@@ -452,7 +452,7 @@ for more information please refer [Test Report](#test-reports)
 
 <details>
 <summary> Spec Report </summary>
-A WebdriverIO plugin to report in spec style. This is one of the reporter in WebdriverIO by which we can check Test case execution status whether it is pass, skip or in fail state. 
+A WebdriverIO plugin to report in spec style. This is one of the reporters in WebdriverIO by which we can check Test case execution status whether it is pass, skip or in fail state. 
 
 And it gives user more in-depth and line by line human readable statements of test case execution. 
 ### *Installation :*
