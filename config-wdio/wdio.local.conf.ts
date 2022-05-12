@@ -69,9 +69,7 @@ export const config: WebdriverIO.Config = {
   // then the current working directory is where your `package.json` resides, so `wdio`
   // will be called from there.
   //
-  specs: [
-    './test/specs/**.*.ts'
-  ],
+  specs: ["./test/specs/**.*.ts"],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -176,6 +174,7 @@ export const config: WebdriverIO.Config = {
       },
     ],
   ],
+
   // Framework you want to run your specs with.
   // The following are supported: Mocha, Jasmine, and Cucumber
   // see also: https://webdriver.io/docs/frameworks
@@ -280,9 +279,9 @@ export const config: WebdriverIO.Config = {
     // Add commands to WebdriverIO
     Object.keys(commonUtils).forEach((key) => {
       browser.addCommand(key, commonUtils[key], true);
-    })
-    browser.maximizeWindow()
-    console.log(`Session Id for session lookup: ${browser.sessionId}`)
+    });
+    browser.setWindowSize(1920, 1080);
+    console.log(`Session Id for session lookup: ${browser.sessionId}`);
     //console.log(`BASE URL: ${browser.options.baseUrl}`)
 
     rerun_utilities.specFile = specs[0];
