@@ -5,11 +5,14 @@ const baseURL = configVal.get("Environment.baseUrl");
 const commonUtils = require("../src/main/utilities/commonUtils");
 const chalk = require("chalk");
 const RerunService = require("wdio-rerun-service");
-const fs = require("fs");
-const path = require("path");
+import * as fs from "fs";
+import * as path from "path";
 const { v5: uuidv5 } = require("uuid");
-const RpService = require("wdio-reportportal-service");
-const reportportal = require("wdio-reportportal-reporter");
+// const RpService = require('wdio-reportportal-service');
+// const reportportal = require('wdio-reportportal-reporter');
+const RpService = require('wdio-reportportal-service');
+const reportportal = require('wdio-reportportal-reporter');
+let RPClient = require('@reportportal/client-javascript');
 const repoConf = require("../config-wdio/wdio-reporter.conf");
 const argv = require("minimist")(process.argv.slice(2));
 
@@ -21,6 +24,31 @@ const rerun_utilities = {
   commandPrefix: "",
   specFile: "",
 };
+
+// const reportPortalClientConfig = {
+//   token: "39dba234-6d5e-4582-bc65-0b4eb5eeeb32",
+//   endpoint: "http://54.219.33.119:4000/api/v1",
+//   launch: "superadmin_TEST_EXAMPLE",
+//   project: "HELLO",
+//   mode: "DEFAULT",
+//   debug: true,
+//   description: "Groot with Analytics",
+// };
+
+let rpClient = new RPClient({
+  token: '39dba234-6d5e-4582-bc65-0b4eb5eeeb32',
+  endpoint: 'http://54.219.33.119:4000/api/v1',
+  launch: 'DEMO DASHBOARD',
+  project: 'HELLO'
+});
+
+// rpClient.checkConnect().then((response) => {
+//   console.log('You have successfully connected to the server.');
+//   console.log(`You are using an account: ${response.fullName}`);
+// }, (error) => {
+//   console.log('Error connection to server');
+//   console.dir(error);
+// });
 
 export const config: WebdriverIO.Config = {
   //
@@ -71,7 +99,7 @@ export const config: WebdriverIO.Config = {
   // then the current working directory is where your `package.json` resides, so `wdio`
   // will be called from there.
   //
-  specs: ["./test/specs/**.*.ts"],
+  specs: ["./test/specs/login.spec.ts"],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -120,7 +148,7 @@ export const config: WebdriverIO.Config = {
   // Define all options that are relevant for the WebdriverIO instance here
   //
   // Level of logging verbosity: trace | debug | info | warn | error | silent
-  logLevel: "info",
+  logLevel: "silent",
   //
   // Set specific log levels per logger
   // loggers:
@@ -162,7 +190,7 @@ export const config: WebdriverIO.Config = {
   // commands. Instead, they hook themselves up into the test process.
   services: [
     [
-      "selenium-standalone",
+      'selenium-standalone',
       { drivers: { chrome: true, chromiumedge: "latest" } },
     ],
     "screenshots-cleanup",
@@ -232,8 +260,15 @@ export const config: WebdriverIO.Config = {
    * @param {Object} config wdio configuration object
    * @param {Array.<Object>} capabilities list of capabilities details
    */
-  // onPrepare: function (config, capabilities) {
-  // },
+  onPrepare: function (config, capabilities) {
+    rpClient.checkConnect().then((response) => {
+      console.log('You have successfully connected to the server.');
+      console.log(`You are using an account: ${response.fullName}`);
+    }, (error) => {
+      console.log('Error connection to server');
+      console.dir(error);
+    });
+  },
   /**
    * Gets executed before a worker process is spawned and can be used to initialise specific service
    * for that worker as well as modify runtime environments in an async fashion.
@@ -485,7 +520,7 @@ export const config: WebdriverIO.Config = {
     //const port = ':8080'; // or empty string for default 80/443 ports
     // const link =  RpService.getLaunchUrlByParams(protocol, hostname, port, config);
     //console.log(`Report portal link ${link}`)
-    const link = await RpService.getLaunchUrl(repoConf);
+    const link = await RpService.getLaunchUrl(reportPortalClientConfig);
     console.log(`Report portal link ${link}`);
   },
   /**
