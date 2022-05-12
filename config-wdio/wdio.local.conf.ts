@@ -70,10 +70,7 @@ export const config: WebdriverIO.Config = {
   // will be called from there.
   //
   specs: [
-    [
-      './test/specs/loadPage.spec.ts',
-      './test/specs/productCategory.spec.ts'
-    ]
+    './test/specs/**.*.ts'
   ],
   // Patterns to exclude.
   exclude: [
@@ -179,7 +176,6 @@ export const config: WebdriverIO.Config = {
       },
     ],
   ],
-
   // Framework you want to run your specs with.
   // The following are supported: Mocha, Jasmine, and Cucumber
   // see also: https://webdriver.io/docs/frameworks
@@ -202,7 +198,6 @@ export const config: WebdriverIO.Config = {
   // see also: https://webdriver.io/docs/dot-reporter
   reporters: [
     "spec",
-
     [
       "allure",
       {
