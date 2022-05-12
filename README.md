@@ -285,7 +285,7 @@ onComplete: function(exitCode, config, capabilities, results) {
 <details>
 <summary> Retries and re run</summary>
 
-### *Retries :*
+### ***Retries :***
 Retry is   mechanism available in Mocha to re-execute the flaky test cases when it fails.  
 
 This can be achieved in different levels in mocha as below: 
@@ -310,7 +310,9 @@ By configuring the below properties in WDIO config file can control the retry lo
 
 Instructions on how to configure retry logic in WDIO can be found [here.](https://webdriver.io/docs/retry/)
 
-### *Rerun :*
+-----
+
+### ***Rerun :***
 Groot integrate node library to achieve the rerunning the flaky test cases. 
 
 How Re-run differs from retry: 
