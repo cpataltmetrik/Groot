@@ -286,7 +286,7 @@ onComplete: function(exitCode, config, capabilities, results) {
 <summary> Retries and re run</summary>
 
 ### ***Retries :***
-Retry is   mechanism available in Mocha to re-execute the flaky test cases when it fails.  
+Retry is a mechanism available in Mocha to re-execute the flaky test cases when it fails.  
 
 This can be achieved in different levels in mocha as below: 
 #### *Suite/Test Level :*
