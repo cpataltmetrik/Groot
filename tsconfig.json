@@ -1,17 +1,14 @@
 {
-    "compilerOptions": {
-        "types": [
-            "node",
-            "webdriverio/async",
-            "@wdio/mocha-framework",
-            "expect-webdriverio",
-            "@wdio/devtools-service"
-        ],
-        "moduleResolution": "node",
-        "target": "ES2022",
-        "module": "CommonJS"
-    },
-    "include" : [
-        "../**/*.ts",
-    ]
+  "compilerOptions": {
+    "types": [
+      "node",
+      "webdriverio/async",
+      "@wdio/mocha-framework",
+      "expect-webdriverio",
+      "@wdio/devtools-service"
+    ],
+    "moduleResolution": "node",
+    "target": "es2021"
+  },
+  "include": ["../**/*.ts"]
 }
