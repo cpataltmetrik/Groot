@@ -14,7 +14,7 @@
     "@wdio/spec-reporter": "^7.19.1",
     "better-docs": "^2.7.2",
     "chai": "^4.3.6",
-    "chromedriver": "^99.0.0",
+    "chromedriver": "^101.0.0",
     "config": "^3.3.7",
     "jsdoc": "^3.6.10",
     "ts-node": "^10.7.0",

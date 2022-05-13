@@ -2,7 +2,7 @@ var defaults = require("./base.conf").config;
 var _ = require("lodash");
 import * as configVal from "config";
 const BASEURL = configVal.get("Environment.baseUrl");
-const DRIVERS = { chrome: { version: '87.0.4280.20' } }
+const DRIVERS = { chromiumedge: { version: '85.0.564.70' } }
 
 var overrides = {
   baseUrl: BASEURL,
@@ -13,8 +13,8 @@ var overrides = {
 
   capabilities: [
     {
-      "goog:maxInstances": 5,
-      browserName: "chrome",
+      //"goog:maxInstances": 5,
+      browserName: "MicrosoftEdge",
     },
   ],
 };

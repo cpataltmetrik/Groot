@@ -9,7 +9,6 @@ var overrides = {
   port: 4444,
   path: "/wd/hub",
   runner: "local",
-
   logLevel: "info",
   maxInstances: 1,
 
