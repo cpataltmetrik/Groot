@@ -8,12 +8,9 @@ const RerunService = require("wdio-rerun-service");
 import * as fs from "fs";
 import * as path from "path";
 const { v5: uuidv5 } = require("uuid");
-// const RpService = require('wdio-reportportal-service');
-// const reportportal = require('wdio-reportportal-reporter');
-const RpService = require('wdio-reportportal-service');
-const reportportal = require('wdio-reportportal-reporter');
-let RPClient = require('@reportportal/client-javascript');
-const repoConf = require("../config-wdio/wdio-reporter.conf");
+const RpService = require("wdio-reportportal-service");
+const reportportal = require("wdio-reportportal-reporter");
+let RPClient = require("@reportportal/client-javascript");
 const argv = require("minimist")(process.argv.slice(2));
 
 const rerun_utilities = {
@@ -25,30 +22,14 @@ const rerun_utilities = {
   specFile: "",
 };
 
-// const reportPortalClientConfig = {
-//   token: "39dba234-6d5e-4582-bc65-0b4eb5eeeb32",
-//   endpoint: "http://54.219.33.119:4000/api/v1",
-//   launch: "superadmin_TEST_EXAMPLE",
-//   project: "HELLO",
-//   mode: "DEFAULT",
-//   debug: true,
-//   description: "Groot with Analytics",
-// };
-
 let rpClient = new RPClient({
-  token: '39dba234-6d5e-4582-bc65-0b4eb5eeeb32',
-  endpoint: 'http://54.219.33.119:4000/api/v1',
-  launch: 'DEMO DASHBOARD',
-  project: 'HELLO'
+  token: "39dba234-6d5e-4582-bc65-0b4eb5eeeb32",
+  endpoint: "http://54.219.33.119:4000/api/v1",
+  launch: "hello",
+  project: "hello",
+  mode: "DEFAULT",
+  debug: false,
 });
-
-// rpClient.checkConnect().then((response) => {
-//   console.log('You have successfully connected to the server.');
-//   console.log(`You are using an account: ${response.fullName}`);
-// }, (error) => {
-//   console.log('Error connection to server');
-//   console.dir(error);
-// });
 
 export const config: WebdriverIO.Config = {
   //
@@ -99,7 +80,7 @@ export const config: WebdriverIO.Config = {
   // then the current working directory is where your `package.json` resides, so `wdio`
   // will be called from there.
   //
-  specs: ["./test/specs/login.spec.ts"],
+  specs: ["./test/specs/**.*.ts"],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -166,7 +147,7 @@ export const config: WebdriverIO.Config = {
   //
   // If you only want to run your tests until a specific amount of tests have failed use
   // bail (default is 0 - don't bail, run all tests).
-  bail: 2,
+  bail: 20,
   //
   // Set a base URL in order to shorten url command calls. If your `url` parameter starts
   // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
@@ -190,7 +171,7 @@ export const config: WebdriverIO.Config = {
   // commands. Instead, they hook themselves up into the test process.
   services: [
     [
-      'selenium-standalone',
+      "selenium-standalone",
       { drivers: { chrome: true, chromiumedge: "latest" } },
     ],
     "screenshots-cleanup",
@@ -236,7 +217,21 @@ export const config: WebdriverIO.Config = {
         disableWebdriverScreenshotsReporting: true,
       },
     ],
-    [reportportal, repoConf],
+
+    [
+      reportportal,
+      {
+        reportPortalClientConfig: {
+          token: "39dba234-6d5e-4582-bc65-0b4eb5eeeb32",
+          endpoint: "http://54.219.33.119:4000/api/v1",
+          launch: "Groot_test_execution",
+          project: "hello",
+          mode: "DEFAULT",
+          debug: false,
+          description: "Groot with Analytics",
+        },
+      },
+    ],
   ],
 
   // Options to be passed to Mocha.
@@ -261,13 +256,16 @@ export const config: WebdriverIO.Config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    */
   onPrepare: function (config, capabilities) {
-    rpClient.checkConnect().then((response) => {
-      console.log('You have successfully connected to the server.');
-      console.log(`You are using an account: ${response.fullName}`);
-    }, (error) => {
-      console.log('Error connection to server');
-      console.dir(error);
-    });
+    rpClient.checkConnect().then(
+      (response) => {
+        console.log("You have successfully connected to the server.");
+        console.log(`You are using an account: ${response.fullName}`);
+      },
+      (error) => {
+        console.log("Error connection to server");
+        console.dir(error);
+      }
+    );
   },
   /**
    * Gets executed before a worker process is spawned and can be used to initialise specific service
@@ -514,14 +512,6 @@ export const config: WebdriverIO.Config = {
         "failed cases": results.failed,
       });
     }
-
-    //const protocol = 'http:';
-    //const hostname = 'example.com';
-    //const port = ':8080'; // or empty string for default 80/443 ports
-    // const link =  RpService.getLaunchUrlByParams(protocol, hostname, port, config);
-    //console.log(`Report portal link ${link}`)
-    const link = await RpService.getLaunchUrl(reportPortalClientConfig);
-    console.log(`Report portal link ${link}`);
   },
   /**
    * Gets executed when a refresh happens.
