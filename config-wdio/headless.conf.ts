@@ -2,19 +2,23 @@ var defaults = require("./base.conf").config;
 var _ = require("lodash");
 import * as configVal from "config";
 const BASEURL = configVal.get("Environment.baseUrl");
-const DRIVERS = { chrome: { version: '87.0.4280.20' } }
 
 var overrides = {
   baseUrl: BASEURL,
   runner: "local",
-  logLevel: "error",
+  logLevel: "debug",
 
-  services: [['selenium-standalone', { args: { DRIVERS }, installArgs: { DRIVERS } }]],
+  services: [
+    ['selenium-standalone'],
+  ],
 
   capabilities: [
     {
       "goog:maxInstances": 5,
-      browserName: "chrome",
+      browserName: 'chrome',
+      'goog:chromeOptions': {
+        args: ['headless', 'disable-gpu'],
+      },
     },
   ],
 };
