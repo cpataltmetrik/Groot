@@ -1,8 +1,24 @@
 const customCommands = require("../src/main/helper/pageHelper.ts");
 import { addLogger } from "../src/main/utilities/logger";
 import * as configVal from "config";
-const BASEURL = configVal.get("Environment.baseUrl");
+const baseURL = configVal.get("Environment.baseUrl");
 const commonUtils = require("../src/main/utilities/commonUtils");
+const chalk = require("chalk");
+const RerunService = require("wdio-rerun-service");
+import fs = require("fs");
+import path = require("path");
+const { v5: uuidv5 } = require("uuid");
+
+const argv = require("minimist")(process.argv.slice(2));
+
+const rerun_utilities = {
+  nonPassingItems: [],
+  serviceWorkerId: "",
+  rerunDataDir: "./results/rerun",
+  rerunScriptPath: "./rerun.sh",
+  commandPrefix: "",
+  specFile: "",
+};
 
 export const config: WebdriverIO.Config = {
   //
@@ -85,7 +101,7 @@ export const config: WebdriverIO.Config = {
       // maxInstances can get overwritten per capability. So if you have an in-house Selenium
       // grid with only 5 firefox instances available you can make sure that not more than
       // 5 instances get started at a time.
-      maxInstances: 5,
+      maxInstances: 1,
       //
       browserName: "chrome",
       acceptInsecureCerts: true,
@@ -120,7 +136,7 @@ export const config: WebdriverIO.Config = {
   //
   // If you only want to run your tests until a specific amount of tests have failed use
   // bail (default is 0 - don't bail, run all tests).
-  bail: 0,
+  bail: 2,
   //
   // Set a base URL in order to shorten url command calls. If your `url` parameter starts
   // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
@@ -142,7 +158,18 @@ export const config: WebdriverIO.Config = {
   // Services take over a specific job you don't want to take care of. They enhance
   // your test setup with almost no effort. Unlike plugins, they don't add new
   // commands. Instead, they hook themselves up into the test process.
-  services: [],
+  services: [
+    "screenshots-cleanup",
+    [
+      RerunService,
+      {
+        rerunDataDir: rerun_utilities.rerunDataDir,
+        rerunScriptPath: rerun_utilities.rerunScriptPath,
+        // ignoredTags: ['@known_bug']
+        commandPrefix: "VARIABLE=true", //Prefix which will be added to the re-run command that is generated.
+      },
+    ],
+  ],
 
   // Framework you want to run your specs with.
   // The following are supported: Mocha, Jasmine, and Cucumber
@@ -153,7 +180,7 @@ export const config: WebdriverIO.Config = {
   framework: "mocha",
   //
   // The number of times to retry the entire specfile when it fails as a whole
-  // specFileRetries: 1,
+  // specFileRetries: 2,
   //
   // Delay in seconds between the spec file retry attempts
   // specFileRetriesDelay: 0,
@@ -182,6 +209,8 @@ export const config: WebdriverIO.Config = {
   mochaOpts: {
     ui: "bdd",
     timeout: 60000,
+    bail: true,
+    // retries: 3,
   },
   //
   // =====
@@ -237,7 +266,7 @@ export const config: WebdriverIO.Config = {
    */
   before(capabilities, specs) {
     addLogger(`Env is ${process.env}.toString()`);
-    addLogger(`Test is running in ${BASEURL}`);
+    addLogger(`Test is running in ${baseURL}`);
 
     // Add commands to WebdriverIO
     Object.keys(customCommands).forEach((key) => {
@@ -251,6 +280,17 @@ export const config: WebdriverIO.Config = {
     browser.setWindowSize(1920, 1080);
     console.log(`Session Id for session lookup: ${browser.sessionId}`);
     //console.log(`BASE URL: ${browser.options.baseUrl}`)
+
+    rerun_utilities.specFile = specs[0];
+    console.log(
+      `Re-run service is activated. Data directory: ${rerun_utilities.rerunDataDir}`
+    );
+    fs.mkdirSync(rerun_utilities.rerunDataDir, { recursive: true });
+    // INFO: `namespace` below copied from: https://github.com/kelektiv/node-uuid/blob/master//lib/v35.js#L54:16
+    rerun_utilities.serviceWorkerId = uuidv5(
+      `${Date.now()}`,
+      "6ba7b810-9dad-11d1-80b4-00c04fd430c8"
+    );
   },
   /**
    * Runs before a WebdriverIO command gets executed.
@@ -270,7 +310,7 @@ export const config: WebdriverIO.Config = {
    */
   beforeTest: function (test, context) {
     addLogger(
-      `Test is running in Env : ${process.env.NODE_ENV} & URL : ${BASEURL}`
+      `Test is running in Env : ${process.env.NODE_ENV} & URL : ${baseURL}`
     );
   },
   /**
@@ -316,6 +356,22 @@ export const config: WebdriverIO.Config = {
           commonUtils.generateFileNameWithTimeStamp()
       );
     }
+
+    if (config.framework !== "cucumber" && !passed) {
+      console.log(`Re-run service is inspecting non-passing test.`);
+      console.log(`Test location: ${rerun_utilities.specFile}`);
+      if (error && error.message) {
+        rerun_utilities.nonPassingItems.push({
+          location: rerun_utilities.specFile.replaceAll("\\", "/"),
+          failure: error.message,
+          ErrorStack: error.stack.replaceAll("\\", "/"),
+        });
+      } else {
+        console.log(
+          "The non-passing test did not contain any error message, it could not be added for re-run."
+        );
+      }
+    }
   },
 
   /**
@@ -340,8 +396,24 @@ export const config: WebdriverIO.Config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that ran
    */
-  // after: function (result, capabilities, specs) {
-  // },
+  after: function (result, capabilities, specs) {
+    if (rerun_utilities.nonPassingItems.length > 0) {
+      fs.writeFileSync(
+        `${
+          rerun_utilities.rerunDataDir
+        }/rerun-${commonUtils.generateRerunFileNameWithTimeStamp()}.json`,
+        JSON.stringify(rerun_utilities.nonPassingItems)
+      );
+      console.log(
+        "ServiceWorkId: ",
+        JSON.stringify(rerun_utilities.serviceWorkerId)
+      );
+    } else {
+      console.log(
+        "Re-run service did not detect any non-passing scenarios or tests."
+      );
+    }
+  },
   /**
    * Gets executed right after terminating the webdriver session.
    * @param {Object} config wdio configuration object
@@ -358,8 +430,50 @@ export const config: WebdriverIO.Config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  // onComplete: function(exitCode, config, capabilities, results) {
-  // },
+  onComplete: function (exitCode, config, capabilities, results) {
+    const directoryPath = path.join(`${rerun_utilities.rerunDataDir}`);
+    if (fs.existsSync(directoryPath)) {
+      const rerunFiles = fs.readdirSync(directoryPath);
+      console.log("In On complete hook");
+      console.log("length: ", rerunFiles.length);
+      if (rerunFiles.length > 0) {
+        let rerunCommand = `DISABLE_RERUN=true node_modules/.bin/wdio ${argv._[0]} `;
+        if (rerun_utilities.commandPrefix) {
+          rerunCommand = `${rerun_utilities.commandPrefix} ${rerunCommand}`;
+          console.log("Rerun Command: ", rerunCommand);
+        }
+        let failureLocations = [];
+        rerunFiles.forEach((file) => {
+          const json = JSON.parse(
+            fs
+              .readFileSync(`${rerun_utilities.rerunDataDir}/${file}`)
+              .toString()
+          );
+          json.forEach((failure) => {
+            failureLocations.push(failure.location.replace(/\\/g, "/"));
+          });
+        });
+        const failureLocationsUnique = [...new Set(failureLocations)];
+        failureLocationsUnique.forEach((failureLocation) => {
+          rerunCommand += ` --spec=${failureLocation}`;
+        });
+        console.log("RerunCommand: ", rerunCommand);
+        fs.writeFileSync(rerun_utilities.rerunScriptPath, rerunCommand);
+        console.log(
+          `Re-run script has been generated @ ${rerun_utilities.rerunScriptPath}`
+        );
+      }
+    }
+
+    if (results.failed == this.bail) {
+      console.log(chalk.red.underline.bold("******* BAILING OUT *******"));
+      console.table({
+        "Total Executed cases": results.finished,
+        "passed cases": results.passed,
+        "failed cases": results.failed,
+      });
+    }
+  },
   /**
    * Gets executed when a refresh happens.
    * @param {String} oldSessionId session ID of the old session
