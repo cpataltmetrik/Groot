@@ -121,12 +121,14 @@ $ npm install
 
 1. To run a single test case
 ```
-   SET NODE_ENV=dev&& npx wdio .\config-wdio\wdio.local.conf.ts --spec <path to test case>
+   SET BROWSER=chrome (ff for firefox and edge for edge)
+   SET NODE_ENV=dev&& npx wdio .\config-wdio\local.conf.ts --spec <path to test case>
 
-   EX: SET NODE_ENV=dev&& npx wdio .\config-wdio\wdio.local.conf.ts --spec test\specs\forgotPassword.spec.ts
+   EX: SET NODE_ENV=dev&& npx wdio .\config-wdio\local.conf.ts --spec test\specs\forgotPassword.spec.ts
 ```  
 2. How to run multiple test cases based on the environment or based on tags
 ```
+   SET BROWSER=chrome (ff for firefox and edge for edge)
    npm run test-dev        -> to run all test cases for Dev env
    npm run test-dev-smoke  -> to run only Smoke tests
    npm run test-dev-sanity -> to run only Sanity tests
@@ -136,8 +138,9 @@ $ npm install
 ## **Understanding the Folder structure**
 ```
  1. config --> this folder contains all ENV related JSON files, where baseURL is saved
-    1.1. wdio.local.conf.ts -> will have all the default configs, and some are overriden according to our requirement
- 2. config-wdio --> this folder contains all webdriver IO config files specific to browsers (yet to add more browser config files)
+ 2. config-wdio --> this folder contains all webdriver IO config files specific to browsers 
+     2.1. base.conf.ts -> will have all the default configs, and some are overriden according to our requirement
+     2.2. local.conf.ts -> overriden file on top of base.conf.ts file, specific to run cases in local according to SET BROWSER
  3. src\main\helper --> contains all the helper classes like Custom methods and Navigator classes et
  4. src\main\pageObjects --> Contains all the page classes, which contains all the locators and their respective actions
  5. src\main\utilities --> Contains utility methods or classes like File name generator, email generator and etc

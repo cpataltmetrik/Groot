@@ -2,7 +2,7 @@ var defaults = require("./base.conf").config;
 var _ = require("lodash");
 import * as configVal from "config";
 const BASEURL = configVal.get("Environment.baseUrl");
-const BROWSER = process.env.BROWSER;
+const BROWSER = process.env.BROWSER||'chrome';
 let DRIVERS;
 let browserName;
 if (BROWSER.toLowerCase() === "chrome") {
