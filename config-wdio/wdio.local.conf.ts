@@ -5,8 +5,8 @@ const baseURL = configVal.get("Environment.baseUrl");
 const commonUtils = require("../src/main/utilities/commonUtils");
 const chalk = require("chalk");
 const RerunService = require("wdio-rerun-service");
-import fs = require("fs");
-import path = require("path");
+const fs = require("fs");
+const path = require("path");
 const { v5: uuidv5 } = require("uuid");
 
 const argv = require("minimist")(process.argv.slice(2));
@@ -197,7 +197,6 @@ export const config: WebdriverIO.Config = {
   // see also: https://webdriver.io/docs/dot-reporter
   reporters: [
     "spec",
-
     [
       "allure",
       {
@@ -347,17 +346,17 @@ export const config: WebdriverIO.Config = {
     if (error) {
       browser.saveScreenshot(
         "./screenshot/" +
-          test.title +
-          "_" +
-          commonUtils.generateFileNameWithTimeStamp()
+        test.title +
+        "_" +
+        commonUtils.generateFileNameWithTimeStamp()
       );
     }
     if (result === "skip") {
       browser.saveScreenshot(
         "./screenshot/" +
-          test.title +
-          "_" +
-          commonUtils.generateFileNameWithTimeStamp()
+        test.title +
+        "_" +
+        commonUtils.generateFileNameWithTimeStamp()
       );
     }
 
@@ -403,8 +402,7 @@ export const config: WebdriverIO.Config = {
   after: function (result, capabilities, specs) {
     if (rerun_utilities.nonPassingItems.length > 0) {
       fs.writeFileSync(
-        `${
-          rerun_utilities.rerunDataDir
+        `${rerun_utilities.rerunDataDir
         }/rerun-${commonUtils.generateRerunFileNameWithTimeStamp()}.json`,
         JSON.stringify(rerun_utilities.nonPassingItems)
       );

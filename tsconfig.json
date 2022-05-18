@@ -8,7 +8,9 @@
       "@wdio/devtools-service"
     ],
     "moduleResolution": "node",
-    "target": "es2021"
+    "target": "ES2021"
   },
-  "include": ["../**/*.ts"]
+  "include": [
+    "../**/*.ts"
+  ]
 }
