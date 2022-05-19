@@ -121,14 +121,14 @@ $ npm install
 
 1. To run a single test case
 ```
-   SET BROWSER=chrome (ff for firefox and edge for edge)
+   SET BROWSER=chrome (ff for firefox and edge for edge), if this value is not set, code will pick chrome by default
    SET NODE_ENV=dev&& npx wdio .\config-wdio\local.conf.ts --spec <path to test case>
 
    EX: SET NODE_ENV=dev&& npx wdio .\config-wdio\local.conf.ts --spec test\specs\forgotPassword.spec.ts
 ```  
 2. How to run multiple test cases based on the environment or based on tags
 ```
-   SET BROWSER=chrome (ff for firefox and edge for edge)
+   SET BROWSER=chrome (ff for firefox and edge for edge), if this value is not set, code will pick chrome by default
    npm run test-dev        -> to run all test cases for Dev env
    npm run test-dev-smoke  -> to run only Smoke tests
    npm run test-dev-sanity -> to run only Sanity tests
