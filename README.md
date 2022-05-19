@@ -68,6 +68,8 @@ This repository contains automation testing framework built in webdriverIO and T
     * [Allure Report](#allure-report)
     * [Spec Report](#spec-report)
     * [Js Doc](#js-doc)
+    * [TARA Report Portal Integration with Groot](#tara-report-portal-integration-with-groot)
+    * [Cross Browser and Selenoid Integration](#cross-browser-and-selenoid-integration)
 
 * [code Examples](#code-examples)
 
@@ -121,12 +123,14 @@ $ npm install
 
 1. To run a single test case
 ```
-   SET NODE_ENV=dev&& npx wdio .\config-wdio\wdio.local.conf.ts --spec <path to test case>
+   SET BROWSER=chrome (ff for firefox and edge for edge), if this value is not set, code will pick chrome by default
+   SET NODE_ENV=dev&& npx wdio .\config-wdio\local.conf.ts --spec <path to test case>
 
-   EX: SET NODE_ENV=dev&& npx wdio .\config-wdio\wdio.local.conf.ts --spec test\specs\forgotPassword.spec.ts
+   EX: SET NODE_ENV=dev&& npx wdio .\config-wdio\local.conf.ts --spec test\specs\forgotPassword.spec.ts
 ```  
 2. How to run multiple test cases based on the environment or based on tags
 ```
+   SET BROWSER=chrome (ff for firefox and edge for edge), if this value is not set, code will pick chrome by default
    npm run test-dev        -> to run all test cases for Dev env
    npm run test-dev-smoke  -> to run only Smoke tests
    npm run test-dev-sanity -> to run only Sanity tests
@@ -136,8 +140,9 @@ $ npm install
 ## **Understanding the Folder structure**
 ```
  1. config --> this folder contains all ENV related JSON files, where baseURL is saved
-    1.1. wdio.local.conf.ts -> will have all the default configs, and some are overriden according to our requirement
- 2. config-wdio --> this folder contains all webdriver IO config files specific to browsers (yet to add more browser config files)
+ 2. config-wdio --> this folder contains all webdriver IO config files specific to browsers 
+     2.1. base.conf.ts -> will have all the default configs, and some are overriden according to our requirement
+     2.2. local.conf.ts -> overriden file on top of base.conf.ts file, specific to run cases in local according to SET BROWSER
  3. src\main\helper --> contains all the helper classes like Custom methods and Navigator classes et
  4. src\main\pageObjects --> Contains all the page classes, which contains all the locators and their respective actions
  5. src\main\utilities --> Contains utility methods or classes like File name generator, email generator and etc
@@ -489,9 +494,7 @@ JSDoc comments should generally be placed immediately before the code being docu
 The JSDoc community has created templates and other tools to help you generate and customize your documentation which can be found in [here.](https://www.npmjs.com/package/jsdoc )
 </details>
 <details>
-<summary>
-TARA Report Portal Integration with Groot: 
-</summary>
+<summary>TARA Report Portal Integration with Groot</summary>
 <br>
 Install Report Portal Reporter package by entering following command
 
@@ -571,6 +574,39 @@ Under “On Prepare” hook add below code, this will help us understand connect
     ); 
   }, 
 ```
+</details>
+<details>
+<summary>Cross Browser and Selenoid Integration</summary>
+<br>
+
+1. For Cross browser testing in your local machine, use <b>local.conf.ts</b> config file for execution. Need to set the browser value first, use
+
+```
+  SET BROWSER=chrome or ff or edge, according to your browser compatibility testing
+  If this value is not passed from CLI, then code will automatically picks chrome as default browser.
+
+  Ref code in local.conf.ts: const BROWSER = process.env.BROWSER||'chrome';
+```
+After this, you can run single test case or group as explained above.
+
+```
+SET NODE_ENV=dev&& npx wdio .\config-wdio\local.conf.ts --spec <path to test case>
+```
+
+2. For Headless execution, use headless.conf.ts file in the execution command.
+
+```
+SET NODE_ENV=dev&& npx wdio .\config-wdio\headless.conf.ts --spec <path to test case>
+```
+3. For selenoid, use the appropriate conf file. 
+
+```
+SET NODE_ENV=dev&& npx wdio .\config-wdio\ff-selenoid.conf.ts --spec <path to test case>
+```
+You can set up your Selenoid using this documentation,
+
+https://o365altimetrik-my.sharepoint.com/:w:/g/personal/ggawali_altimetrik_com/EUXIjBQb_RFGtNKyk25tfcsBX1KWp33N1Etuy5oDVGr2fQ
+
 </details>
 
 ## **code Examples**
