@@ -1,51 +1,40 @@
-import { addLogger } from "../utilities/logger"
 import Page from "./page"
 
-export default class SelectCategory extends Page
-{
-    //Load Page
-    public async open(path: string): Promise<any>
-    {
-        await super.open(path)
+export default class SelectCategory extends Page {
+
+    /**
+     * It is used to open url in browser and load respective webpage
+     * @param path 
+     * @returns {string} path
+     */
+    public async open(path: string): Promise<string> {
+        return await super.open(path)
     }
 
-    //Maximize Window
-    public get maxWin()
-    {
-        return browser.maximizeWindow()
+    /**
+     * It is used to fetch url address as well as title of webpage
+     * @returns {object} webPageUrl, webPageTitle
+     */
+    public async getUrlAndTitle(): Promise<object> {
+        return {
+            webPageUrl: await browser.getUrl(),
+            webPageTitle: await browser.getTitle()
+        }
     }
 
-    //Get Page Url Address And Title
-    public async getUrlAndTitle(): Promise<any>
-    {
-        addLogger(await browser.getUrl())
-        addLogger(await browser.getTitle())
-    }
-
-    //Select Category
-    public get dropdown()
-    {
+    public get dropdown() {
         return <any>$("#searchDropdownBox")
     }
 
-    public get optionsArray()
-    {
+    public get optionsArray() {
         return <any>$$("//select[@id='searchDropdownBox']/option")
     }
 
-    //Search Box
-    public get searchBox()
-    {
+    public get searchBox() {
         return <any>$("#twotabsearchtextbox")
     }
 
-    public get searchBtn()
-    {
+    public get searchBtn() {
         return <any>$("//*[@type='submit']")
     }
 }
-
-/*
-module.exports = new SelectCategory()
-export default new SelectCategory()
-*/

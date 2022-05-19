@@ -491,6 +491,90 @@ JSDoc comments should generally be placed immediately before the code being docu
 
 The JSDoc community has created templates and other tools to help you generate and customize your documentation which can be found in [here.](https://www.npmjs.com/package/jsdoc )
 </details>
+<details>
+<summary>
+TARA Report Portal Integration with Groot: 
+</summary>
+<br>
+Install Report Portal Reporter package by entering following command
+
+```
+npm i wdio-reportportal-reporter --save-dev
+```
+
+Install Report Portal Service by entering following command 
+```
+npm i wdio-reportportal-service --save-dev
+```
+Optional Step: Install ReportPortal js client by entering following command 
+```
+npm i @reportportal/client-javascript --save-dev"
+```
+This Client is to communicate with the Report Portal on node js. The library is used only for implementors of custom listeners for ReportPortal.
+
+Once installed, under package.json it will start showing entries as below: 
+In the wdio.local.conf.ts file, import the following packages: 
+```
+const RpService = require("wdio-reportportal-service"); 
+const reportportal = require("wdio-reportportal-reporter"); 
+let RPClient = require("@reportportal/client-javascript"); 
+```
+In wdio.local.conf.ts file, Under Services please add this
+``` 
+services: [ 
+        [RpService, {}], 
+  ], 
+```
+
+In wdio.local.conf.ts file, Under Services please add the 
+```
+reporters:  
+    [ 
+      reportportal, 
+      { 
+        reportPortalClientConfig: { 
+          token: "39dba234-XXX-XXXX-XXXX-XXXXXXXXXXX", 
+          endpoint: "http://54.219.33.119:4000/api/v1", 
+          launch: "Groot_test_execution", 
+          project: "hello", 
+          mode: "DEFAULT", 
+          debug: false, 
+          description: "Groot with Analytics", 
+        }, 
+      }, 
+    ], 
+```
+
+Optional Configuration: Declare all the required token, endpoint, launch information as below. 
+
+```
+let rpClient = new RPClient({ 
+  token: "39dba234-XXX-XXXX-XXXX-XXXXXXXXXXX", 
+  endpoint: "http://54.219.33.119:4000/api/v1", 
+  launch: "Groot_test_execution", 
+  project: "hello", 
+  mode: "DEFAULT", 
+  debug: false, 
+}); 
+```
+
+Under “On Prepare” hook add below code, this will help us understand connection to report portal for required user is done successfully. It will also through an error message in case of issue login. 
+
+```
+ onPrepare: function (config, capabilities) { 
+    rpClient.checkConnect().then( 
+      (response) => { 
+        console.log("You have successfully connected to the server."); 
+        console.log(`You are using an account: ${response.fullName}`); 
+      }, 
+      (error) => { 
+        console.log("Error connection to server"); 
+        console.dir(error); 
+      } 
+    ); 
+  }, 
+```
+</details>
 
 ## **code Examples**
 1. WDIO test folder and specs - groot\test\specs

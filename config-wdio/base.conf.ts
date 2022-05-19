@@ -5,10 +5,12 @@ const baseURL = configVal.get("Environment.baseUrl");
 const commonUtils = require("../src/main/utilities/commonUtils");
 const chalk = require("chalk");
 const RerunService = require("wdio-rerun-service");
-import fs = require("fs");
-import path = require("path");
+import * as fs from "fs";
+import * as path from "path";
 const { v5: uuidv5 } = require("uuid");
-
+const RpService = require("wdio-reportportal-service");
+const reportportal = require("wdio-reportportal-reporter");
+let RPClient = require("@reportportal/client-javascript");
 const argv = require("minimist")(process.argv.slice(2));
 
 const rerun_utilities = {
@@ -19,6 +21,15 @@ const rerun_utilities = {
   commandPrefix: "",
   specFile: "",
 };
+
+let rpClient = new RPClient({
+  token: "39dba234-6d5e-4582-bc65-0b4eb5eeeb32",
+  endpoint: "http://54.219.33.119:4000/api/v1",
+  launch: "hello",
+  project: "hello",
+  mode: "DEFAULT",
+  debug: false,
+});
 
 export const config: WebdriverIO.Config = {
   //
@@ -118,7 +129,7 @@ export const config: WebdriverIO.Config = {
   // Define all options that are relevant for the WebdriverIO instance here
   //
   // Level of logging verbosity: trace | debug | info | warn | error | silent
-  logLevel: "info",
+  logLevel: "silent",
   //
   // Set specific log levels per logger
   // loggers:
@@ -136,7 +147,7 @@ export const config: WebdriverIO.Config = {
   //
   // If you only want to run your tests until a specific amount of tests have failed use
   // bail (default is 0 - don't bail, run all tests).
-  bail: 2,
+  bail: 20,
   //
   // Set a base URL in order to shorten url command calls. If your `url` parameter starts
   // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
@@ -169,6 +180,7 @@ export const config: WebdriverIO.Config = {
         commandPrefix: "VARIABLE=true", //Prefix which will be added to the re-run command that is generated.
       },
     ],
+    [RpService, {}],
   ],
 
   // Framework you want to run your specs with.
@@ -193,13 +205,27 @@ export const config: WebdriverIO.Config = {
   // see also: https://webdriver.io/docs/dot-reporter
   reporters: [
     "spec",
-
     [
       "allure",
       {
         outputDir: "allure-results",
         disableWebdriverStepsReporting: true,
         disableWebdriverScreenshotsReporting: true,
+      },
+    ],
+
+    [
+      reportportal,
+      {
+        reportPortalClientConfig: {
+          token: "39dba234-6d5e-4582-bc65-0b4eb5eeeb32",
+          endpoint: "http://54.219.33.119:4000/api/v1",
+          launch: "Groot_test_execution",
+          project: "hello",
+          mode: "DEFAULT",
+          debug: false,
+          description: "Groot with Analytics",
+        },
       },
     ],
   ],
@@ -225,8 +251,18 @@ export const config: WebdriverIO.Config = {
    * @param {Object} config wdio configuration object
    * @param {Array.<Object>} capabilities list of capabilities details
    */
-  // onPrepare: function (config, capabilities) {
-  // },
+  onPrepare: function (config, capabilities) {
+    rpClient.checkConnect().then(
+      (response) => {
+        console.log("You have successfully connected to the server.");
+        console.log(`You are using an account: ${response.fullName}`);
+      },
+      (error) => {
+        console.log("Error connection to server");
+        console.dir(error);
+      }
+    );
+  },
   /**
    * Gets executed before a worker process is spawned and can be used to initialise specific service
    * for that worker as well as modify runtime environments in an async fashion.
@@ -343,17 +379,17 @@ export const config: WebdriverIO.Config = {
     if (error) {
       browser.saveScreenshot(
         "./screenshot/" +
-          test.title +
-          "_" +
-          commonUtils.generateFileNameWithTimeStamp()
+        test.title +
+        "_" +
+        commonUtils.generateFileNameWithTimeStamp()
       );
     }
     if (result === "skip") {
       browser.saveScreenshot(
         "./screenshot/" +
-          test.title +
-          "_" +
-          commonUtils.generateFileNameWithTimeStamp()
+        test.title +
+        "_" +
+        commonUtils.generateFileNameWithTimeStamp()
       );
     }
 
@@ -399,8 +435,7 @@ export const config: WebdriverIO.Config = {
   after: function (result, capabilities, specs) {
     if (rerun_utilities.nonPassingItems.length > 0) {
       fs.writeFileSync(
-        `${
-          rerun_utilities.rerunDataDir
+        `${rerun_utilities.rerunDataDir
         }/rerun-${commonUtils.generateRerunFileNameWithTimeStamp()}.json`,
         JSON.stringify(rerun_utilities.nonPassingItems)
       );
@@ -430,7 +465,7 @@ export const config: WebdriverIO.Config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  onComplete: function (exitCode, config, capabilities, results) {
+  onComplete: async function (exitCode, config, capabilities, results) {
     const directoryPath = path.join(`${rerun_utilities.rerunDataDir}`);
     if (fs.existsSync(directoryPath)) {
       const rerunFiles = fs.readdirSync(directoryPath);
