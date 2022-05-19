@@ -579,10 +579,10 @@ Under “On Prepare” hook add below code, this will help us understand connect
 <summary>Cross Browser and Selenoid Integration</summary>
 <br>
 
-1. For Cross browser testing in your local machine, use <b>local.conf.ts</b> config file for execution.Need to set the browser value first, use
+1. For Cross browser testing in your local machine, use <b>local.conf.ts</b> config file for execution. Need to set the browser value first, use
 
 ```
-  SET BROWSER=chrome or ff or edge, according to your browser compatability testing
+  SET BROWSER=chrome or ff or edge, according to your browser compatibility testing
   If this value is not passed from CLI, then code will automatically picks chrome as default browser.
 
   Ref code in local.conf.ts: const BROWSER = process.env.BROWSER||'chrome';
