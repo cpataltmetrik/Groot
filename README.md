@@ -575,6 +575,41 @@ Under “On Prepare” hook add below code, this will help us understand connect
   }, 
 ```
 </details>
+<details>
+<summary>
+Cross Browser and Selenoid Integration
+</summary>
+<br>
+
+1. For Cross browser testing in your local machine, use <b>local.conf.ts</b> config file for execution.Need to set the browser value first, use
+
+```
+  SET BROWSER=chrome or ff or edge, according to your browser compatability testing
+  If this value is not passed from CLI, then code will automatically picks chrome as default browser.
+
+  Ref code in local.conf.ts: const BROWSER = process.env.BROWSER||'chrome';
+```
+After this, you can run single test case or group as explained above.
+
+```
+SET NODE_ENV=dev&& npx wdio .\config-wdio\local.conf.ts --spec <path to test case>
+```
+
+2. For Headless execution, use headless.conf.ts file in the execution command.
+
+```
+SET NODE_ENV=dev&& npx wdio .\config-wdio\headless.conf.ts --spec <path to test case>
+```
+3. For selenoid, use the appropriate conf file. 
+
+```
+SET NODE_ENV=dev&& npx wdio .\config-wdio\ff-selenoid.conf.ts --spec <path to test case>
+```
+You can set up your Selenoid using this documentation,
+
+https://o365altimetrik-my.sharepoint.com/:w:/g/personal/ggawali_altimetrik_com/EUXIjBQb_RFGtNKyk25tfcsBX1KWp33N1Etuy5oDVGr2fQ
+
+</details>
 
 ## **code Examples**
 1. WDIO test folder and specs - groot\test\specs
