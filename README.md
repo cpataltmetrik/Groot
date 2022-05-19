@@ -68,6 +68,8 @@ This repository contains automation testing framework built in webdriverIO and T
     * [Allure Report](#allure-report)
     * [Spec Report](#spec-report)
     * [Js Doc](#js-doc)
+    * [TARA Report Portal Integration with Groot](#tara-report-portal-integration-with-groot)
+    * [Cross Browser and Selenoid Integration](#cross-browser-and-selenoid-integration)
 
 * [code Examples](#code-examples)
 
@@ -492,9 +494,7 @@ JSDoc comments should generally be placed immediately before the code being docu
 The JSDoc community has created templates and other tools to help you generate and customize your documentation which can be found in [here.](https://www.npmjs.com/package/jsdoc )
 </details>
 <details>
-<summary>
-TARA Report Portal Integration with Groot: 
-</summary>
+<summary>TARA Report Portal Integration with Groot</summary>
 <br>
 Install Report Portal Reporter package by entering following command
 
@@ -576,9 +576,7 @@ Under “On Prepare” hook add below code, this will help us understand connect
 ```
 </details>
 <details>
-<summary>
-Cross Browser and Selenoid Integration
-</summary>
+<summary>Cross Browser and Selenoid Integration</summary>
 <br>
 
 1. For Cross browser testing in your local machine, use <b>local.conf.ts</b> config file for execution.Need to set the browser value first, use
