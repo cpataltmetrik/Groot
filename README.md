@@ -1,7 +1,7 @@
 <html>
 <div align="center">
 
-<img src="https://user-images.githubusercontent.com/51842349/167406501-c704fa1c-0136-43c0-9422-be6f226cda9d.png" width="160" alt="Groot" style="border-radius: 50%;overflow: hidden;"/>
+<img src="https://user-images.githubusercontent.com/51842349/169853710-1979ee3f-2b1b-4451-886a-73237272ce49.png" width="160" alt="Groot"/>
 
 
 # **Groot - 👋 I am Groot**  <img src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg" width="80" height="40" alt="Awesome" align="center"/>
