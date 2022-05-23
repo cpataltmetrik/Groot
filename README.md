@@ -1,14 +1,4 @@
 <html>
-<head>
-<style>
-  summary{
-    font-size : 17px;
-    font-weight : bold;
-    font-style : italic;
-  }
-</style>
-</head>
-<body>
 <div align="center">
 
 <img src="https://user-images.githubusercontent.com/51842349/167406501-c704fa1c-0136-43c0-9422-be6f226cda9d.png" width="160" alt="Groot" style= "border-radius: 50%"/>
@@ -402,6 +392,8 @@ To fix the lint errors use the following command,
 
 <details>
 <summary> DevTool Integration for LightHouse </summary>
+
+
 The following WDIO service helps us to automate chrome beyond the webDriver protocol.
 ```
 npm install @wdio/devtools-service --save-dev
@@ -631,6 +623,14 @@ Thanks goes to these wonderful peoples :
   </tr>
 <table>
 
-</body>
+<head>
+<style>
+  summary{
+    font-size : 17px;
+    font-weight : bold;
+    font-style : italic;
+  }
+</style>
+</head>
 
 </html>
