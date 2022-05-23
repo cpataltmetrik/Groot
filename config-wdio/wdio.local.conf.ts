@@ -281,7 +281,7 @@ export const config: WebdriverIO.Config = {
     Object.keys(commonUtils).forEach((key) => {
       browser.addCommand(key, commonUtils[key], true);
     });
-    browser.setWindowSize(1920, 1080);
+    browser.maximizeWindow();
     console.log(`Session Id for session lookup: ${browser.sessionId}`);
     //console.log(`BASE URL: ${browser.options.baseUrl}`)
 
@@ -312,7 +312,8 @@ export const config: WebdriverIO.Config = {
   /**
    * Function to be executed before a test (in Mocha/Jasmine) starts.
    */
-  beforeTest: function (test, context) {
+  beforeTest: async function (test, context) {
+    await browser.deleteAllCookies()
     addLogger(
       `Test is running in Env : ${process.env.NODE_ENV} & URL : ${baseURL}`
     );
@@ -339,11 +340,12 @@ export const config: WebdriverIO.Config = {
    * @param {Boolean} result.passed    true if test has passed, otherwise false
    * @param {Object}  result.retries   informations to spec related retries, e.g. `{ attempts: 0, limit: 0 }`
    */
-  afterTest: function (
+  afterTest: async function (
     test,
     context,
     { error, result, duration, passed, retries }
   ) {
+    await browser.deleteAllCookies()
     if (error) {
       browser.saveScreenshot(
         "./screenshot/" +
