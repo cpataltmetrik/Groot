@@ -230,7 +230,7 @@ constants :
 
 ## **Features**
 <details>
-<summary> Bail out </summary>
+<summary style= "font-size : 17px;font-weight : bold;font-style : italic;"> Bail out </summary>
 Bail event help to stop the execution when the specified bail count equals to test failure count.
 
 Condition we need to know : 
@@ -278,7 +278,7 @@ onComplete: function(exitCode, config, capabilities, results) {
 </details>
 
 <details>
-<summary> Retries and re run</summary>
+<summary style= "font-size : 17px;font-weight : bold;font-style : italic;"> Retries and re run</summary>
 
 ### ***Retries :***
 Retry is a mechanism available in Mocha to re-execute the flaky test cases when it fails.  
@@ -332,7 +332,7 @@ services: [
 ```
 </details>
 <details>
-<summary> Custom Commands Implementation </summary>
+<summary style= "font-size : 17px;font-weight : bold;font-style : italic;"> Custom Commands Implementation </summary>
 Groot create his own custom commands by extend the browser instance with his own set of commands, the check out some browser method addCommand is here for you.
 
 ```
@@ -349,7 +349,7 @@ This custom commands we used to reduce the code repeatability in groot.
 </details>
 
 <details>
-<summary> Eslint Configuration </summary>
+<summary style= "font-size : 17px;font-weight : bold;font-style : italic;"> Eslint Configuration </summary>
 ESLint is a JavaScript and TypeScript linting tool. That means it analyses source code and identifies possible programming problems and errors.
 
 It underlines errors in red and warnings in yellow. It is very useful to cover coding styles issues. 
@@ -391,7 +391,7 @@ To fix the lint errors use the following command,
 </details>
 
 <details>
-<summary> DevTool Integration for LightHouse </summary>
+<summary style= "font-size : 17px;font-weight : bold;font-style : italic;"> DevTool Integration for LightHouse </summary>
 
 
 The following WDIO service helps us to automate chrome beyond the webDriver protocol.
@@ -413,7 +413,7 @@ services: ['devtools']
 </details>
 
 <details>
-<summary>WDIO Logger Utility </summary>
+<summary style= "font-size : 17px;font-weight : bold;font-style : italic;">WDIO Logger Utility </summary>
 Groot has its own logger functionality that helps us to print the data in console and also add the info in allure reporter.
 
 This command helps us to perform logger function
@@ -426,7 +426,7 @@ console.log(`STEP: ${log}`)
 </details>
 
 <details>
-<summary> Allure Report </summary>
+<summary style= "font-size : 17px;font-weight : bold;font-style : italic;"> Allure Report </summary>
 Allure reporter helps us to create a report with formatted information and interactive UI.
 
 Installation of allure report with WDIO
@@ -450,7 +450,7 @@ for more information please refer [Test Report](#test-reports)
 </details>
 
 <details>
-<summary> Spec Report </summary>
+<summary style= "font-size : 17px;font-weight : bold;font-style : italic;"> Spec Report </summary>
 A WebdriverIO plugin to report in spec style. This is one of the reporters in WebdriverIO by which we can check Test case execution status whether it is pass, skip or in fail state. 
 
 And it gives user more in-depth and line by line human readable statements of test case execution. 
@@ -468,7 +468,7 @@ reporters: ['spec']
 </details>
 
 <details>
-<summary>Js Doc</summary>
+<summary style= "font-size : 17px;font-weight : bold;font-style : italic;">Js Doc</summary>
 JSDoc is a markup language used to annotate JavaScript/TypeScript source code files. Using comments containing JSDoc, programmers can add documentation describing the API of the code they're creating. 
 
 It is used for documentation lookup in JavaScript and TypeScript, as well as for type annotations and method return type hints in chained methods.
@@ -486,7 +486,7 @@ JSDoc comments should generally be placed immediately before the code being docu
 The JSDoc community has created templates and other tools to help you generate and customize your documentation which can be found in [here.](https://www.npmjs.com/package/jsdoc )
 </details>
 <details>
-<summary>TARA Report Portal Integration with Groot</summary>
+<summary style= "font-size : 17px;font-weight : bold;font-style : italic;">TARA Report Portal Integration with Groot</summary>
 <br>
 Install Report Portal Reporter package by entering following command
 
@@ -568,7 +568,7 @@ Under “On Prepare” hook add below code, this will help us understand connect
 ```
 </details>
 <details>
-<summary>Cross Browser and Selenoid Integration</summary>
+<summary style= "font-size : 17px;font-weight : bold;font-style : italic;">Cross Browser and Selenoid Integration</summary>
 <br>
 
 1. For Cross browser testing in your local machine, use <b>local.conf.ts</b> config file for execution. Need to set the browser value first, use
@@ -622,15 +622,5 @@ Thanks goes to these wonderful peoples :
     <td align="center"><a href="https://github.com/cpataltmetrik/Groot"><img src="https://i.pinimg.com/originals/4c/52/48/4c524884748a0517cce7c905453a686e.png" style= "border-radius: 20%" width="80px;" alt=""/><br /><sub><b>Altimetrik QA Team</b></sub></a><br /><a href="https://github.com/cpataltmetrik/Groot/graphs/contributors" title="contribution">💻</a></td>
   </tr>
 <table>
-
-<head>
-<style>
-  summary{
-    font-size : 17px;
-    font-weight : bold;
-    font-style : italic;
-  }
-</style>
-</head>
 
 </html>
