@@ -615,7 +615,7 @@ https://webdriver.io/
 
 # Contributors ✨
 
-Thanks goes to these wonderful peoples :
+Thanks goes to these wonderful people:
 
 <table>
   <tr>
