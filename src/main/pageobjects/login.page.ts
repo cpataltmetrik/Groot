@@ -34,6 +34,9 @@ class LoginPage extends Page {
   public get lastBtn() {
     return <any>$("//input[@id='signInSubmit']");
   }
+  public get createAccountBtn() {
+    return <any>$("#createAccountSubmit")
+  }
 
   //checking if the login is success or not
 
@@ -57,6 +60,10 @@ class LoginPage extends Page {
 
   public async waitForPageLoad() {
     await this.emailField.waitForPageLoad();
+  }
+
+  public async clickCreateAccountButton(){
+    await this.createAccountBtn.clickWhenReady();
   }
 }
 export default new LoginPage();

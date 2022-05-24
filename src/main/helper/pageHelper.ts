@@ -393,5 +393,19 @@ module.exports = {
       addLogger(`ERROR : ${error}`);
     }
   },
+  /**
+   * Check the Element is exist in the page or not and return true if it presents else send false
+   * @callback isElementExist
+   * @method
+   * @param {string} timeout provided default timeout
+   */
+  isElementExist: async function (timeout = 1000) {
+    try {
+      await browser.pause(timeout)
+      return (await $(this.selector)).isExisting()
+    } catch (error) {
+      addLogger(`ERROR : ${error}`);
+    }
+  }
 };
 
