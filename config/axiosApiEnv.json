@@ -1,0 +1,6 @@
+{
+    "commonUrl": "https://jsonplaceholder.typicode.com/users",
+    "baseUrl": "https://customer-test-api.herokuapp.com",
+    "generateDataUrl": "https://api.namefake.com/english-united-states",
+    "apiToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbG1hbiIsInJvbGUiOiJtZW1iZXIiLCJpYXQiOjE2NTM0NTIxMTMsImV4cCI6MTY1MzQ1MzkxM30.RrvR7pFrk63jo5Gg8BC5K4ENhVdhJdKl9C0cknBtVzM"
+}
