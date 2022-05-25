@@ -20,6 +20,7 @@
     "config": "^3.3.7",
     "@faker-js/faker": "^7.0.1",
     "jsdoc": "^3.6.10",
+    "lodash": "^4.17.21",
     "mysql2": "^2.3.3",
     "selenium-standalone": "^8.1.4",
     "ts-node": "^10.7.0",
@@ -59,7 +60,6 @@
   "dependencies": {
     "allure-commandline": "^2.17.2",
     "docdash": "^1.2.0",
-    "lodash": "^4.17.21",
     "mocha-tags": "^1.0.1",
     "mysql": "^2.18.1"
   }
