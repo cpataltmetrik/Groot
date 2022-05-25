@@ -42,11 +42,12 @@ class signUpPage extends Page {
     await this.passwordField.setValue(password);
   }
   public async confirmPassword(password) {
-    if(await this.passwordFieldCheck.isElementExist())
+    if(await this.passwordFieldCheck.isExisting())
         await this.passwordFieldCheck.setValue(password);
   }
   public async clickContinueButton() {
     await this.continueButton.clickWhenReady();
+    await browser.pause(1000)
   }
   public async enterName(name) {
     await this.nameField.setValue(name);
