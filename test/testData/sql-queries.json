@@ -1,0 +1,4 @@
+{
+    "getUserQuery":"select * from sys.users where userid =1",
+    "getUserIdExpected":"Balu"
+}
