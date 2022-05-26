@@ -12,19 +12,16 @@ describe("Fetch single tweet from twitter", async () => {
 
         let result = await APICalls.getMethodCall(`${apiEnvironmentVariables.baseUrl}/tweets/${twitterAPIData.tweet_id}`,queryParameters, `${apiEnvironmentVariables.bearerToken}`,200)
 
-                console.log("Result from new Function Stringfied "+JSON.stringify(result))
-                console.log("Result from new Function "+result.data)
-
-                twitterAPIData.user_id = result.data.data.author_id
-                twitterAPIData.tweet_id = result.data.data.id
-                twitterAPIData.userTweetPublicMetrics = result.data.data.public_metrics
-                fs.writeFileSync(
-                    "D:/User/bpampari/automation/webdriveriowithtypescript/test/testData/twitterApi.data.json",
-                    JSON.stringify(twitterAPIData)
-                )
+                // twitterAPIData.user_id = result.data.data.author_id
+                // twitterAPIData.tweet_id = result.data.data.id
+                // twitterAPIData.userTweetPublicMetrics = result.data.data.public_metrics
+                // fs.writeFileSync(
+                //     "D:/User/bpampari/automation/webdriveriowithtypescript/test/testData/twitterApi.data.json",
+                //     JSON.stringify(twitterAPIData)
+                // )
 
                 //Chai Assertions
-                chaiExpect(result.data.data.created_at).to.equal("2022-05-11T19:42:13.000Z")
+                chaiExpect(result.data.data.created_at).to.equal("2022-05-13T11:11:08.000Z")
                 chaiExpect(result.data.data.author_id).to.have.lengthOf(19)
                 chaiExpect(result.data.data.text).to.be.a("string")
     })
