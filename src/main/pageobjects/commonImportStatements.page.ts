@@ -20,6 +20,7 @@ import FetchUserLikedTweetDetails from "../../../src/main/pageobjects/fetchUserL
 const fetchUserLikedTweetDetails = new FetchUserLikedTweetDetails()
 const axiosApiEnvironmentVariables = require("../../../config/axiosApiEnv.json")
 const practiceWebsiteApisData = require("../../../test/testData/practiceWebsiteApis.data.json")
+import APICalls from '../helper/http-method-config'
 
 export {
     addLogger,
@@ -36,5 +37,6 @@ export {
     fetchUserLikedTweetDetails,
     loginTwitter,
     axiosApiEnvironmentVariables,
-    practiceWebsiteApisData
+    practiceWebsiteApisData,
+    APICalls
 }

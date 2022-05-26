@@ -8,7 +8,7 @@ var overrides = {
   runner: "local",
   logLevel: "error",
 
-  services: [["chromedriver"]],
+  services: [['chromedriver']],
 
   capabilities: [
     {
