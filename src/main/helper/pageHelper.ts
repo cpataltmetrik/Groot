@@ -2,13 +2,12 @@ import clearValue from "webdriverio/build/commands/element/clearValue";
 import { addLogger } from "../utilities/logger";
 
 module.exports = {
-
- /**
+  /**
    * This is a custom command that is used to click on a web element when it is displayed on the webpage
    * @callback clickWhenDisplayed
    * @method
    * @param {number} timeout IntervalTime
-   */ 
+   */
   clickWhenDisplayed: function (timeout) {
     try {
       this.waitForDisplayed(timeout || { timeout: 10000 });
@@ -22,8 +21,8 @@ module.exports = {
     }
   },
 
-  /** 
-   * Perform click when ther WebElement is ready to click 
+  /**
+   * Perform click when ther WebElement is ready to click
    * @callback clickWhenReady
    * @method
    * @param {number} timeout TimeInterval
@@ -39,7 +38,7 @@ module.exports = {
   },
 
   /**
-   * Perform click after the WebElement is enabled on the webpage and specified timeout 
+   * Perform click after the WebElement is enabled on the webpage and specified timeout
    * @callback clickWhenEnabled
    * @method
    * @param {number} timeout TimeInterval
@@ -55,7 +54,7 @@ module.exports = {
   },
 
   /**
-   * Click and enter value to the field 
+   * Click and enter value to the field
    * @callback setText
    * @async
    * @method
@@ -125,7 +124,7 @@ module.exports = {
    * @callback waitTillInterval
    * @method
    * @async
-   * @param {number} timeout 
+   * @param {number} timeout
    */
   waitTillInterval: async function (timeout) {
     try {
@@ -142,7 +141,7 @@ module.exports = {
     }
   },
 
-  /**  
+  /**
    * Perform a click action and then highlight the webelement
    * @callback clickAndhighlight
    * @method
@@ -169,7 +168,7 @@ module.exports = {
   },
 
   /**
-   * Scroll an element into the visible area of the browser window 
+   * Scroll an element into the visible area of the browser window
    * @callback scrolltoView
    * @method
    * @async
@@ -187,7 +186,7 @@ module.exports = {
   },
 
   /**
-   * Select the options with the displayed text (given label) 
+   * Select the options with the displayed text (given label)
    * @callback selectByText
    * @method
    * @param {string} option Text of option element to get selected
@@ -202,7 +201,7 @@ module.exports = {
   },
 
   /**
-   * Select the option with the given value 
+   * Select the option with the given value
    * @callback selectOptionByValue
    * @method
    * @param {string} option Attribute of option element to get selected
@@ -218,7 +217,7 @@ module.exports = {
   },
 
   /**
-   * Select the value/option at the given index. 
+   * Select the value/option at the given index.
    * Index starts from 0
    * @callback selectOptionByIndex
    * @method
@@ -286,7 +285,7 @@ module.exports = {
    * Obtain the webpage URL and also the title of the webpage
    * @callback getUrlAndTitle
    * @method
-   * @param {number} timeout 
+   * @param {number} timeout
    * @returns URL and Title
    */
   getUrlAndTitle: function (timeout) {
@@ -355,7 +354,7 @@ module.exports = {
    * @callback mouseHover
    * @method
    */
-  mouseHover: async function () { // removed extra spaces in this function
+  mouseHover: async function () {
     try {
       const location = (await $(this.selector)).getLocation();
       console.log(location);
@@ -364,6 +363,8 @@ module.exports = {
       const yLocation = await (await $(this.selector)).getLocation("y");
       console.log("ylocation********** :", yLocation);
       this.moveTo(xLocation, yLocation);
+      this.waitForDisplayed();
+      this.highlight();
     } catch (error) {
       addLogger(`ERROR : ${error}`);
     }
@@ -373,7 +374,7 @@ module.exports = {
    * Switch over to new window or new tab
    * @callback switchToWindow
    * @method
-   * @param {string} name 
+   * @param {string} name
    */
   switchToWindow: async function (name) {
     try {
@@ -408,4 +409,3 @@ module.exports = {
     }
   }
 };
-
