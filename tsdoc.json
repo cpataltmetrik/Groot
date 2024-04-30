@@ -1,0 +1,43 @@
+{
+	"tags":
+	{
+		"allowUnknownTags" : true
+	},
+	"plugins":[
+		 "plugins/markdown",
+		"node_modules/better-docs/typescript"
+	],
+	
+	"opts": {	
+		"encoding": "utf8",	
+		"source" :"./src/main/helper",
+		"destination": "./docs",
+		"recurse": true,
+		"template": "node_modules/better-docs"
+	},
+	"templates": {
+        "better-docs": {
+            "name": "Groot"
+        }
+    },
+	"markdown": {
+		"tags": ["load"]
+	  },
+	"source":
+	{
+    	"includePattern": "\\.(jsx|js|ts|tsx)$"
+	},
+	
+	"tsdoc":{
+		"source"		:"./src/main/helper",
+		"destination"	:"./docs",
+		"tutorials"		:"",
+		"systemName"	: "Groot",
+		"footer"		: "",
+		"copyright"		: "Groot Copyright © 2022 Altimetrik.",
+		"outputSourceFiles" : true,
+		"commentsOnly": true
+	}
+
+	
+}
