@@ -1,6 +1,6 @@
 import {
     apiEnvironmentVariables, twitterAPIData, fs, chaiExpect, apiGetMethodCall
-} from "../../../src/main/pageobjects/commonImportStatements.page"
+} from "../../../src/main/pageObjects/commonImportStatements.page"
 
 describe("Fetch user details by using id value", async () => {
     it("Should get user information by following its id value", async () => {

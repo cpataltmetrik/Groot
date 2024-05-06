@@ -1,4 +1,4 @@
-import ServicePage from '../../src/main/pageobjects/customerService.page';
+import ServicePage from '../../src/main/pageObjects/customerService.page';
 import { addLogger } from '../../src/main/utilities/logger';
 const service: any = new ServicePage();
 

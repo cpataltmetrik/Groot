@@ -1,6 +1,6 @@
 import {
     axios, chaiExpect, fs, axiosApiEnvironmentVariables
-} from "../../../src/main/pageobjects/commonImportStatements.page"
+} from "../../../src/main/pageObjects/commonImportStatements.page"
 
 describe("Generate token by logging in", async () => {
     it("Should generate token by logging in", async () => {

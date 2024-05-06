@@ -7,7 +7,7 @@ import {
   loadPage,
   addLogger,
   fetchUserDetailsByUsername,
-} from "../../../src/main/pageobjects/commonImportStatements.page";
+} from "../../../src/main/pageObjects/commonImportStatements.page";
 import DBConnection from "../../../src/main/helper/db-connection-helper";
 const ASSERT_CHAI = require("chai").assert;
 const QUERIES = require("../../testData/sql-queries.json");

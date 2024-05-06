@@ -1,0 +1,1 @@
+[{"location":"D:\\User\\bpampari\\automation\\webdriveriowithtypescript\\test\\specs\\amz.productDetails.specs.ts","failure":"Can't call waitTillInterval on element with selector \"//*[contains(text(),\"EMI options\")]\" because element wasn't found"}]

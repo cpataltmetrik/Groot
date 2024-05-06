@@ -1,6 +1,6 @@
-import SearchPage from '../../src/main/pageobjects/amz.search.page';
-import amazonHomePage from '../../src/main/pageobjects/home.page';
-import amazonLoginPage from '../../src/main/pageobjects/login.page';
+import SearchPage from '../../src/main/pageObjects/amz.search.page';
+import amazonHomePage from '../../src/main/pageObjects/home.page';
+import amazonLoginPage from '../../src/main/pageObjects/login.page';
 import LOGINDATA from '../testData/loginData';
 import * as config from 'config'
 import { addLogger } from '../../src/main/utilities/logger'

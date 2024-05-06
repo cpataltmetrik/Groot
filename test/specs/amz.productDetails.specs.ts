@@ -1,5 +1,5 @@
-import ProductDetailsPage from "../../src/main/pageobjects/amz.productDetails.page";
-import SearchPage from "../../src/main/pageobjects/amz.search.page";
+import ProductDetailsPage from "../../src/main/pageObjects/amz.productDetails.page";
+import SearchPage from "../../src/main/pageObjects/amz.search.page";
 import SEARCH_DATA from "../testData/searchData";
 import * as config from "config";
 import { addLogger } from "../../src/main/utilities/logger";

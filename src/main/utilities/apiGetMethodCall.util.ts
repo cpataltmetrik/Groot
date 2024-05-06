@@ -1,6 +1,6 @@
 import {
     apiEnvironmentVariables, axios
-} from "../pageobjects/commonImportStatements.page"
+} from "../pageObjects/commonImportStatements.page"
 
 export default class ApiGetMethodCall {
 

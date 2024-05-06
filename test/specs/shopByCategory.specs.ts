@@ -1,4 +1,4 @@
-import ShopByCategory from "../../src/main/pageobjects/shopByCategory.page";
+import ShopByCategory from "../../src/main/pageObjects/shopByCategory.page";
 import * as config from "config";
 import { addLogger } from "../../src/main/utilities/logger";
 const ASSERT_CHAI = require("chai").assert;

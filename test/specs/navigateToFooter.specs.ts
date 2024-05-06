@@ -1,4 +1,4 @@
-import Footer from "../../src/main/pageobjects/navigateToFooter.page";
+import Footer from "../../src/main/pageObjects/navigateToFooter.page";
 import * as config from "config";
 import { addLogger } from '../../src/main/utilities/logger'
 const baseURL = config.get("Environment.baseUrl");

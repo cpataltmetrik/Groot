@@ -1,0 +1,1 @@
+[{"location":"D:\\User\\bpampari\\automation\\webdriveriowithtypescript\\test\\specs\\productCategory.spec.ts","failure":"Can't call clickWhenReady on element with selector \"#searchDropdownBox\" because element wasn't found"}]

@@ -1,4 +1,4 @@
-var defaults = require("./wdio.local.conf").config;
+var defaults = require("./base.conf").config;
 var _ = require("lodash");
 import * as configVal from 'config'
 const baseURL = configVal.get('Environment.baseUrl');

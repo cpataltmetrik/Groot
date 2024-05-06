@@ -1,0 +1,1 @@
+[{"location":"D:\\User\\bpampari\\automation\\webdriveriowithtypescript\\test\\specs\\postReviewQuestion.specs.ts","failure":"Can't call waitTillInterval on element with selector \"//span[contains(text(),\"Redmi Note 11 (Horizon Blue, 6GB RAM, \")]\" because element wasn't found"}]

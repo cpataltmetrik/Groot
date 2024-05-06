@@ -1,6 +1,6 @@
 import {
     apiEnvironmentVariables, twitterAPIData, fs, chaiExpect, APICalls, apiGetMethodCall,fetchUserDetailsByUsername,loadPage,addLogger
-} from "../../../src/main/pageobjects/commonImportStatements.page"
+} from "../../../src/main/pageObjects/commonImportStatements.page"
 
 
 describe("Fetch single tweet from twitter", async () => {

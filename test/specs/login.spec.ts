@@ -1,7 +1,7 @@
-import Login from '../../src/main/pageobjects/login.page';
+import Login from '../../src/main/pageObjects/login.page';
 import { addLogger } from '../../src/main/utilities/logger';
 import loginData from '../testData/loginData';
-import loginPage from '../../src/main/pageobjects/login.page';
+import loginPage from '../../src/main/pageObjects/login.page';
 const chaiExpect: any = require("chai").expect;
 
 /*data from login data*/
@@ -20,6 +20,6 @@ describe("Login Page", async () => {
 
   it("Should check login has been done successful or not", async () => {
     let txt: string = await loginPage.successLog.getText();
-    chaiExpect(txt).to.equal("Hello,");
+    chaiExpect(txt).to.equal("Test,");
   });
 });

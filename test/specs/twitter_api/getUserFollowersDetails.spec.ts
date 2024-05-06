@@ -1,6 +1,6 @@
 import {
     apiEnvironmentVariables, twitterAPIData, chaiExpect, apiGetMethodCall, loadPage, addLogger, axios, fetchUserFollowersDetails
-} from "../../../src/main/pageobjects/commonImportStatements.page"
+} from "../../../src/main/pageObjects/commonImportStatements.page"
 
 describe("Get details of followers of user", async () => {
     it("Should fetch count and details of followers of user", async () => {

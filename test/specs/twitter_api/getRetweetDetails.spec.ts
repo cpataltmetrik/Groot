@@ -1,6 +1,6 @@
 import {
     apiEnvironmentVariables, twitterAPIData, chaiExpect, axios, apiGetMethodCall
-} from "../../../src/main/pageobjects/commonImportStatements.page"
+} from "../../../src/main/pageObjects/commonImportStatements.page"
 
 describe("Get retweet details of tweet", async () => {
     it("Should fetch retweet information of tweet", async () => {

@@ -1,6 +1,6 @@
 import {
     apiEnvironmentVariables, loadPage, addLogger
-} from "../../../src/main/pageobjects/commonImportStatements.page"
+} from "../../../src/main/pageObjects/commonImportStatements.page"
 
 describe("Load a website url in browser", async () => {
     it("Should open website url in browser", async () => {

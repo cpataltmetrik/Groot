@@ -1,6 +1,6 @@
 import {
     axios, chaiExpect, axiosApiEnvironmentVariables, practiceWebsiteApisData
-} from "../../../src/main/pageobjects/commonImportStatements.page"
+} from "../../../src/main/pageObjects/commonImportStatements.page"
 
 describe("Fetch customer details by using its id", async () => {
     it("Should get customer information by its id", async () => {

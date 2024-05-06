@@ -1,6 +1,6 @@
 import {
     apiEnvironmentVariables, twitterAPIData, fs, chaiExpect, apiGetMethodCall
-} from "../../../src/main/pageobjects/commonImportStatements.page"
+} from "../../../src/main/pageObjects/commonImportStatements.page"
 
 describe("Get multiple tweets from twitter", async () => {
     it("Should fetch multiple tweets at same time from twitter", async () => {

@@ -1,0 +1,1 @@
+[{"location":"D:\\User\\bpampari\\automation\\webdriveriowithtypescript\\test\\specs\\customerService.spec.ts","failure":"Can't call scrolltoView on element with selector \"//div[@class='a-span12 a-column a-spacing-top-small']\" because element wasn't found"}]

@@ -1,6 +1,6 @@
 import {
     axios, chaiExpect, axiosApiEnvironmentVariables
-} from "../../../src/main/pageobjects/commonImportStatements.page"
+} from "../../../src/main/pageObjects/commonImportStatements.page"
 
 describe("Fetch customers list", async () => {
     it("Should get customers list", async () => {

@@ -1,6 +1,6 @@
 import {
     apiEnvironmentVariables, loadPage, addLogger, loginTwitter
-} from "../../../src/main/pageobjects/commonImportStatements.page"
+} from "../../../src/main/pageObjects/commonImportStatements.page"
 
 describe("Login to twitter website", async () => {
     it("Should log in into the twitter website", async () => {
