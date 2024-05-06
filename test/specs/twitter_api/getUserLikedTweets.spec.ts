@@ -1,6 +1,6 @@
 import {
     apiEnvironmentVariables, twitterAPIData, chaiExpect, apiGetMethodCall, loadPage, addLogger, fetchUserLikedTweetDetails
-} from "../../../src/main/pageobjects/commonImportStatements.page"
+} from "../../../src/main/pageObjects/commonImportStatements.page"
 
 describe("Get details of user's liked tweets", async () => {
     it("Should fetch information about user's liked tweets", async () => {

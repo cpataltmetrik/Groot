@@ -1,6 +1,6 @@
 import * as config from 'config';
 import { addLogger } from '../../src/main/utilities/logger';
-import postReviewQuestion from '../../src/main/pageobjects/postReviewQuestion.page';
+import postReviewQuestion from '../../src/main/pageObjects/postReviewQuestion.page';
 const postReviewQuestions = new postReviewQuestion();
 const ASSERT_CHAI = require("chai").assert;
 

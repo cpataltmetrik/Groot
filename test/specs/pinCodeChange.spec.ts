@@ -1,5 +1,5 @@
-import SearchPage from '../../src/main/pageobjects/amz.search.page';
-import amazonHomePage from '../../src/main/pageobjects/home.page';
+import SearchPage from '../../src/main/pageObjects/amz.search.page';
+import amazonHomePage from '../../src/main/pageObjects/home.page';
 import * as config from 'config'
 import { addLogger } from '../../src/main/utilities/logger'
 const baseURL = config.get('Environment.baseUrl');

@@ -1,4 +1,4 @@
-import Category from "../../src/main/pageobjects/productCategory.page"
+import Category from "../../src/main/pageObjects/productCategory.page"
 const category: any = new Category()
 import categoryData from "../testData/category.data"
 const chaiExpect: any = require("chai").expect

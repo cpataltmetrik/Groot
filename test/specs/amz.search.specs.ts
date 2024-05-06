@@ -1,4 +1,4 @@
-import SearchPage from "../../src/main/pageobjects/amz.search.page";
+import SearchPage from "../../src/main/pageObjects/amz.search.page";
 import SEARCH_DATA from "../testData/searchData";
 const expect = require("chai").expect;
 

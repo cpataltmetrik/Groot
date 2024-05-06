@@ -1,6 +1,6 @@
 import {
     axios, chaiExpect, axiosApiEnvironmentVariables, practiceWebsiteApisData, fs
-} from "../../../src/main/pageobjects/commonImportStatements.page"
+} from "../../../src/main/pageObjects/commonImportStatements.page"
 
 describe("Sign up new customer", async () => {
 

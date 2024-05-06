@@ -1,6 +1,6 @@
 import {
     axios, chaiExpect, axiosApiEnvironmentVariables, practiceWebsiteApisData
-} from "../../../src/main/pageobjects/commonImportStatements.page"
+} from "../../../src/main/pageObjects/commonImportStatements.page"
 
 describe("Delete existing customer", async () => {
 
