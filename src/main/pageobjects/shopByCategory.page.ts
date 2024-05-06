@@ -1,9 +1,9 @@
 import Page from "./page";
-import * as config from "config";
 
 //const baseURL = config.get("Environment.baseUrl");
 
 export default class ShopByCategory extends Page {
+  productName: any;
 
   public get shopBy() {
     return <any>$("//h2[text()='Shop by Category']");

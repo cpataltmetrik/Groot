@@ -5,3 +5,9 @@ allure-results
 package-lock.json
 rerun.sh
 results
+.DS_Store
+npm-debug.log
+package-lock.json
+logs/
+.git
+.eslintcache

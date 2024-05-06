@@ -1,8 +1,5 @@
 import Page from "./page";
 
-import * as config from "config";
-import { isAssertClause, OperationCanceledException } from "typescript";
-
 export default class Footer extends Page {
 
   public get helpButton() {

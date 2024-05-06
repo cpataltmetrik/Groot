@@ -1,4 +1,3 @@
-import { ChainablePromiseElement } from 'webdriverio';
 import Page from './page';
 
 /**
@@ -8,36 +7,36 @@ class HomePage extends Page {
     /**
      * define selectors using getter methods
      */
- public get loginButton() {
-     return <any>$(`//a[@id='nav-link-accountList']`);
- }
+    public get loginButton() {
+        return <any>$(`//a[@id='nav-link-accountList']`);
+    }
 
- public async clickLoginButton() {
-      await this.loginButton.click()
- }
- public async waitForPageLoad() {
-   await this.loginButton.waitForPageLoad();
-}
+    public async clickLoginButton() {
+        await this.loginButton.click()
+    }
+    public async waitForPageLoad() {
+        await this.loginButton.waitForPageLoad();
+    }
 
-public get pinCode() {
-    return <any>$(`#glow-ingress-block`)
-}
-public async clickSelectAddress() {
-    await this.pinCode.waitTill();
-    await this.pinCode.clickWhenReady();
-}
+    public get pinCode() {
+        return <any>$(`#glow-ingress-block`)
+    }
+    public async clickSelectAddress() {
+        await this.pinCode.waitTill();
+        await this.pinCode.clickWhenReady();
+    }
 
-public async getPostalCodeText() {
- return await this.pinCode.getText();  
-}
+    public async getPostalCodeText() {
+        return await this.pinCode.getText();  
+    }
 
-public async enterPostalcode(postalCode) {
-   await $(`#GLUXZipUpdateInput`).setValue(postalCode)
-}
+    public async enterPostalcode(postalCode) {
+        await $(`#GLUXZipUpdateInput`).setValue(postalCode)
+    }
 
-public async clickApplyButton() {
-    await $(`[data-action$='GLUXPostalUpdateAction'] > input`).clickWhenEnabled();
-}
+    public async clickApplyButton() {
+        await (await $(`[data-action$='GLUXPostalUpdateAction'] > input`)).click();
+    }
 
 }
 
