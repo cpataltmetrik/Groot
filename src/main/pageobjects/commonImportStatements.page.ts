@@ -1,9 +1,10 @@
 import { addLogger } from "../utilities/logger"
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const chaiExpect: any = require("chai").expect
 const apiEnvironmentVariables = require("../../../config/api_env.json")
 import LoadPage from "../../../src/main/pageobjects/loadPage.page"
 const loadPage = new LoadPage()
-const fs = require("fs")
+import * as fs from 'fs';
 const twitterAPIData = require("../../../test/testData/twitterApi.data.json")
 import ApiGetMethodCall from "../../../src/main/utilities/apiGetMethodCall.util"
 const apiGetMethodCall = new ApiGetMethodCall()
@@ -20,6 +21,7 @@ import FetchUserLikedTweetDetails from "../../../src/main/pageobjects/fetchUserL
 const fetchUserLikedTweetDetails = new FetchUserLikedTweetDetails()
 const axiosApiEnvironmentVariables = require("../../../config/axiosApiEnv.json")
 const practiceWebsiteApisData = require("../../../test/testData/practiceWebsiteApis.data.json")
+import APICalls from '../helper/http-method-config'
 
 export {
     addLogger,
@@ -36,5 +38,6 @@ export {
     fetchUserLikedTweetDetails,
     loginTwitter,
     axiosApiEnvironmentVariables,
-    practiceWebsiteApisData
+    practiceWebsiteApisData,
+    APICalls
 }

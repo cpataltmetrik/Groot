@@ -1,5 +1,5 @@
 import Page from './page';
-import * as config from 'config';
+
 export default class PostReviewQuestion extends Page {
 
   public get searchField() {

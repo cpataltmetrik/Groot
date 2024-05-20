@@ -1,0 +1,23 @@
+[
+    {
+        "testCaseId" : "TC212",
+        "testDesription": "",
+        "email": "opportun.team09@gmail.com",
+        "password": "Opportun123",
+        "welcomeData": "Hello,"
+    },
+    {
+        "testCaseId" : "TC212",
+        "testDesription": "",
+        "email": "opportun.team09@gmail.com",
+        "password": "Opportun123",
+        "welcomeData": "Hello,"
+    },
+    {
+        "testCaseId" : "TC213",
+        "testDesription": "",
+        "email": "opportun.team09@gmail.com",
+        "password": "Opportun123",
+        "welcomeData": "Hello,"
+    }
+]

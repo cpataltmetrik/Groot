@@ -1,0 +1,2 @@
+node_modules/*
+/config-wdio/wdio.local.conf.ts
